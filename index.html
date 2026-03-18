@@ -4,10 +4,31 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vite-scaffold</title>
+    <!-- Preconnect to Google Fonts for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <title>ezCheckMe</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Tawk.to Live Chat Widget — matches legacy loading behavior -->
+    <script>
+      if (!window.location.href.match(/\/session\/new/i) && !navigator.userAgent.includes('Googlebot')) {
+        var tawkDelay = window.location.href.includes('help') ? 0 : 8000;
+        setTimeout(function () {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://embed.tawk.to/5d1c78867a48df6da242b8cd/default';
+          s.charset = 'UTF-8';
+          s.setAttribute('crossorigin', '*');
+          document.head.appendChild(s);
+        }, tawkDelay);
+      }
+    </script>
   </body>
 </html>

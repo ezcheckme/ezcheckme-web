@@ -1,1 +1,142 @@
 @import "tailwindcss";
+
+/*
+ * ezCheckMe — Global Theme
+ * Light/white theme with green accents — matches original production app.
+ * Source: themesConfig.js, courses.style.js, Home.styles.js
+ */
+
+@theme {
+  --font-sans: "Muli", "Roboto", "Helvetica", "Arial", sans-serif;
+  --color-primary: #1976d2;
+  --color-primary-hover: #115293;
+  --color-secondary: #039be5;
+  --color-secondary-hover: #0288d1;
+  --color-success: #4caf50;
+  --color-error: #f44336;
+  --color-warning: #ff9800;
+  --color-info: #2196f3;
+
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-sidebar: #2d323e;
+
+  --color-text-primary: rgba(0, 0, 0, 0.87);
+  --color-text-secondary: rgba(0, 0, 0, 0.54);
+  --color-text-disabled: rgba(0, 0, 0, 0.38);
+
+  /* shadcn/radix required CSS variables ---------------------------------- */
+  --color-popover: #ffffff;
+  --color-popover-foreground: rgba(0, 0, 0, 0.87);
+  --color-accent: #f5f5f5;
+  --color-accent-foreground: rgba(0, 0, 0, 0.87);
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: rgba(0, 0, 0, 0.54);
+  --color-border: rgba(0, 0, 0, 0.12);
+  --color-ring: #0277bd;
+  --color-link: #0277bd;
+  --color-link-dark: #01579b;
+
+  --shadow-mui-1:
+    0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  --shadow-mui-24:
+    0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+
+  /* Domain-specific — synced with config/theme.ts */
+  --color-success-main: #58B947;
+  --color-success-dark: #44a033;
+  --color-error-dark: #b71c1c;
+  --color-warning-dark: #da8806;
+  --color-text-main: rgba(0, 0, 0, 0.87);
+  --color-text-hint: #888;
+  --color-field-ok: #58B947;
+  --color-field-pending: #da8806;
+  --color-field-denied: #9f0b0b;
+  --color-location-onsite: #44a033;
+  --color-location-offsite: #04768a;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    margin: 0;
+    min-height: 100dvh;
+    font-size: 0.875rem; /* 14px default */
+  }
+
+  /* Scrollbar theming — light */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #c4c4c4;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #999999;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #0277bd;
+    outline-offset: 2px;
+  }
+
+  /* All interactive elements should show pointer cursor */
+  button,
+  a,
+  select,
+  summary,
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  input[type="file"],
+  label[for],
+  [role="button"],
+  [role="link"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [tabindex]:not([tabindex="-1"]) {
+    cursor: pointer;
+  }
+
+  /* Skeleton shimmer loader */
+  @keyframes shimmer {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      #e0e0e0 25%,
+      #ececec 50%,
+      #e0e0e0 75%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+}

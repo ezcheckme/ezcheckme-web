@@ -1,0 +1,94 @@
+src/features/auto/__tests__/autoModeStore.test.ts(1,21): error TS2307: Cannot find module '@testing-library/react' or its corresponding type declarations.
+src/features/auto/__tests__/autoModeStore.test.ts(3,10): error TS1484: 'AutoSession' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/features/auto/__tests__/autoModeStore.test.ts(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/auto/__tests__/autoModeStore.test.ts(6,3): error TS2304: Cannot find name 'beforeEach'.
+src/features/auto/__tests__/autoModeStore.test.ts(20,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/auto/__tests__/autoModeStore.test.ts(22,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(23,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(24,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(27,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/auto/__tests__/autoModeStore.test.ts(33,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(34,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(37,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/auto/__tests__/autoModeStore.test.ts(45,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(46,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(49,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/auto/__tests__/autoModeStore.test.ts(65,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(68,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/auto/__tests__/autoModeStore.test.ts(75,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/__tests__/autoModeStore.test.ts(76,5): error TS2304: Cannot find name 'expect'.
+src/features/auto/components/AutoModeFooter.tsx(5,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+src/features/auto/components/FollowingSessions.tsx(12,8): error TS2307: Cannot find module '@/components/ui/table' or its corresponding type declarations.
+src/features/auto/components/NextSession.tsx(3,1): error TS6133: 'CountUp' is declared but its value is never read.
+src/features/auto/components/NextSession.tsx(6,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+src/features/auto/components/NextSession.tsx(30,11): error TS6133: 'isRtl' is declared but its value is never read.
+src/features/auto/components/RoomLine.tsx(11,8): error TS2307: Cannot find module '@/components/ui/select' or its corresponding type declarations.
+src/features/auto/hooks/useAutoSessionManagement.ts(7,34): error TS6133: 'room' is declared but its value is never read.
+src/features/auto/store/autoModeStore.ts(2,10): error TS1484: 'AutoSession' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/features/sessions/__tests__/sessionStore.test.ts(1,21): error TS2307: Cannot find module '@testing-library/react' or its corresponding type declarations.
+src/features/sessions/__tests__/sessionStore.test.ts(4,3): error TS1484: 'Session' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/features/sessions/__tests__/sessionStore.test.ts(5,3): error TS1484: 'SessionStatus' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/features/sessions/__tests__/sessionStore.test.ts(6,3): error TS1484: 'SessionMode' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/features/sessions/__tests__/sessionStore.test.ts(9,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/sessionStore.test.ts(10,3): error TS2304: Cannot find name 'beforeEach'.
+src/features/sessions/__tests__/sessionStore.test.ts(28,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/sessionStore.test.ts(30,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(31,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(32,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(33,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(36,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/sessionStore.test.ts(42,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(45,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/sessionStore.test.ts(53,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(54,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(62,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(65,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/sessionStore.test.ts(71,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(74,13): error TS2339: Property 'decrementTime' does not exist on type 'SessionState'.
+src/features/sessions/__tests__/sessionStore.test.ts(75,13): error TS2339: Property 'decrementTime' does not exist on type 'SessionState'.
+src/features/sessions/__tests__/sessionStore.test.ts(79,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(82,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/sessionStore.test.ts(84,34): error TS2551: Property 'setIsPaused' does not exist on type 'SessionState'. Did you mean 'isPaused'?
+src/features/sessions/__tests__/sessionStore.test.ts(88,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/sessionStore.test.ts(91,34): error TS2551: Property 'setIsPaused' does not exist on type 'SessionState'. Did you mean 'isPaused'?
+src/features/sessions/__tests__/sessionStore.test.ts(95,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/useQrCode.test.ts(1,33): error TS2307: Cannot find module '@testing-library/react' or its corresponding type declarations.
+src/features/sessions/__tests__/useQrCode.test.ts(4,10): error TS2305: Module '"@/shared/services/api-client"' has no exported member 'ezdataservice'.
+src/features/sessions/__tests__/useQrCode.test.ts(7,1): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(9,25): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(14,1): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(15,10): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(17,17): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(24,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/useQrCode.test.ts(25,3): error TS2304: Cannot find name 'beforeEach'.
+src/features/sessions/__tests__/useQrCode.test.ts(26,5): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(42,5): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(45,3): error TS2304: Cannot find name 'afterEach'.
+src/features/sessions/__tests__/useQrCode.test.ts(46,5): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(49,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/useQrCode.test.ts(60,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/useQrCode.test.ts(64,7): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(68,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/useQrCode.test.ts(69,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/useQrCode.test.ts(72,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/useQrCode.test.ts(75,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/features/sessions/__tests__/useQrCode.test.ts(78,34): error TS2551: Property 'setIsPaused' does not exist on type 'SessionState'. Did you mean 'isPaused'?
+src/features/sessions/__tests__/useQrCode.test.ts(92,7): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(96,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/__tests__/useQrCode.test.ts(100,34): error TS2551: Property 'setIsPaused' does not exist on type 'SessionState'. Did you mean 'isPaused'?
+src/features/sessions/__tests__/useQrCode.test.ts(104,7): error TS2304: Cannot find name 'jest'.
+src/features/sessions/__tests__/useQrCode.test.ts(109,5): error TS2304: Cannot find name 'expect'.
+src/features/sessions/components/FullSession.tsx(1,21): error TS6133: 'useRef' is declared but its value is never read.
+src/features/sessions/components/FullSession.tsx(11,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+src/features/sessions/components/Instructions.tsx(4,1): error TS6133: 'env' is declared but its value is never read.
+src/features/sessions/components/Instructions.tsx(4,10): error TS2305: Module '"@/config/env"' has no exported member 'env'.
+src/features/sessions/components/MinimizedSession.tsx(1,10): error TS6133: 'useEffect' is declared but its value is never read.
+src/features/sessions/components/MinimizedSession.tsx(3,21): error TS6133: 'X' is declared but its value is never read.
+src/features/sessions/components/MinimizedSession.tsx(6,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.
+src/features/sessions/components/MinimizedSession.tsx(20,11): error TS6133: 't' is declared but its value is never read.
+src/features/sessions/components/StudentsCounter.tsx(6,41): error TS2307: Cannot find module 'framer-motion' or its corresponding type declarations.
+src/features/sessions/hooks/useQrCode.ts(2,20): error TS2307: Cannot find module 'qr-logo' or its corresponding type declarations.
+src/features/sessions/hooks/useQrCode.ts(4,10): error TS2305: Module '"@/shared/services/api-client"' has no exported member 'ezdataservice'.
+src/features/sessions/hooks/useQrCode.ts(5,10): error TS2305: Module '"@/config/env"' has no exported member 'env'.
+src/features/sessions/hooks/useQrCode.ts(30,29): error TS2503: Cannot find namespace 'NodeJS'.
+src/features/sessions/store/sessionStore.ts(7,8): error TS2307: Cannot find module '../types/session.types' or its corresponding type declarations.

@@ -1,0 +1,9 @@
+src/app/layout/AppToolbar.tsx(227,9): error TS6133: 'defaultProfile' is declared but its value is never read.
+src/features/auth/components/SignupDialog.tsx(9,25): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+src/features/auth/components/SignupDialog.tsx(11,29): error TS2307: Cannot find module '@hookform/resolvers/zod' or its corresponding type declarations.
+src/features/auth/components/SignupDialog.tsx(44,18): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(value: readonly Literal[], params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidValue<unknown>> | undefined; message?: string | undefined; } | undefined): ZodLiteral<...>', gave the following error.
+    Argument of type 'boolean' is not assignable to parameter of type 'readonly Literal[]'.
+  Overload 2 of 2, '(value: true, params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidValue<unknown>> | undefined; message?: string | undefined; } | undefined): ZodLiteral<...>', gave the following error.
+    Object literal may only specify known properties, and 'errorMap' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidValue<unknown>> | undefined; message?: string | undefined; }'.
+src/features/auth/components/SignupDialog.tsx(78,41): error TS2339: Property 'signup' does not exist on type 'AuthState & AuthActions'.

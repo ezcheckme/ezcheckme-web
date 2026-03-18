@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="612px" height="612px" viewBox="0 0 612 612" enable-background="new 0 0 612 612" xml:space="preserve">
+<g>
+	<path fill="#FFD9A0" d="M77.668,242v256l136.664,15H306V242H77.668z M77.668,242"/>
+	<path fill="#FDC165" d="M534.332,242v256l-136.664,15H306V242H534.332z M534.332,242"/>
+	<path fill="#FFD9A0" d="M412.668,227H306l-21.332,132.332L306,498l49.668,15h42l15-15V227z M412.668,227"/>
+	<path fill="#FFE7C3" d="M199.332,227v276l15,10h42L306,498V227H199.332z M199.332,227"/>
+	<path fill="#87C540" d="M135.336,419H50v94h164.332v-15C214.332,454.438,178.895,419,135.336,419L135.336,419z M135.336,419"/>
+	<path fill="#65BC46" d="M476.668,419H562v94H397.668v-15C397.668,454.438,433.105,419,476.668,419L476.668,419z M476.668,419"/>
+	<rect x="139" y="292.133" fill="#FAA626" width="30" height="45.867"/>
+	<rect x="443" y="292.133" fill="#EA8E23" width="30" height="45.867"/>
+	<path fill="#BC2025" d="M412.668,257L306,114l-10.668,85.332L306,257H412.668z M412.668,257"/>
+	<g>
+		<defs>
+			<rect id="SVGID_1_" x="50" y="99" width="512" height="414"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<path clip-path="url(#SVGID_2_)" fill="#EF4523" d="M306,257V114L199.332,257H306z M306,257"/>
+		<path clip-path="url(#SVGID_2_)" fill="#EF4523" d="M459.246,99H306l-10.668,15L306,137.41L412.668,257h149.191L459.246,99z
+			 M459.246,99"/>
+		<path clip-path="url(#SVGID_2_)" fill="#F26322" d="M152.754,99L50.141,257h149.191L306,137.41V99H152.754z M152.754,99"/>
+	</g>
+	<path fill="#EA8E23" d="M321,292.133h-15l-10.668,24.535L306,338h15V292.133z M321,292.133"/>
+	<rect x="291" y="292.133" fill="#FAA626" width="15" height="45.867"/>
+	<path fill="#AB5726" d="M355.668,426c0-27.387-22.281-49.664-49.668-49.664l-10.668,79L306,513h49.668V426z M355.668,426"/>
+	<path fill="#CC702C" d="M256.332,426v87H306V376.332C278.613,376.332,256.332,398.613,256.332,426L256.332,426z M256.332,426"/>
+</g>
+</svg>

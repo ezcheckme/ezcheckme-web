@@ -1,0 +1,43 @@
+src/features/billing/components/PricingDialog.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/features/billing/components/PricingDialog.tsx(24,3): error TS6133: 'pricingViewType' is declared but its value is never read.
+src/features/billing/components/PricingDialog.tsx(42,9): error TS2322: Type '{ children: Element[]; className: string; hideClose: true; }' is not assignable to type 'IntrinsicAttributes & Omit<DialogContentProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<...>'.
+  Property 'hideClose' does not exist on type 'IntrinsicAttributes & Omit<DialogContentProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<...>'.
+src/features/billing/components/PricingTable.tsx(6,8): error TS6133: 'React' is declared but its value is never read.
+src/features/billing/components/PricingTable.tsx(44,9): error TS6133: 'user' is declared but its value is never read.
+src/features/checkin/components/AttendeeSignUp.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/features/checkin/components/AttendeeSignUp.tsx(12,3): error TS6133: 'useSearch' is declared but its value is never read.
+src/features/checkin/components/AttendeeSignUp.tsx(15,18): error TS6133: 'ArrowLeft' is declared but its value is never read.
+src/features/checkin/components/AttendeeSignUp.tsx(22,9): error TS6133: 't' is declared but its value is never read.
+src/features/checkin/components/ConfirmConditions.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/features/checkin/components/ConfirmConditions.tsx(11,28): error TS2307: Cannot find module '@/components/ui/scroll-area' or its corresponding type declarations.
+src/features/checkin/components/CountryCodesModal.tsx(8,8): error TS6133: 'React' is declared but its value is never read.
+src/features/checkin/components/CountryCodesModal.tsx(18,28): error TS2307: Cannot find module '@/components/ui/scroll-area' or its corresponding type declarations.
+src/features/checkin/components/VerificationStep.tsx(22,3): error TS6133: 'contactMethod' is declared but its value is never read.
+src/features/courses/components/CheckInMessageDialog.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/features/courses/components/CheckInMessageDialog.tsx(9,10): error TS6133: 'Loader2' is declared but its value is never read.
+src/features/courses/components/CheckInMessageDialog.tsx(55,10): error TS6133: 'sending' is declared but its value is never read.
+src/features/courses/components/ImportAttendeesExcelDialog.tsx(10,26): error TS2307: Cannot find module 'read-excel-file/web' or its corresponding type declarations.
+src/features/courses/components/ImportAttendeesExcelDialog.tsx(26,26): error TS2307: Cannot find module '@/components/ui/progress' or its corresponding type declarations.
+src/features/courses/components/ImportAttendeesExcelDialog.tsx(27,41): error TS2307: Cannot find module '@/components/ui/alert' or its corresponding type declarations.
+src/features/courses/components/ImportAttendeesExcelDialog.tsx(28,33): error TS2307: Cannot find module '../../store/student.store' or its corresponding type declarations.
+src/features/courses/components/ImportAttendeesExcelDialog.tsx(99,48): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/features/courses/components/ImportAttendeesExcelDialog.tsx(100,46): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/features/courses/components/MessageTemplatesDialog.tsx(6,1): error TS6133: 'React' is declared but its value is never read.
+src/features/courses/components/MessageTemplatesDialog.tsx(37,9): error TS6133: 't' is declared but its value is never read.
+src/features/courses/components/SendMessageDialog.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/features/courses/components/SendMessageDialog.tsx(14,3): error TS6133: 'DialogTitle' is declared but its value is never read.
+src/features/courses/components/SendMessageDialog.tsx(21,32): error TS6133: 'courseId' is declared but its value is never read.
+src/features/courses/components/SendMessageDialog.tsx(21,50): error TS6133: 'message' is declared but its value is never read.
+src/features/home/components/GetFreePremiumDialog.tsx(6,8): error TS6133: 'React' is declared but its value is never read.
+src/features/home/components/GetFreePremiumDialog.tsx(30,9): error TS6133: 't' is declared but its value is never read.
+src/features/home/components/GetFreePremiumDialog.tsx(35,36): error TS2339: Property 'sub' does not exist on type 'UserData'.
+src/features/sessions/components/CreateFutureSessionsDialog.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/features/sessions/components/ImportSessionsFromExcelDialog.tsx(10,26): error TS2307: Cannot find module 'read-excel-file/web' or its corresponding type declarations.
+src/features/sessions/components/ImportSessionsFromExcelDialog.tsx(21,26): error TS2307: Cannot find module '@/components/ui/progress' or its corresponding type declarations.
+src/features/sessions/components/ImportSessionsFromExcelDialog.tsx(22,41): error TS2307: Cannot find module '@/components/ui/alert' or its corresponding type declarations.
+src/features/sessions/components/ImportSessionsFromExcelDialog.tsx(23,33): error TS2307: Cannot find module '../../store/session.store' or its corresponding type declarations.
+src/features/sessions/components/ImportSessionsFromExcelDialog.tsx(43,42): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/features/sessions/components/ImportSessionsFromExcelDialog.tsx(44,46): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/features/sessions/components/MergeSessionsDialog.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/features/sessions/components/MergeSessionsDialog.tsx(23,10): error TS1484: 'Session' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/features/sessions/components/MergeSessionsDialog.tsx(213,28): error TS2339: Property 'attendees' does not exist on type 'Session'.
