@@ -34,3 +34,15 @@ storybook-static/
 
 # Misc
 *.tsbuildinfo
+
+# Scratch / temp files
+output.json
+output.txt
+ts_errors.txt
+tsc_errors*.txt
+tsc_out.txt
+legacy_files.txt
+new_files.txt
+test_api.ts
+test_week.js
+test_week.ts

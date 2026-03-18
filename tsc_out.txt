@@ -1,1 +1,0 @@
-src/app/layout/AppToolbar.tsx(227,9): error TS6133: 'defaultProfile' is declared but its value is never read.
