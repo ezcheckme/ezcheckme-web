@@ -120,11 +120,9 @@ export function exportExcelReport(courseId: string): Promise<unknown> {
 /** Get connection data (IP, geo) from our own Lambda — response is AES-encrypted */
 export async function getConnectionData(): Promise<Record<string, unknown>> {
   const response = await get<{ data: string }>(`${API_PATHS.HOST}/connection`);
-  console.log('[getConnectionData] raw response:', response);
   const decrypted = decryptJSON<Record<string, unknown>>(
     response.data,
     ENCRYPTION_KEYS.INFO,
   );
-  console.log('[getConnectionData] decrypted:', decrypted);
   return decrypted || {};
 }

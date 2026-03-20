@@ -262,9 +262,9 @@ export function CourseSessions() {
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Table Header / Toolbar */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+      <div className="flex items-center justify-between px-5 py-4">
         <div className="flex items-center gap-2">
-          <h2 className="text-[17px] text-[#222]">
+          <h2 className="text-[20px] font-semibold text-[#222]">
             Sessions ({filteredSessions.length})
           </h2>
 
@@ -405,7 +405,7 @@ export function CourseSessions() {
                   <td className="px-2 text-gray-600">
                     {filteredSessions.length - globalIdx}
                   </td>
-                  <td className="px-4 text-[#222]">
+                  <td className="px-4 text-[rgba(0,0,0,0.87)]">
                     {session.name || `Session ${session.serialId ?? ""}`}
                   </td>
                   {/* Label dropdown — matches old app's DropDownMenu in CourseSessionRow.js */}
@@ -445,8 +445,8 @@ export function CourseSessions() {
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </td>
-                  <td className="px-4 text-[#222]">{session.shortId || session.id}</td>
-                  <td className="px-4 text-[#222]">
+                  <td className="px-4 text-[rgba(0,0,0,0.87)]">{session.shortId || session.id}</td>
+                  <td className="px-4 text-[rgba(0,0,0,0.87)]">
                     {session.begins
                       ? new Date(session.begins)
                           .toLocaleString("en-US", {
@@ -460,8 +460,8 @@ export function CourseSessions() {
                           .replace(/,/g, "")
                       : "—"}
                   </td>
-                  <td className="px-4 text-[#222]">{checkinCount}</td>
-                  <td className="px-4 text-[#222]">
+                  <td className="px-4 text-[rgba(0,0,0,0.87)]">{checkinCount}</td>
+                  <td className="px-4 text-[rgba(0,0,0,0.87)]">
                     {rate}%
                   </td>
                   {/* Resume session link — own column, visibility-based */}

@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import type { PubSubService } from "@/shared/services/pubsub.service";
 import type {
   Session,
   AutoSession,
@@ -148,3 +149,20 @@ export const useSessionStore = create<SessionState>()(
     { name: "SessionStore" },
   ),
 );
+
+// ---------------------------------------------------------------------------
+// Module-level PubSub ref — shared between SessionProvider and useQrCode
+// Not stored in Zustand because PubSub is not serializable.
+// ---------------------------------------------------------------------------
+
+let _pubsubRef: PubSubService | null = null;
+
+/** Store the active PubSub instance (called from SessionProvider) */
+export function setSessionPubSub(ps: PubSubService | null) {
+  _pubsubRef = ps;
+}
+
+/** Get the active PubSub instance (used by useQrCode) */
+export function getSessionPubSub(): PubSubService | null {
+  return _pubsubRef;
+}

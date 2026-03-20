@@ -165,10 +165,10 @@ export class PubSubService {
     });
   }
 
-  updateSession(id: string, codes: string[]) {
+  updateSession(id: string, codes: { previous: { icon: number }; current: { icon: number } }) {
     this.send({
       action: "message",
-      data: { op: "session:update", refId: id, codes },
+      data: { op: "session:update", refId: id, codes: codes as unknown as string[] },
     });
   }
 

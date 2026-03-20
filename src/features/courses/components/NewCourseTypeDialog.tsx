@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { COURSE_TYPES } from "@/config/constants";
 import type { CourseType } from "@/config/constants";
@@ -85,6 +86,7 @@ export function NewCourseTypeDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[680px] p-0 overflow-hidden bg-white text-gray-900">
+        <DialogTitle className="sr-only">{t("New Course")}</DialogTitle>
         {/* Title section — matching old app: fontSize 26 bold + fontSize 18 subtitle, centered */}
         <div className="flex flex-col items-center text-center pt-6 pb-2 px-6">
           <h2 style={{ fontSize: 26, fontWeight: 700, marginBottom: 10 }}>

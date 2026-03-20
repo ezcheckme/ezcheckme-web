@@ -36,6 +36,8 @@ export interface Course {
   studentsCount?: number;
   /** Max attendees count (from API, used for attendance rate calculation) */
   maxattendance?: number;
+  /** Course start timestamp */
+  begins?: number;
   /** Created timestamp */
   createdAt?: number;
   /** Updated timestamp */

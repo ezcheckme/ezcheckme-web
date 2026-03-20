@@ -25,6 +25,8 @@ import { ProfileDialog } from "@/features/auth/components/ProfileDialog";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { HowItWorksDialog } from "./HowItWorksDialog";
 import { CheckInMessageDialog } from "@/features/courses/components/CheckInMessageDialog";
+import { HostUsageDialog } from "@/features/admin/components/HostUsageDialog";
+import { BLUESNAP_URLS } from "@/features/billing/constants/billing.constants";
 import { USER_ROLES } from "@/config/constants";
 import { useState, useRef, useEffect } from "react";
 import {
@@ -42,15 +44,16 @@ export function AppToolbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [checkinOpen, setCheckinOpen] = useState(false);
+  const [usageOpen, setUsageOpen] = useState(false);
 
   const isAuthenticated =
     role === USER_ROLES.HOST || role === USER_ROLES.ATTENDEE;
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-white">
+      <header className="sticky top-0 z-30 bg-white shadow-sm">
         <div
-          className="flex h-16 items-center gap-4 mx-auto px-4"
+          className="flex h-16 items-center gap-4 mx-auto px-6"
           style={{
             height: "64px",
             ...(isAuthenticated ? {} : { maxWidth: 1200 }),
@@ -95,11 +98,11 @@ export function AppToolbar() {
               {/* Help icon */}
               <button
                 className="rounded-lg p-2 transition-colors hover:bg-gray-100 cursor-pointer"
-                style={{ color: "#224866" }}
+                style={{ color: "rgb(117, 117, 117)" }}
                 title="Help"
                 onClick={() => setHelpOpen(true)}
               >
-                <HelpCircle className="h-5 w-5" />
+                <HelpCircle className="h-6 w-6" />
               </button>
 
               {/* Notifications menu */}
@@ -113,6 +116,7 @@ export function AppToolbar() {
                 user={user}
                 onLogout={logout}
                 setProfileOpen={setProfileOpen}
+                setUsageOpen={setUsageOpen}
               />
             </div>
           ) : (
@@ -190,6 +194,9 @@ export function AppToolbar() {
 
       {/* Check-in Message Dialog */}
       <CheckInMessageDialog open={checkinOpen} onOpenChange={setCheckinOpen} />
+
+      {/* Host Usage Dialog */}
+      <HostUsageDialog open={usageOpen} onOpenChange={setUsageOpen} />
     </>
   );
 }
@@ -205,6 +212,7 @@ function UserDropdown({
   user,
   onLogout,
   setProfileOpen,
+  setUsageOpen,
 }: {
   name: string;
   photoURL?: string;
@@ -212,6 +220,7 @@ function UserDropdown({
   user: any;
   onLogout: () => void;
   setProfileOpen: (open: boolean) => void;
+  setUsageOpen: (open: boolean) => void;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -251,7 +260,7 @@ function UserDropdown({
             <img
               src={photoURL}
               alt="Avatar"
-              className="h-10 w-10 rounded-full object-cover"
+              className="h-8 w-8 rounded-full object-cover"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
                   "/assets/images/icons/profile.jpg";
@@ -261,7 +270,7 @@ function UserDropdown({
             <img
               src="/assets/images/icons/profile.jpg"
               alt="Avatar"
-              className="h-10 w-10 rounded-full object-cover"
+              className="h-8 w-8 rounded-full object-cover"
             />
           )}
 
@@ -284,21 +293,21 @@ function UserDropdown({
 
         <div className="hidden md:flex flex-col items-start ml-2">
           <span
-            className="text-[14px] font-medium text-[rgba(0,0,0,0.87)] max-w-[140px] truncate"
-            style={{ fontFamily: "Heebo, sans-serif" }}
+            className="text-[14px] font-medium text-[rgb(33,33,33)] max-w-[140px] truncate"
+            style={{ fontFamily: "Roboto, Helvetica, Arial, sans-serif" }}
           >
             {name}
           </span>
           <span
-            className="text-[12px] text-[rgba(0,0,0,0.54)]"
-            style={{ fontFamily: "Heebo, sans-serif" }}
+            className="text-[12px] text-[rgb(117,117,117)]"
+            style={{ fontFamily: "Roboto, Helvetica, Arial, sans-serif" }}
           >
             {roleLabel}
           </span>
         </div>
         <ChevronDown
           className={cn(
-            "h-5 w-5 text-gray-400 transition-transform hidden sm:block",
+            "h-5 w-5 text-[rgb(117,117,117)] transition-transform hidden sm:block",
             open && "rotate-180",
           )}
         />
@@ -360,7 +369,10 @@ function UserDropdown({
             !user?.groupmanager &&
             !user?.facultyManager && (
               <button
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  setUsageOpen(true);
+                }}
                 className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
               >
                 <BarChart3 className="h-5 w-5 text-gray-500" />
@@ -388,8 +400,9 @@ function UserDropdown({
                 onClick={() => {
                   setOpen(false);
                   if (user?.id) {
+                    const bsUrl = BLUESNAP_URLS.PROD;
                     window.location.assign(
-                      `https://sale.maxpay.co.il/clearing.aspx?cgcd=FADCEDBE2AC54B5BB0B1AA9E82845233&merchanttransactionid=${user.id}`,
+                      `${bsUrl}&merchanttransactionid=${user.id}`,
                     );
                   }
                 }}

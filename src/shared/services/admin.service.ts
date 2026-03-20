@@ -127,10 +127,17 @@ export function getAdminUniqueAttendees(
 }
 
 /** Get unique attendees for a specific host */
-export function getHostUniqueAttendees(
-  params: Record<string, string>,
-): Promise<unknown[]> {
-  return get(`${API_PATHS.ADMIN}/host_unique_attendees`, params);
+export function getHostUniqueAttendees(params: {
+  hostId: string;
+  from: string;
+  to: string;
+}): Promise<unknown[]> {
+  // API expects query key "id" (not "hostId") — matches legacy ezdataservice.js
+  return get(`${API_PATHS.ADMIN}/host_unique_attendees`, {
+    id: params.hostId,
+    from: params.from,
+    to: params.to,
+  });
 }
 
 /** Get hosts by activity (super admin) */

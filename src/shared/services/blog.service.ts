@@ -65,8 +65,8 @@ function parseWPPost(wp: WPPost): BlogPost {
   if (wp._embedded?.["wp:featuredmedia"]?.[0]) {
     const media = wp._embedded["wp:featuredmedia"][0];
     coverImage =
-      media.media_details?.sizes?.medium?.source_url ||
       media.media_details?.sizes?.full?.source_url ||
+      media.media_details?.sizes?.medium?.source_url ||
       media.source_url ||
       "";
   }

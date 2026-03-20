@@ -10,6 +10,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Loader2, Save, HelpCircle, MapPin } from "lucide-react";
 import {
@@ -249,6 +250,7 @@ export function AddCourseDialog({
   courseType,
 }: AddCourseDialogProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const createCourse = useCourseStore((s) => s.createCourse);
   const user = useAuthStore((s) => s.user);
 
@@ -375,7 +377,7 @@ export function AddCourseDialog({
 
     setLoading(true);
     try {
-      await createCourse({
+      const newCourseId = await createCourse({
         name: name.trim(),
         description: description.trim() || undefined,
         language,
@@ -397,6 +399,9 @@ export function AddCourseDialog({
         iconQuizEnabled: true,
       });
       onOpenChange(false);
+      if (newCourseId) {
+        navigate({ to: `/courses/${newCourseId}` as any });
+      }
     } catch (error) {
       console.error("Failed to create course:", error);
       setLoading(false);
@@ -457,11 +462,14 @@ export function AddCourseDialog({
                   <option value="" disabled>
                     Select Faculty *
                   </option>
-                  {user?.faculties?.map((f) => (
-                    <option key={f._id} value={f._id}>
-                      {f.name}
-                    </option>
-                  ))}
+                  {user?.faculties?.map((f) => {
+                    const fid = f.id ?? f._id ?? "";
+                    return (
+                      <option key={fid} value={fid}>
+                        {f.name}
+                      </option>
+                    );
+                  })}
                 </FloatingSelect>
               )}
 

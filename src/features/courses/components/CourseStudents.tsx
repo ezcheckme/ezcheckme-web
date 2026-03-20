@@ -68,13 +68,25 @@ export function CourseStudents() {
   );
 
   const filteredStudents = useMemo(() => {
-    if (!searchTerm) return students;
-    const term = searchTerm.toLowerCase();
-    return students.filter(
-      (s) =>
-        s.name?.toLowerCase().includes(term) ||
-        s.email?.toLowerCase().includes(term),
-    );
+    const list = !searchTerm
+      ? students
+      : students.filter((s) => {
+          const term = searchTerm.toLowerCase();
+          return (
+            s.name?.toLowerCase().includes(term) ||
+            s.email?.toLowerCase().includes(term)
+          );
+        });
+
+    // Sort alphabetically by last name, then first name
+    return [...list].sort((a, b) => {
+      const aLast = (a.lastName || a.name?.split(" ").pop() || "").toLowerCase();
+      const bLast = (b.lastName || b.name?.split(" ").pop() || "").toLowerCase();
+      if (aLast !== bLast) return aLast.localeCompare(bLast);
+      const aFirst = (a.firstName || a.name?.split(" ").slice(0, -1).join(" ") || "").toLowerCase();
+      const bFirst = (b.firstName || b.name?.split(" ").slice(0, -1).join(" ") || "").toLowerCase();
+      return aFirst.localeCompare(bFirst);
+    });
   }, [students, searchTerm]);
 
   // Pagination
@@ -127,8 +139,19 @@ export function CourseStudents() {
         email: student.email || "",
         attendee_manual: (student as any).attendee_manual ?? true,
       });
-      // Refresh students to reflect updated check-in state
-      await getCourseStudents(courseId);
+      // Optimistic local update — avoids full table refetch/rerender
+      useStudentStore.setState((state) => ({
+        students: state.students.map((s) => {
+          if (s.id !== student.id) return s;
+          const sessions = { ...(s.sessions as any) };
+          if (isCheckin) {
+            sessions[sessionId] = { ...(sessions[sessionId] || {}), checkin: true, request: "approved" };
+          } else {
+            delete sessions[sessionId];
+          }
+          return { ...s, sessions };
+        }),
+      }));
     } catch (err) {
       console.error("Check-in failed:", err);
     }

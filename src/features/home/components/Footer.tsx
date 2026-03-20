@@ -1,17 +1,17 @@
 /**
  * Footer component — matches legacy FooterLayout2.js exactly.
  * Simple dark bar (50px height) with links on left, social + copyright on right.
+ * Uses SVG images for social icons (same as old app).
  */
 
 import { Link } from "@tanstack/react-router";
-import { Facebook, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
     <footer
       className="w-full"
       style={{
-        background: "#212121",
+        background: "#262728",
         height: 50,
         fontSize: "0.8em",
         padding: "0 80px",
@@ -73,7 +73,6 @@ export function Footer() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          gap: 8,
         }}
       >
         <a
@@ -83,9 +82,10 @@ export function Footer() {
           title="Facebook"
           className="hover:opacity-80"
         >
-          <Facebook
-            className="h-5 w-5 text-[#dddddd]"
-            style={{ marginTop: 2 }}
+          <img
+            src="/assets/images/logos/facebook_footer.svg"
+            alt="Facebook"
+            style={{ marginTop: 8, marginRight: 12 }}
           />
         </a>
         <a
@@ -95,9 +95,10 @@ export function Footer() {
           title="Twitter"
           className="hover:opacity-80"
         >
-          <Twitter
-            className="h-5 w-5 text-[#dddddd]"
-            style={{ marginTop: 2 }}
+          <img
+            src="/assets/images/logos/twitter_footer.svg"
+            alt="Twitter"
+            style={{ marginTop: 8, marginRight: 12 }}
           />
         </a>
         <div style={{ fontSize: "1.1em" }}>

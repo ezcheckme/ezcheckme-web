@@ -1,14 +1,15 @@
 /**
- * BlogPage — displays list of blog posts, or a single post if an ID is present.
- * Replaces the placeholder blog route.
+ * BlogPage — matches legacy Posts.js (list) and Post.js (single post) exactly.
  *
- * Source: old Blogs.js → modern functional component.
+ * Layout: Sage green #9ab0a0 background, 828px Paper container,
+ * horizontal cards (image 360×216 left, excerpt right with gradient blur overlay).
+ * Single post: white paper container, close X icon, content with 60px margins.
  */
 
 import { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
-import { useParams, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Calendar, Tag } from "lucide-react";
+import { useParams, useNavigate, Link } from "@tanstack/react-router";
+import { X } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import * as blogService from "@/shared/services/blog.service";
 import type { BlogPost } from "@/shared/services/blog.service";
@@ -28,7 +29,7 @@ export function BlogPage() {
   }
 
   useEffect(() => {
-    if (postId) return; // Don't load list if viewing single post
+    if (postId) return;
     setLoading(true);
     blogService
       .getBlogPosts()
@@ -39,45 +40,58 @@ export function BlogPage() {
 
   // Single post view
   if (postId) {
-    return <BlogPostView slug={postId} />;
+    return <BlogPostView slug={postId} allPosts={posts} />;
   }
 
-  // List view
+  // Blog list view — matching old Posts.js layout
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        width: "100%",
+        background: "#9ab0a0",
+        minHeight: "100%",
+      }}
+    >
       <title>Blog — ezCheckMe</title>
-      <h1 className="text-3xl font-bold text-gray-800 mb-2">Blog</h1>
-      <p className="text-gray-500 mb-8">
-        Tips, updates, and insights on attendance management
-      </p>
-
-      {loading ? (
-        <div className="grid gap-6 md:grid-cols-2">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="rounded-xl border border-gray-200 overflow-hidden">
-              <Skeleton height={180} borderRadius={0} />
-              <div className="p-5 space-y-3">
-                <Skeleton width={100} height={10} borderRadius={3} />
-                <Skeleton width="90%" height={16} borderRadius={3} />
-                <Skeleton width="70%" height={12} borderRadius={3} />
-                <Skeleton width="50%" height={12} borderRadius={3} />
-                <div className="flex gap-2 pt-1">
-                  <Skeleton width={48} height={16} borderRadius={10} />
-                  <Skeleton width={56} height={16} borderRadius={10} />
-                </div>
+      <div
+        style={{
+          position: "relative",
+          width: 828,
+          display: "flex",
+          flexDirection: "column",
+          margin: "20px auto 30px auto",
+          fontSize: 16,
+          background: "#9ab0a0",
+        }}
+      >
+        {loading ? (
+          <div className="flex flex-col gap-8">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  height: 216,
+                  margin: "0px 20px 30px 20px",
+                  boxShadow:
+                    "0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)",
+                  background: "#fff",
+                  borderRadius: 4,
+                }}
+              >
+                <Skeleton width={360} height={216} borderRadius={0} />
               </div>
-            </div>
-          ))}
-        </div>
-      ) : posts.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-gray-400 text-lg">No blog posts yet.</p>
-          <p className="text-gray-400 text-sm mt-1">Check back soon!</p>
-        </div>
-      ) : (
-        <div className="grid gap-6 md:grid-cols-2">
-          {posts.map((post) => (
-            <article
+            ))}
+          </div>
+        ) : posts.length === 0 ? (
+          <div className="text-center py-16">
+            <p style={{ color: "#fff", fontSize: 18 }}>No blog posts yet.</p>
+          </div>
+        ) : (
+          posts.map((post) => (
+            <div
               key={post.id}
               onClick={() =>
                 navigate({
@@ -85,82 +99,173 @@ export function BlogPage() {
                   params: { id: post.slug || post.id },
                 })
               }
-              className="group cursor-pointer rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+              className="cursor-pointer"
+              style={{
+                height: 216,
+                boxShadow:
+                  "0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)",
+                margin: "0px 20px 30px 20px",
+                position: "relative",
+                overflow: "visible",
+                background: "#fff",
+                borderRadius: 4,
+              }}
             >
+              {/* Image on left */}
               {post.coverImage && (
-                <div className="aspect-video bg-gray-100 overflow-hidden">
-                  <img
-                    src={post.coverImage}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  style={{
+                    width: 360,
+                    height: 216,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    objectFit: "cover",
+                  }}
+                />
               )}
-              <div className="p-5">
-                <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
-                  <Calendar className="h-3 w-3" />
-                  {new Date(post.publishedAt).toLocaleDateString()}
-                </div>
-                <h2 className="text-lg font-semibold text-gray-800 group-hover:text-link transition-colors mb-2">
-                  {post.title}
-                </h2>
-                <p className="text-sm text-gray-500 line-clamp-3">
-                  {post.excerpt}
-                </p>
-                {post.tags && post.tags.length > 0 && (
-                  <div className="flex gap-1.5 mt-3 flex-wrap">
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-600"
-                      >
-                        <Tag className="h-2.5 w-2.5" />
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
+
+              {/* Excerpt text on right */}
+              <div
+                style={{
+                  margin: "10px 30px",
+                  height: 200,
+                  overflow: "hidden",
+                  position: "absolute",
+                  top: 0,
+                  left: 360,
+                  fontSize: 21,
+                  fontWeight: 700,
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(post.excerpt),
+                }}
+              />
+
+              {/* Gradient blur overlay with "Read more..." */}
+              <div
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 360,
+                  width: 423,
+                  height: 70,
+                  fontSize: 20,
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,1) 70%, rgba(255,255,255,1) 100%)",
+                }}
+              >
+                <Link
+                  to="/blog/$id"
+                  params={{ id: post.slug || post.id }}
+                  style={{
+                    position: "absolute",
+                    bottom: 10,
+                    right: 20,
+                    textDecoration: "underline",
+                    color: "#1976d2",
+                  }}
+                >
+                  Read more...
+                </Link>
               </div>
-            </article>
-          ))}
-        </div>
-      )}
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
 
 // ---------------------------------------------------------------------------
-// Single Blog Post View (inline sub-component)
+// Single Blog Post View — matches old Post.js layout
 // ---------------------------------------------------------------------------
 
-function BlogPostView({ slug }: { slug: string }) {
+function BlogPostView({
+  slug,
+  allPosts: _allPosts,
+}: {
+  slug: string;
+  allPosts: BlogPost[];
+}) {
   const navigate = useNavigate();
   const [post, setPost] = useState<BlogPost | null>(null);
+  const [allPosts, setAllPosts] = useState<BlogPost[]>(_allPosts);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-    blogService
+    // Load both the current post and all posts (for "Read Next")
+    const loadPost = blogService
       .getBlogPost(slug)
-      .then((result) => setPost(result))
+      .then((result) => setPost(result));
+    const loadAll =
+      allPosts.length > 0
+        ? Promise.resolve()
+        : blogService.getBlogPosts().then((p) => setAllPosts(p));
+
+    Promise.all([loadPost, loadAll])
       .catch(() => setPost(null))
       .finally(() => setLoading(false));
   }, [slug]);
 
+  // Find next post for "Read Next" link
+  const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+  const nextPost =
+    currentIndex >= 0 && allPosts.length > 1
+      ? allPosts[(currentIndex + 1) % allPosts.length]
+      : null;
+
   if (loading) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-12 space-y-6">
-        <Skeleton width={80} height={14} borderRadius={3} />
-        <Skeleton height={280} borderRadius={12} />
-        <div className="flex items-center gap-3">
-          <Skeleton width={100} height={12} borderRadius={3} />
-          <Skeleton width={120} height={12} borderRadius={3} />
-        </div>
-        <Skeleton width="80%" height={24} borderRadius={4} />
-        <div className="space-y-3 pt-4">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} width={`${85 + (i % 3) * 5}%`} height={14} borderRadius={3} />
-          ))}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "100%",
+          background: "#9ab0a0",
+          minHeight: "100%",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            width: 828,
+            margin: "20px auto 30px auto",
+            background: "#9ab0a0",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              maxWidth: 800,
+              marginTop: 39,
+              background: "#fff",
+              padding: "25px 60px",
+              boxShadow:
+                "0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)",
+            }}
+          >
+            <Skeleton width="80%" height={24} borderRadius={4} />
+            <div className="flex justify-between mt-6 mb-4">
+              <Skeleton width={120} height={14} borderRadius={3} />
+              <Skeleton width={100} height={14} borderRadius={3} />
+            </div>
+            <div className="space-y-3 pt-4">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <Skeleton
+                  key={i}
+                  width={`${85 + (i % 3) * 5}%`}
+                  height={14}
+                  borderRadius={3}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -168,49 +273,179 @@ function BlogPostView({ slug }: { slug: string }) {
 
   if (!post) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-        <p className="text-lg text-gray-500">Post not found.</p>
-        <button
-          onClick={() => navigate({ to: "/blog" })}
-          className="mt-4 text-link hover:underline text-sm"
-        >
-          ← Back to Blog
-        </button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          background: "#9ab0a0",
+          minHeight: "100%",
+        }}
+      >
+        <div className="text-center text-white">
+          <p style={{ fontSize: 18 }}>Post not found.</p>
+          <button
+            onClick={() => navigate({ to: "/blog" })}
+            className="mt-4 underline text-sm"
+            style={{ color: "#fff" }}
+          >
+            ← Back to Blog
+          </button>
+        </div>
       </div>
     );
   }
 
+  // Format date like old app: "MMM d yyyy"
+  const formattedDate = (() => {
+    try {
+      const d = new Date(post.publishedAt);
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return `${months[d.getMonth()]} ${d.getDate()} ${d.getFullYear()}`;
+    } catch {
+      return post.publishedAt;
+    }
+  })();
+
   return (
-    <article className="max-w-3xl mx-auto px-4 py-12">
-      <button
-        onClick={() => navigate({ to: "/blog" })}
-        className="flex items-center gap-1 text-sm text-gray-500 hover:text-link mb-6"
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        width: "100%",
+        background: "#9ab0a0",
+        minHeight: "100%",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: 828,
+          display: "flex",
+          flexDirection: "column",
+          margin: "20px auto 30px auto",
+          fontSize: 16,
+          background: "#9ab0a0",
+        }}
       >
-        <ArrowLeft className="h-4 w-4" /> Back to Blog
-      </button>
+        <div
+          style={{
+            position: "relative",
+            maxWidth: 800,
+            display: "flex",
+            flexDirection: "column",
+            marginTop: 39,
+            marginBottom: 20,
+            fontSize: 16,
+            background: "#fff",
+            boxShadow:
+              "0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)",
+          }}
+        >
+          {/* Close icon — matches old HighlightOffIcon */}
+          <button
+            onClick={() => navigate({ to: "/" })}
+            className="cursor-pointer hover:opacity-80"
+            style={{
+              position: "absolute",
+              top: -33,
+              right: -38,
+              color: "#fff",
+              background: "none",
+              border: "none",
+              fontSize: 36,
+            }}
+            aria-label="Close"
+          >
+            <X className="h-9 w-9" />
+          </button>
 
-      {post.coverImage && (
-        <div className="aspect-video rounded-xl overflow-hidden mb-6">
-          <img
-            src={post.coverImage}
-            alt={post.title}
-            className="w-full h-full object-cover"
+          {/* Title */}
+          <h1
+            style={{
+              margin: "25px 60px 10px 60px",
+              fontSize: "2.125rem",
+              fontWeight: 400,
+            }}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(post.title),
+            }}
           />
-        </div>
-      )}
 
-      <div className="flex items-center gap-3 text-sm text-gray-400 mb-4">
-        <span>{post.author}</span>
-        <span>•</span>
-        <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+          {/* Date + Author */}
+          <div
+            style={{
+              display: "flex",
+              margin: "25px 60px 10px 60px",
+              fontSize: 18,
+              justifyContent: "space-between",
+            }}
+          >
+            <span>
+              By the{" "}
+              <a href="https://ezcheck.me" style={{ color: "#1976d2" }}>
+                EZCheck.me
+              </a>{" "}
+              team
+            </span>
+            <span>{formattedDate}</span>
+          </div>
+
+          {/* Content */}
+          <div
+            className="blog-content"
+            style={{ margin: "10px 60px" }}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(post.content),
+            }}
+          />
+
+          {/* Read Next */}
+          {nextPost && (
+            <div className="flex flex-row mb-10 mt-8">
+              <h6
+                style={{
+                  fontSize: 17,
+                  margin: "0 60px",
+                  fontWeight: 500,
+                }}
+              >
+                Read Next:{" "}
+                <Link
+                  to="/blog/$id"
+                  params={{ id: nextPost.slug || nextPost.id }}
+                  style={{ color: "#1976d2" }}
+                >
+                  {nextPost.title}
+                </Link>
+              </h6>
+            </div>
+          )}
+        </div>
       </div>
 
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">{post.title}</h1>
-
-      <div
-        className="prose prose-gray max-w-none"
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
-      />
-    </article>
+      {/* Blog content styles — match old app's WordPress content rendering */}
+      <style>{`
+        .blog-content p {
+          margin-block-end: 0;
+          margin-block-start: 0.5rem;
+        }
+        .blog-content img {
+          width: 100%;
+        }
+        .blog-content a {
+          color: #1976d2;
+          text-decoration: underline;
+        }
+        @media (max-width: 700px) {
+          .blog-content {
+            font-size: 16px;
+            margin: 10px 20px !important;
+          }
+        }
+      `}</style>
+    </div>
   );
 }

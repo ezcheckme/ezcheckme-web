@@ -11,7 +11,7 @@
  */
 
 import { useState, useEffect, useMemo } from "react";
-import { Plus, BookOpen, MoreVertical, Trash2, Edit, Eye } from "lucide-react";
+import { BookOpen, MoreVertical, Trash2, Edit, Eye } from "lucide-react";
 import { useCourseStore } from "../store/course.store";
 import type { Course } from "@/shared/types";
 import type { CourseType } from "@/config/constants";
@@ -138,24 +138,44 @@ export function CourseList() {
       {/* Header — "My Courses (N)" + Add button */}
       <div className="p-4">
         <div className="flex items-center justify-between">
-          <h2 className="m-0 text-xl font-bold text-[rgba(0,0,0,0.87)]">
+          <h2
+            className="m-0"
+            style={{ color: "#20486a", fontWeight: 600, fontSize: "1.5rem" }}
+          >
             My Courses ({courseCount})
           </h2>
           {canAddCourse && (
             <button
-              className="flex items-center justify-center rounded-full bg-[var(--color-primary)] hover:bg-[#1a3a56] transition-colors"
-              style={{ width: 24, height: 24 }}
+              className="flex items-center justify-center cursor-pointer"
               title="New Course"
               onClick={() => setDialog({ type: "courseType" })}
+              style={{ background: "none", border: "none", padding: 0 }}
             >
-              <Plus className="h-4 w-4 text-white font-bold" />
+              {/* MUI AddCircle icon matching old app */}
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill={canAddCourse ? "#224866" : "#b8c4cc"}
+                style={{ cursor: canAddCourse ? "pointer" : "default", marginRight: 13 }}
+              >
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+              </svg>
             </button>
           )}
         </div>
       </div>
 
       {/* Course list (Scrollable area) */}
-      <div className="flex-1 overflow-y-auto bg-[#fafafa] m-4 border-1 border-gray-200 rounded-sm">
+      <div
+        className="flex-1 overflow-y-auto m-4"
+        style={{
+          boxShadow: "0px 0px 1px 0px rgba(0,0,0,0.24)",
+          border: "1px solid rgba(0,0,0,0.2)",
+          maxHeight: "calc(100vh - 200px)",
+          background: "#fff",
+        }}
+      >
         {loading && !courses && (
           <div className="flex flex-col">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -213,7 +233,7 @@ export function CourseList() {
           }}
           onClick={() => setShowHidden(!showHidden)}
         >
-          <span className="text-sm font-normal text-[rgba(0,0,0,0.87)] font-[Heebo,sans-serif]">
+          <span className="text-sm font-normal text-[rgba(0,0,0,0.87)] font-[Roboto,Helvetica,Arial,sans-serif]">
             Show hidden courses
           </span>
           <Switch
@@ -253,10 +273,13 @@ export function CourseList() {
           onClick={() => setDialog({ type: "share" })}
         >
           {/* Material "stay_primary_portrait" style phone icon */}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1976d2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#224866">
             <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" />
           </svg>
-          <span className="text-sm text-[#1976d2] font-[Heebo,sans-serif] cursor-pointer">
+          <span
+            className="text-sm cursor-pointer"
+            style={{ textDecoration: "underline", color: "inherit" }}
+          >
             Share Attendees' App...
           </span>
         </div>
@@ -337,9 +360,9 @@ function CourseListItem({
             onSelect();
           }
         }}
-        className="flex w-full items-center text-left transition-colors duration-100 relative cursor-pointer h-12"
+        className="flex w-full items-center text-left transition-colors duration-100 relative cursor-pointer h-16 hover:bg-[rgba(0,0,0,0.04)]"
         style={{
-          backgroundColor: isActive ? "#eeeeee" : "#ffffff",
+          backgroundColor: isActive ? "rgba(0,0,0,0.08)" : "#ffffff",
           borderBottom: "1px solid #e0e0e0",
           paddingRight: 4,
         }}

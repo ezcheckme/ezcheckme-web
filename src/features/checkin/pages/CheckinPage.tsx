@@ -2,7 +2,7 @@
  * CheckinPage — /checkin, /getsessionid, /w/checkin, /w/getsessionid
  * Entry point for attendee check-in.
  *
- * Layout: matches old GetSessionId.js — same 350×568 window as SignUp.
+ * Layout: matches old GetSessionId.js — same 400×640 window as SignUp.
  * On desktop: shows "Pop-Up in a new window" link at bottom.
  *
  * Auth routing:
@@ -14,8 +14,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useCheckinStore } from "../store/checkin.store";
 
-const WEB_CHECKIN_X = 350;
-const WEB_CHECKIN_Y = 568;
+const WEB_CHECKIN_X = 400;
+const WEB_CHECKIN_Y = 640;
 
 export function CheckinPage() {
   const navigate = useNavigate();

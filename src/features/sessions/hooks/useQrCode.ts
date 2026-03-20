@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import QRLogo from "qr-logo";
-import { useSessionStore } from "../store/sessionStore";
+import { useSessionStore, getSessionPubSub } from "../store/sessionStore";
 import { updateSessionCodes } from "@/shared/services/session.service";
 
 interface UseQrCodeProps {
@@ -171,6 +171,22 @@ export const useQrCode = ({
           const { initialCount } = useSessionStore.getState();
           const serverNewCheckins = resp.checkins - initialCount;
           useSessionStore.setState({ nameCounter: serverNewCheckins });
+        }
+
+        // Broadcast icons via PubSub — this is how the mobile app receives
+        // the current icon for the icon quiz
+        // Old app: this.ezwspubsub.updateSession(session.shortid.toString(), { previous: { icon: prevIcon }, current: { icon } })
+        const pubsub = getSessionPubSub();
+        const shortId = shortIdRef.current;
+        if (pubsub && shortId) {
+          try {
+            pubsub.updateSession(String(shortId), {
+              previous: { icon: prevIconRef.current },
+              current: { icon: iconIndex },
+            });
+          } catch (e) {
+            console.error("Error in pubsub.updateSession:", e);
+          }
         }
       })
       .catch((error) => {

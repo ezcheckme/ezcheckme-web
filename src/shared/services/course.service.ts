@@ -21,7 +21,14 @@ export function getAllCourses(): Promise<Course[]> {
 
 /** Create a new course */
 export function addCourse(props: Partial<Course>): Promise<Course> {
-  return post<Course>(API_PATHS.COURSES, props);
+  const hostId = getEffectiveHostId();
+  if (!hostId) throw new Error("No host ID available — cannot create course");
+  const data = {
+    ...props,
+    hostid: hostId,
+    begins: props.begins ?? Date.now(),
+  };
+  return post<Course>(API_PATHS.COURSES, data);
 }
 
 /** Update course properties */

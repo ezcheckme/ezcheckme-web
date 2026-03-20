@@ -54,7 +54,7 @@ export interface UserData {
   /** Payment account ID */
   accountId?: string;
   /** Faculty list (institutional) — conditional field in course dialog */
-  faculties?: Array<{ _id: string; name: string }>;
+  faculties?: Array<{ _id?: string; id?: string; name: string }>;
   /** Auto-mode enabled */
   autoMode?: boolean;
   /** Auto-mode rooms list */

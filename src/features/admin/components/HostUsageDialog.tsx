@@ -77,7 +77,7 @@ export function HostUsageDialog({ open, onOpenChange }: HostUsageDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[700px] p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
         {/* Banner Header matched to legacy styling */}
         <div
           className="flex flex-row justify-between items-center px-6 py-4"
@@ -102,29 +102,42 @@ export function HostUsageDialog({ open, onOpenChange }: HostUsageDialogProps) {
             <DialogTitle className="sr-only">{t("Host Usage")}</DialogTitle>
           </DialogHeader>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-8 px-4 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
-            <span className="text-lg font-medium text-slate-700 dark:text-slate-300">
+          {/* Yellow attendees strip — matches old HostUsageDialog.styles.js */}
+          <div
+            className="flex flex-row items-center justify-center gap-4 py-2 px-4 rounded mx-auto"
+            style={{
+              background: "#ffdc61",
+              fontSize: 20,
+              minHeight: 61,
+              minWidth: 515,
+            }}
+          >
+            <span className="font-medium text-gray-800">
               {t(
                 "institute members - dialog - total unique attendees",
                 "Total unique attendees",
               )}
             </span>
 
-            <div className="flex items-center gap-4">
-              <input
-                type="month"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-md bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100"
-              />
+            <input
+              type="month"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="px-3 py-2 border border-gray-400 rounded bg-white text-gray-900 cursor-pointer"
+              style={{ fontSize: 16 }}
+            />
 
-              <div className="min-w-[40px] flex justify-end text-2xl font-bold text-primary">
-                {loading ? (
-                  <Loader2 className="w-6 h-6 animate-spin" />
-                ) : (
-                  <span>{totalUniqueAttendees}</span>
-                )}
-              </div>
+            <div className="flex justify-end" style={{ minWidth: 40 }}>
+              {loading ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <span
+                  className="font-bold"
+                  style={{ fontSize: 27, marginLeft: 10 }}
+                >
+                  {totalUniqueAttendees}
+                </span>
+              )}
             </div>
           </div>
 

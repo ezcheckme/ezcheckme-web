@@ -20,8 +20,8 @@ export function HeroSection({ onGetStarted }: HeroSectionProps) {
       <div className="mx-auto  px-0 py-4">
         {/* Video / Image container */}
         <div
-          className="relative mx-auto overflow-hidden rounded-2xl"
-          style={{ maxWidth: 1200 }}
+          className="relative mx-auto overflow-hidden"
+          style={{ maxWidth: 1200, borderRadius: 15 }}
         >
           {/* Background Video — text is baked into the video itself */}
           <video
@@ -44,13 +44,15 @@ export function HeroSection({ onGetStarted }: HeroSectionProps) {
             <button
               onClick={onGetStarted}
               className={cn(
-                "rounded px-8 py-2 text-white font-bold text-[1.3em]",
+                "rounded text-white text-[1.3em] text-center",
                 "transition-all duration-200 hover:brightness-110 shadow-lg cursor-pointer",
               )}
               style={{
                 background: "linear-gradient(#469c2e 0%, #469c2e 100%)",
                 width: 240,
-                height: 52,
+                height: 36,
+                paddingTop: 8,
+                fontWeight: 650,
               }}
             >
               GET STARTED
@@ -60,8 +62,8 @@ export function HeroSection({ onGetStarted }: HeroSectionProps) {
 
         {/* Caption below hero */}
         <h2
-          className="text-xl text-center mt-2 mb-4"
-          style={{ color: "#333333" }}
+          className="text-center"
+          style={{ color: "#333333", fontSize: "2em", fontWeight: 450, marginTop: 14 }}
         >
           End-to-end Check-in solution for universities, schools, webinars and
           professional training

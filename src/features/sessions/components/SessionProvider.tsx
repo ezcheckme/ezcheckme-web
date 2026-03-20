@@ -15,7 +15,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { useSessionStore } from "../store/sessionStore";
+import { useSessionStore, setSessionPubSub } from "../store/sessionStore";
 import { FullSession } from "./FullSession";
 import { SessionOpenInMinimized } from "./SessionOpenInMinimized";
 import { PubSubService } from "@/shared/services/pubsub.service";
@@ -345,6 +345,7 @@ export const SessionProvider = () => {
     };
 
     pubsubRef.current = new PubSubService(onMessage as unknown as MessageHandler);
+    setSessionPubSub(pubsubRef.current); // Expose to useQrCode
     // Old app: this.ezwspubsub.connectSession(session.shortid.toString())
     pubsubRef.current.connectSession(
       String(liveSessionData.shortid),
@@ -355,6 +356,7 @@ export const SessionProvider = () => {
         pubsubRef.current.disconnectSession(String(liveSessionData.shortid));
         pubsubRef.current.destroy();
         pubsubRef.current = null;
+        setSessionPubSub(null); // Clear ref
       }
     };
   }, [

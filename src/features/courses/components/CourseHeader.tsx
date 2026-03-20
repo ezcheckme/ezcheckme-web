@@ -104,7 +104,7 @@ export function CourseHeader() {
   return (
     <div className="border-b mx-4" style={{ borderColor: "rgba(0,0,0,0.12)" }}>
       {/* Course name + "Run Session" button */}
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-6 py-6">
         <div className="flex items-center gap-2">
           {isDrillDown && (
             <button
@@ -114,7 +114,10 @@ export function CourseHeader() {
               <ArrowLeft className="h-6 w-6" />
             </button>
           )}
-          <h1 className="text-[24px] font-normal text-[var(--color-primary)]">
+          <h1
+            className="text-[24px]"
+            style={{ color: "#20486a", fontWeight: 600, fontFamily: "Roboto, Helvetica, Arial, sans-serif" }}
+          >
             {course.name}
           </h1>
         </div>
@@ -144,7 +147,7 @@ export function CourseHeader() {
                     "inline-flex items-center gap-2 rounded px-4 py-2 text-[14px] font-bold uppercase",
                     "text-white transition-opacity hover:opacity-90 shadow-sm cursor-pointer",
                   )}
-                  style={{ background: theme.colors.button.dangerAlt }}
+                  style={{ background: "linear-gradient(#9D0009 0%, #9D0009 100%)" }}
                 >
                   <Play className="h-4 w-4 fill-white" />
                   Run a new check-in session
@@ -173,7 +176,7 @@ export function CourseHeader() {
       {/* Tab bar */}
       {!isDrillDown && (
         <div
-          className="flex items-center justify-between px-6 border-t border-gray-200"
+          className="flex items-center justify-between px-6"
           style={{ backgroundColor: theme.colors.bg.header }}
         >
           {/* Tabs */}
@@ -202,7 +205,7 @@ export function CourseHeader() {
                   key={tab.id}
                   to={`/courses/${courseId}/${pathSegment}` as any}
                   className={cn(
-                    "relative flex items-center gap-2 px-2 py-3 text-[15px] transition-colors cursor-pointer min-w-[160px]",
+                    "relative flex items-center gap-2 px-2 py-3 text-[14px] transition-colors cursor-pointer min-w-[160px]",
                     isActive
                       ? "text-gray-900"
                       : "text-gray-600 hover:text-gray-900 hover:bg-black/5",
@@ -212,7 +215,7 @@ export function CourseHeader() {
                   <Icon className="h-5 w-5" />
                   {tab.label}
                   {isActive && (
-                    <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-link" />
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-link" />
                   )}
                 </Link>
               );
@@ -224,7 +227,7 @@ export function CourseHeader() {
             <button
               onClick={handleExportClick}
               disabled={downloading}
-              className="flex items-center gap-2 text-[14px] text-[var(--color-text-main)] hover:bg-black/5 px-2 py-1 rounded transition-colors cursor-pointer disabled:opacity-50"
+              className="flex items-center gap-2 text-[1.3rem] text-[#444444] hover:bg-black/5 px-2 py-1 rounded transition-colors cursor-pointer disabled:opacity-50"
             >
               {downloading ? (
                 <Loader2 className="h-[20px] w-[20px] text-[var(--color-success-dark)] animate-spin" />

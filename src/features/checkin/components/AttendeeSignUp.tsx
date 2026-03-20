@@ -16,6 +16,7 @@ import { ConfirmConditions } from "./ConfirmConditions";
 import { CountryCodesModal, getDialCodeByIso } from "./CountryCodesModal";
 import * as attendeeService from "@/shared/services/attendee.service";
 import { useAuthStore } from "@/features/auth/store/auth.store";
+import { MessageSquare, Phone } from "lucide-react";
 
 type Mode = "signup" | "signin";
 
@@ -438,12 +439,12 @@ export function AttendeeSignUp() {
     // Fallback labels matching old app's i18n keys
     const fallbacks: Record<string, string> = {
       "mobile - signup - signup - 1": "To Check-in, please fill in your details:",
-      "mobile - signup - signup - 2": "Enter your phone number for verification",
-      "mobile - signup - signup - 3": "Enter the verification code",
+      "mobile - signup - signup - 2": "Fill in your phone number:",
+      "mobile - signup - signup - 3": "Enter verification code:",
       "mobile - signup - signin - 1": "Please enter your phone number:",
-      "mobile - signup - signin - 2": "Enter your phone number",
-      "mobile - signup - signin - 3": "Enter the verification code",
-      "mobile - signup - signin - 4": "Confirm your phone number",
+      "mobile - signup - signin - 2": "Please enter your phone number:",
+      "mobile - signup - signin - 3": "Please enter verification code:",
+      "mobile - signup - signin - 4": "Please confirm your phone number:",
     };
     return fallbacks[key] || "";
   };
@@ -470,10 +471,10 @@ export function AttendeeSignUp() {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: 350,
-          height: 568,
-          maxWidth: 350,
-          maxHeight: 568,
+          width: 400,
+          height: 640,
+          maxWidth: 400,
+          maxHeight: 640,
           margin: "auto",
           backgroundColor: "#ecf0f3",
           border: "solid 1px gray",
@@ -570,16 +571,12 @@ export function AttendeeSignUp() {
                         pattern="[0-9]*"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="Phone Number"
+                        placeholder="Phone number"
                         required
                         autoComplete="off"
                         style={inputStyle}
                       />
                     </div>
-                  </div>
-                  <div style={{ fontSize: 12, marginTop: 8, color: "#666" }}>
-                    Your phone number will be used for identification only.
-                    Only the last 4 digits be visible to the courses instructor(s).
                   </div>
                 </>
               )}
@@ -619,7 +616,7 @@ export function AttendeeSignUp() {
                     pattern="[0-9]*"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="Phone Number"
+                    placeholder="Phone number"
                     required
                     autoComplete="off"
                     style={inputStyle}
@@ -666,7 +663,7 @@ export function AttendeeSignUp() {
                         setPhoneNumber(e.target.value);
                         if (mode === "signin") setUser(null);
                       }}
-                      placeholder="Phone Number"
+                      placeholder="Phone number"
                       required
                       autoComplete="off"
                       style={inputStyle}
@@ -677,7 +674,7 @@ export function AttendeeSignUp() {
 
               {onlyCode && (
                 <div className="my-4 text-center text-sm">
-                  {`Enter the code sent to ${scrambledPhone}`}
+                  {`We sent a verification code to ${scrambledPhone}. Please fill it in:`}
                 </div>
               )}
 
@@ -686,7 +683,7 @@ export function AttendeeSignUp() {
                 pattern="[0-9]*"
                 value={verification}
                 onChange={(e) => setVerification(e.target.value)}
-                placeholder="Verification Code"
+                placeholder="Verification code"
                 required
                 autoComplete="off"
                 style={inputStyle}
@@ -694,21 +691,27 @@ export function AttendeeSignUp() {
 
               {/* Resend buttons: SMS + Voice */}
               <div style={{ display: "flex", flexDirection: "column", alignItems: "baseline", justifyContent: "center" }}>
-                <div className="flex flex-row justify-between items-center w-full mt-3">
+                <div className="flex flex-row justify-between items-center w-full" style={{ marginTop: "1.2rem" }}>
                   <div
                     onClick={() => resendCodeCounter === 0 && resendCode(false)}
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      cursor: resendCodeCounter > 0 ? "default" : "pointer",
-                      opacity: resendCodeCounter > 0 ? 0.4 : 1,
+                      color: "#0053EC",
+                      height: 33,
+                      cursor: resendCodeCounter > 0 ? "wait" : "pointer",
+                      ...(resendCodeCounter > 0 ? { color: "gray" } : {}),
                     }}
                   >
-                    <span className="material-icons mr-2" style={{ fontSize: 20 }}>
-                      textsms
-                    </span>
-                    <span style={{ color: "#0053EC", textDecoration: "underline", fontSize: "1em" }}>
-                      Resend code
+                    <MessageSquare size={24} style={{ marginRight: "0.8rem" }} />
+                    <span style={{
+                      color: resendCodeCounter > 0 ? "gray" : "#0053EC",
+                      textDecoration: "underline",
+                      fontSize: "1.3em",
+                      lineHeight: "2.5em",
+                      cursor: "pointer",
+                    }}>
+                      Resend the Code
                     </span>
                   </div>
                   <span style={{ fontSize: 14 }}>
@@ -720,20 +723,26 @@ export function AttendeeSignUp() {
 
                 <hr style={{ width: "100%", border: "none", borderTop: "1px solid #ddd", margin: "4px 0" }} />
 
-                <div className="flex flex-row justify-between items-center w-full">
+                <div className="flex flex-row justify-between items-center w-full" style={{ marginTop: -2 }}>
                   <div
                     onClick={() => resendCodeCounter === 0 && resendCode(true)}
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      cursor: resendCodeCounter > 0 ? "default" : "pointer",
-                      opacity: resendCodeCounter > 0 ? 0.4 : 1,
+                      color: "#0053EC",
+                      height: 33,
+                      cursor: resendCodeCounter > 0 ? "wait" : "pointer",
+                      ...(resendCodeCounter > 0 ? { color: "gray" } : {}),
                     }}
                   >
-                    <span className="material-icons mr-2" style={{ fontSize: 20 }}>
-                      phone
-                    </span>
-                    <span style={{ color: "#0053EC", textDecoration: "underline", fontSize: "1em" }}>
+                    <Phone size={24} style={{ marginRight: "0.8rem" }} />
+                    <span style={{
+                      color: resendCodeCounter > 0 ? "gray" : "#0053EC",
+                      textDecoration: "underline",
+                      fontSize: "1.3em",
+                      lineHeight: "2.5em",
+                      cursor: "pointer",
+                    }}>
                       Call me
                     </span>
                   </div>
@@ -798,14 +807,22 @@ export function AttendeeSignUp() {
               )}
 
               <button type="submit" disabled={loading} style={greenButtonStyle}>
-                {loading ? "..." : "Confirm Phone"}
+                {loading ? "..." : "Confirm"}
               </button>
             </form>
           )}
         </div>
 
-        {/* Toggle signup/signin link */}
-        {step !== 2 ? (
+        {/* Toggle signup/signin link — matches old app behavior:
+            step 2 (phone input) shows disclaimer instead of toggle link;
+            signin step 1 also shows disclaimer (equivalent to old step 2) */}
+        {step === 2 || (mode === "signin" && step === 1) ? (
+          <div style={{ fontSize: 12, marginTop: 8, textAlign: "center", color: "#666" }}>
+            You phone number will be used for identification only.
+            <br />
+            Only the last 4 digits be visible to the courses instructor(s).
+          </div>
+        ) : (
           <div>
             <button
               onClick={toggleMode}
@@ -823,14 +840,8 @@ export function AttendeeSignUp() {
             >
               {mode === "signup"
                 ? "Already have an account?"
-                : "Don't have an account? Sign up"}
+                : "No account yet?"}
             </button>
-          </div>
-        ) : (
-          <div style={{ fontSize: 12, marginTop: 8, textAlign: "center", color: "#666" }}>
-            Your phone number will be used for verification only.
-            <br />
-            We will not share your number with anyone.
           </div>
         )}
 

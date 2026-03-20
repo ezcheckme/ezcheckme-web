@@ -211,7 +211,7 @@ export function CourseTemplates({
             </option>
           ))}
           {isGroupManager(user) && templates.length > 0 && (
-            <option disabled>──────────</option>
+            <option key="__separator__" disabled>──────────</option>
           )}
           {isGroupManager(user) && (
             <option value="__save__">

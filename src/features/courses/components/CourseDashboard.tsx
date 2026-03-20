@@ -21,15 +21,25 @@ export function CourseDashboard() {
   const studentsLoading = useStudentStore((s) => s.loading);
   const sessionsLoading = useSessionStore((s) => s.loading);
   const getCourseStudents = useStudentStore((s) => s.getCourseStudents);
+  const getCourseSessions = useSessionStore((s) => s.getCourseSessions);
+  const getCourses = useCourseStore((s) => s.getCourses);
   const user = useAuthStore((s) => s.user);
   const isPremium = user?.plan === "Premium";
 
-  // Load students when Dashboard mounts (they may not be loaded yet)
+  // Load courses, students, and sessions when Dashboard mounts
+  // (they may not be loaded yet on direct URL navigation)
+  useEffect(() => {
+    if (!courses) {
+      getCourses();
+    }
+  }, [courses, getCourses]);
+
   useEffect(() => {
     if (courseId) {
       getCourseStudents(courseId);
+      getCourseSessions(courseId);
     }
-  }, [courseId, getCourseStudents]);
+  }, [courseId, getCourseStudents, getCourseSessions]);
 
   const course = useMemo(
     () => courses?.find((c) => c.id === courseId),
@@ -205,46 +215,38 @@ export function CourseDashboard() {
           icon={<DonutIcon />}
           width="calc(33.33% - 16px)"
         >
-          <div
-            style={{
-              borderBottom: "1px solid #e0e0e0",
-              margin: "0 16px 16px",
-            }}
-          />
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div style={{ textAlign: "center" }}>
-              <span style={{ fontSize: 42, fontWeight: 300, color: "#333" }}>
+          <div style={{ display: "flex", justifyContent: "space-around", position: "relative" }}>
+            {/* Vertical divider matching old app */}
+            <div style={{ width: 1, height: "80%", background: "#20486a", position: "absolute", top: "10%", left: "50%" }} />
+            <div className="flex flex-col w-1/2 items-center">
+              <span style={{ fontSize: 50, fontWeight: 700, color: "#20486a" }}>
                 {analytics.courseAttendanceRate
                   ? analytics.courseAttendanceRate
                   : "-"}
                 {analytics.courseAttendanceRate ? (
-                  <span style={{ fontSize: 20 }}>%</span>
+                  <span style={{ fontSize: 40 }}>%</span>
                 ) : (
                   ""
                 )}
               </span>
-              <div
-                style={{ fontSize: 13, color: "#888", marginTop: 4 }}
-              >
+              <span style={{ fontSize: 20, textAlign: "center", color: "#20486a" }}>
                 Course
-              </div>
+              </span>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <span style={{ fontSize: 42, fontWeight: 300, color: "#333" }}>
+            <div className="flex flex-col w-1/2 items-center">
+              <span style={{ fontSize: 50, fontWeight: 700, color: "#20486a" }}>
                 {analytics.lastSessionAttendanceRate
                   ? analytics.lastSessionAttendanceRate
                   : "-"}
                 {analytics.lastSessionAttendanceRate ? (
-                  <span style={{ fontSize: 20 }}>%</span>
+                  <span style={{ fontSize: 40 }}>%</span>
                 ) : (
                   ""
                 )}
               </span>
-              <div
-                style={{ fontSize: 13, color: "#888", marginTop: 4 }}
-              >
+              <span style={{ fontSize: 20, textAlign: "center", color: "#20486a" }}>
                 Latest Session
-              </div>
+              </span>
             </div>
           </div>
         </DashboardCard>
@@ -358,13 +360,14 @@ function DashboardCard({
       style={{
         width,
         minWidth: 260,
-        background: "#fff",
-        borderRadius: 4,
-        boxShadow:
-          "0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)",
+        height: 300,
+        background: "#f5f5f5",
+        borderRadius: 10,
+        boxShadow: "1px 1px 5px grey, -1px -0.5px 3px grey",
         overflow: "hidden",
         flex: "1 1 auto",
         position: "relative",
+        color: "#20486a",
       }}
     >
       <div
@@ -372,20 +375,35 @@ function DashboardCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "12px 16px 8px",
+          padding: 8,
+          background: "#f5f5f5",
+          color: blurred ? "#00000038" : "#20486a",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           {icon}
-          <span style={{ fontSize: 15, fontWeight: 500, color: "#333" }}>
+          <span style={{ fontSize: 20, fontWeight: 700 }}>
             {title}
           </span>
         </div>
         <HelpCircle
-          style={{ width: 18, height: 18, color: "#bbb", cursor: "pointer" }}
+          style={{ width: 18, height: 18, color: "#20486a", cursor: "pointer", marginTop: 12, marginRight: 19 }}
         />
       </div>
-      <div style={{ paddingBottom: 12, filter: blurred ? "blur(5px)" : undefined, userSelect: blurred ? "none" : undefined }}>{children}</div>
+      <div style={{
+        background: "#fff",
+        border: "1px solid #ddd",
+        margin: "5px 20px 20px 20px",
+        padding: 0,
+        height: "78%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        filter: blurred ? "blur(5px)" : undefined,
+        userSelect: blurred ? "none" : undefined,
+        overflow: "auto",
+        width: "auto",
+      }}>{children}</div>
       {blurred && (
         <div
           style={{

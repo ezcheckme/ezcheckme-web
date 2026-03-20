@@ -33,7 +33,7 @@ interface CourseState {
 interface CourseActions {
   // CRUD
   getCourses: () => Promise<void>;
-  createCourse: (props: Partial<Course>) => Promise<void>;
+  createCourse: (props: Partial<Course>) => Promise<string | undefined>;
   updateCourse: (props: Partial<Course> & { id: string }) => Promise<void>;
   deleteCourse: (courseId: string) => Promise<void>;
 
@@ -118,11 +118,13 @@ export const useCourseStore = create<CourseState & CourseActions>()(
           latestCourseSelected: true,
           view: COURSE_VIEWS.SESSIONS,
         });
+        return course.id;
       } catch (err) {
         set({
           error: (err as Error).message || "Failed to create course",
           loading: false,
         });
+        return undefined;
       }
     },
 
