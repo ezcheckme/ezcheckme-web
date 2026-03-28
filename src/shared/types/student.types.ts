@@ -26,7 +26,17 @@ export interface Student {
    * Session attendance map: sessionId → checkin data.
    * This comes from the API response for getCourseStudents.
    */
-  sessions?: Record<string, { method?: string; request?: string; time?: number; location?: any }>;
+  sessions?: Record<string, {
+    method?: string;
+    request?: string;
+    time?: number;
+    checkin?: boolean;
+    location?: {
+      latLng?: { lat: number; lng: number };
+      distance?: number;
+      locationText?: string;
+    };
+  }>;
   /** Total attendance count */
   attendanceCount?: number;
   /** Total sessions count */

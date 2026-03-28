@@ -1,15 +1,15 @@
 import { act } from "@testing-library/react";
-import { useSessionStore } from "../store/sessionStore";
+import { useLiveSessionStore } from "../store/sessionStore";
 import type {
   Session,
   SessionStatus,
   SessionMode,
 } from "@/shared/types/session.types";
 
-describe("useSessionStore", () => {
+describe("useLiveSessionStore", () => {
   beforeEach(() => {
     // Reset store before each test
-    const store = useSessionStore.getState();
+    const store = useLiveSessionStore.getState();
     act(() => {
       store.clearSession();
     });
@@ -26,7 +26,7 @@ describe("useSessionStore", () => {
   };
 
   it("should initialize with empty state", () => {
-    const state = useSessionStore.getState();
+    const state = useLiveSessionStore.getState();
     expect(state.currentSession).toBeNull();
     expect(state.studentsPresent).toEqual([]);
     expect(state.remainingTime).toBe(0);
@@ -35,62 +35,62 @@ describe("useSessionStore", () => {
 
   it("should set an active session", () => {
     act(() => {
-      useSessionStore.getState().setSession(mockSession);
+      useLiveSessionStore.getState().setSession(mockSession);
     });
 
-    const state = useSessionStore.getState();
+    const state = useLiveSessionStore.getState();
     expect(state.currentSession).toEqual(mockSession);
   });
 
   it("should add a student and prevent duplicates", () => {
     act(() => {
-      useSessionStore.getState().setSession(mockSession);
-      useSessionStore.getState().addStudentPresent("student-1");
-      useSessionStore.getState().addStudentPresent("student-2");
+      useLiveSessionStore.getState().setSession(mockSession);
+      useLiveSessionStore.getState().addStudentPresent("student-1");
+      useLiveSessionStore.getState().addStudentPresent("student-2");
     });
 
-    let state = useSessionStore.getState();
+    let state = useLiveSessionStore.getState();
     expect(state.studentsPresent).toHaveLength(2);
     expect(state.studentsPresent).toContain("student-1");
 
     // Add duplicate
     act(() => {
-      useSessionStore.getState().addStudentPresent("student-1");
+      useLiveSessionStore.getState().addStudentPresent("student-1");
     });
 
-    state = useSessionStore.getState();
+    state = useLiveSessionStore.getState();
     expect(state.studentsPresent).toHaveLength(2); // Still 2
   });
 
   it("should manage remaining time correctly", () => {
     act(() => {
-      useSessionStore.getState().setRemainingTime(3600);
+      useLiveSessionStore.getState().setRemainingTime(3600);
     });
 
-    let state = useSessionStore.getState();
+    let state = useLiveSessionStore.getState();
     expect(state.remainingTime).toBe(3600);
 
     act(() => {
-      useSessionStore.getState().setRemainingTime(3598);
+      useLiveSessionStore.getState().setRemainingTime(3598);
     });
 
-    state = useSessionStore.getState();
+    state = useLiveSessionStore.getState();
     expect(state.remainingTime).toBe(3598);
   });
 
   it("should handle pause and resume", () => {
     act(() => {
-      useSessionStore.setState({ isPaused: true });
+      useLiveSessionStore.setState({ isPaused: true });
     });
 
-    let state = useSessionStore.getState();
+    let state = useLiveSessionStore.getState();
     expect(state.isPaused).toBe(true);
 
     act(() => {
-      useSessionStore.setState({ isPaused: false });
+      useLiveSessionStore.setState({ isPaused: false });
     });
 
-    state = useSessionStore.getState();
+    state = useLiveSessionStore.getState();
     expect(state.isPaused).toBe(false);
   });
 });

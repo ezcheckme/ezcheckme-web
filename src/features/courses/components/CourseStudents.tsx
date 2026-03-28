@@ -113,7 +113,7 @@ export function CourseStudents() {
     session: any,
   ) {
     e.stopPropagation();
-    const studentSession = (student.sessions as any)?.[session.id];
+    const studentSession = student.sessions?.[session.id];
     setCheckinTarget({
       student,
       sessionId: session.id,
@@ -137,13 +137,13 @@ export function CourseStudents() {
         icon: 0,
         name: student.name || "",
         email: student.email || "",
-        attendee_manual: (student as any).attendee_manual ?? true,
+        attendee_manual: student.attendee_manual ?? true,
       });
       // Optimistic local update — avoids full table refetch/rerender
       useStudentStore.setState((state) => ({
         students: state.students.map((s) => {
           if (s.id !== student.id) return s;
-          const sessions = { ...(s.sessions as any) };
+          const sessions = { ...s.sessions };
           if (isCheckin) {
             sessions[sessionId] = { ...(sessions[sessionId] || {}), checkin: true, request: "approved" };
           } else {
@@ -407,7 +407,7 @@ export function CourseStudents() {
                           key={session.id}
                           className="px-1 text-center"
                           style={{ minWidth: 32 }}
-                          onClick={(e) => handleIconClick(e, student as any, session)}
+                          onClick={(e) => handleIconClick(e, student, session)}
                           title={`Click to ${attended ? "uncheck" : "check-in"} ${student.name}`}
                         >
                           {attended ? (

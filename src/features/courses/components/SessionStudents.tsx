@@ -134,14 +134,13 @@ function XVIcon({
 
 export function SessionStudents() {
   const navigate = useNavigate();
-  const params: any = useParams({ strict: false });
+  const params = useParams({ strict: false }) as Record<string, string>;
   const urlSessionId = params.sessionId;
   const courseId = useCourseStore((s) => s.courseId);
   const courses = useCourseStore((s) => s.courses);
   const viewCourse = useCourseStore((s) => s.viewCourse);
   const session = useSessionStore((s) => s.session);
   const sessionId = useSessionStore((s) => s.sessionId);
-  const sessions = useSessionStore((s) => s.sessions);
   const getCourseSessions = useSessionStore((s) => s.getCourseSessions);
   const selectSession = useSessionStore((s) => s.selectSession);
   const nextSession = useSessionStore((s) => s.nextSession);
@@ -230,7 +229,7 @@ export function SessionStudents() {
   );
 
   const attendanceRate = useMemo(() => {
-    const maxAttendance = (course as any)?.maxattendance;
+    const maxAttendance = course?.maxattendance;
     if (!maxAttendance || !checkedInCount) return 0;
     return Math.round((checkedInCount / maxAttendance) * 100);
   }, [course, checkedInCount]);
@@ -323,13 +322,11 @@ export function SessionStudents() {
       })
     : "";
 
-  const durationStr = (session as any)?.duration
-    ? `${String(Math.floor((session as any).duration / 60)).padStart(2, "0")}:${String((session as any).duration % 60).padStart(2, "0")}`
+  const durationStr = session?.duration
+    ? `${String(Math.floor(session.duration / 60)).padStart(2, "0")}:${String(session.duration % 60).padStart(2, "0")}`
     : "";
 
-  const locationText = (session as any)?.location?.locationText as
-    | string
-    | undefined;
+  const locationText = session?.location?.locationText;
 
   // Pagination range text
   const startRow = totalStudents > 0 ? page * rowsPerPage + 1 : 0;
@@ -354,7 +351,7 @@ export function SessionStudents() {
         <div className="text-[13px] text-gray-700">
           <span className="font-medium">
             {session?.name ||
-              `Session ${(session as any)?.serialId ?? ""}`}
+              `Session ${session?.serialId ?? ""}`}
           </span>
           <span className="mx-2 text-gray-400 text-lg align-middle">|</span>
           <span>
@@ -685,15 +682,15 @@ export function SessionStudents() {
           setResumeDialogOpen(false);
           try {
             document.documentElement.requestFullscreen?.().catch(() => {});
-          } catch {
-            /* fullscreen not available */
+          } catch (error) {
+            console.error("[SessionStudents] Fullscreen not available", error);
           }
           navigate({
             to: "/session/$shortid",
             params: {
               shortid:
-                (session as any).shortId ||
-                (session as any).shortid ||
+                session.shortId ||
+                session.shortid ||
                 session.id,
             },
           });
@@ -704,7 +701,7 @@ export function SessionStudents() {
         open={!!checkinStudent}
         onOpenChange={(open) => { if (!open) setCheckinStudent(null); }}
         studentName={checkinStudent?.name ?? ""}
-        sessionName={session?.name || `Session ${(session as any)?.serialId ?? ""}`}
+        sessionName={session?.name || `Session ${session?.serialId ?? ""}`}
         studentSession={checkinStudent?.sessionData}
         onToggleCheckIn={async (action) => {
           if (!courseId || !sessionId || !checkinStudent) return;
@@ -724,7 +721,7 @@ export function SessionStudents() {
             sessionId,
             checkin: isCheckin,
             attendeeid: checkinStudent.id,
-            method: CHECKIN_METHODS.MANUAL as any,
+            method: CHECKIN_METHODS.MANUAL,
             code: "MANUAL",
             icon: 0,
             name: checkinStudent.name,

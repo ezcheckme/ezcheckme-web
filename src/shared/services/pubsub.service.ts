@@ -85,8 +85,8 @@ export class PubSubService {
       try {
         const data = JSON.parse(e.data);
         this.onMessage?.(data);
-      } catch {
-        console.error("[PubSub] Error parsing message");
+      } catch (error) {
+        console.error("[PubSub] Error parsing message", error);
       }
     };
 
@@ -121,7 +121,8 @@ export class PubSubService {
       const msg = this.queue.shift()!;
       try {
         this.ws.send(JSON.stringify(msg));
-      } catch {
+      } catch (error) {
+        console.error("[PubSub] Error sending queued message", error);
         this.queue.unshift(msg);
         break;
       }
@@ -132,7 +133,8 @@ export class PubSubService {
     if (this.connected && this.ws?.readyState === WebSocket.OPEN) {
       try {
         this.ws.send(JSON.stringify(msg));
-      } catch {
+      } catch (error) {
+        console.error("[PubSub] Error sending message", error);
         this.enqueue(msg);
       }
     } else {

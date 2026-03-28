@@ -17,7 +17,7 @@ export function CookieBanner() {
   useEffect(() => {
     // Determine whether to show the banner
     const agreedLocal = localStorage.getItem("cookiesAgreed");
-    const agreedDB = user && (user as any).cookiesAgreed;
+    const agreedDB = user && user.cookiesAgreed;
     const isGuest = role === "guest" || role === "unknown";
 
     if (isGuest) {
@@ -45,7 +45,7 @@ export function CookieBanner() {
     localStorage.setItem("cookiesAgreed", now);
     if (role !== "guest" && role !== "unknown") {
       try {
-        await updateUserData({ cookiesAgreed: now } as any);
+        await updateUserData({ cookiesAgreed: now });
       } catch (e) {
         console.error("Failed to update user cookie preference", e);
       }

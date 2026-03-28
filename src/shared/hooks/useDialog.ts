@@ -3,7 +3,7 @@
  * Generic dialog state management replacing Redux openDialog/closeDialog pattern.
  */
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 interface DialogState<T = unknown> {
   open: boolean;
@@ -16,13 +16,13 @@ export function useDialog<T = unknown>(initialOpen = false) {
     data: null,
   });
 
-  const openDialog = (data?: T) => {
-    setState({ open: true, data: data ?? null });
-  };
+  const openDialog = useCallback((data?: T) => {
+    setState({ open: true, data: data ?? (null as T | null) });
+  }, []);
 
-  const closeDialog = () => {
+  const closeDialog = useCallback(() => {
     setState({ open: false, data: null });
-  };
+  }, []);
 
   return {
     open: state.open,

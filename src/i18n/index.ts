@@ -29,13 +29,6 @@ const resources = {
   },
 };
 
-// Suppress i18next's Locize promotional console message during init
-const _origLog = console.log;
-console.log = (...args: unknown[]) => {
-  if (typeof args[0] === "string" && args[0].includes("locize")) return;
-  _origLog.apply(console, args);
-};
-
 i18n.use(initReactI18next).init({
   resources,
   lng: "en",
@@ -52,8 +45,5 @@ i18n.use(initReactI18next).init({
   //   ? (_lngs, _ns, key) => { console.warn(`[i18n] Missing: "${key}"`); }
   //   : undefined,
 });
-
-// Restore original console.log
-console.log = _origLog;
 
 export default i18n;

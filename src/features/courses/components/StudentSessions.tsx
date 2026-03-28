@@ -24,7 +24,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useCourseStore } from "../store/course.store";
 import { useStudentStore } from "../store/student.store";
 import { useSessionStore } from "../store/session.store";
-import { COURSE_VIEWS, type CourseView } from "@/config/constants";
+import { COURSE_VIEWS, CHECKIN_METHODS, type CourseView } from "@/config/constants";
 import { EditStudentDialog } from "./EditStudentDialog";
 import type { Session } from "@/shared/types";
 
@@ -120,8 +120,9 @@ export function StudentSessions() {
       await checkUncheck({
         courseId,
         sessionId: session.id,
-        studentId,
-        method: "manual",
+        checkin: !isCheckedIn(session),
+        attendeeid: studentId,
+        method: CHECKIN_METHODS.MANUAL,
       });
       if (courseId) {
         useStudentStore.getState().getCourseStudents(courseId);
@@ -283,7 +284,7 @@ export function StudentSessions() {
             Phone: {maskPhone(student.phone)}
           </p>
           <p className="text-[14px] text-[rgba(0,0,0,0.54)] py-1">
-            ID: {maskId(student.studentId || (student as any).attendeeid)}
+            ID: {maskId(student.studentId || student.attendeeid)}
           </p>
           {/* View Course dropdown */}
           <div className="flex items-center gap-2 mt-3 text-[14px] text-[rgba(0,0,0,0.87)]">
@@ -354,9 +355,9 @@ export function StudentSessions() {
                     <div>
                       {session.name || `Session ${session.serialId ?? ""}`}
                     </div>
-                    {(session as any).description && (
+                    {session.description && (
                       <div className="text-xs text-gray-400">
-                        {(session as any).description}
+                        {session.description}
                       </div>
                     )}
                   </td>
@@ -377,7 +378,7 @@ export function StudentSessions() {
                   </td>
                   {/* Session ID (shortid) */}
                   <td className="px-3 text-gray-600">
-                    {(session as any).shortid || session.id?.slice(0, 6) || "—"}
+                    {session.shortid || session.id?.slice(0, 6) || "—"}
                   </td>
                   {/* Check-in status */}
                   <td className="px-3">

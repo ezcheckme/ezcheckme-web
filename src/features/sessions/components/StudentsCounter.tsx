@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CountUp from "react-countup";
 import { useTranslation } from "react-i18next";
-import { useSessionStore } from "../store/sessionStore";
+import { useLiveSessionStore } from "../store/sessionStore";
 import { saveSessionData } from "@/shared/services/session.service";
 
 export const StudentsCounter = () => {
@@ -22,7 +22,7 @@ export const StudentsCounter = () => {
     initialCount,
     nameCounter,
     iconQuizEnabled,
-  } = useSessionStore();
+  } = useLiveSessionStore();
   const { t, i18n } = useTranslation();
 
   const isRtl = i18n.language === "he";

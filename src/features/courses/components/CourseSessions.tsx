@@ -499,7 +499,7 @@ export function CourseSessions() {
           } catch { /* fullscreen not available */ }
           navigate({
             to: "/session/$shortid",
-            params: { shortid: (session as any).shortId || (session as any).shortid || session.id },
+            params: { shortid: session.shortId || session.shortid || session.id },
           });
         }}
       />
@@ -532,7 +532,7 @@ export function CourseSessions() {
         courseName={course?.name || ""}
         onImport={async (sessions) => {
           // TODO: implement session import API call
-          console.log("Import sessions:", sessions);
+          void sessions;
         }}
       />
       <ConfirmationDialog

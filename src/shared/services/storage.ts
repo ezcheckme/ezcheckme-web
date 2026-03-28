@@ -13,7 +13,8 @@ import { encrypt, decryptJSON } from "./crypto";
 export function getItem(key: string): string | null {
   try {
     return localStorage.getItem(key);
-  } catch {
+  } catch (error) {
+    console.error("[storage.getItem]", key, error);
     return null;
   }
 }
@@ -21,16 +22,16 @@ export function getItem(key: string): string | null {
 export function setItem(key: string, value: string): void {
   try {
     localStorage.setItem(key, value);
-  } catch {
-    // localStorage full or unavailable — fail silently
+  } catch (error) {
+    console.error("[storage.setItem]", key, error);
   }
 }
 
 export function removeItem(key: string): void {
   try {
     localStorage.removeItem(key);
-  } catch {
-    // fail silently
+  } catch (error) {
+    console.error("[storage.removeItem]", key, error);
   }
 }
 

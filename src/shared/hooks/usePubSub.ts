@@ -20,15 +20,19 @@ export function usePubSub(
 ) {
   const { autoConnect = true } = options;
   const serviceRef = useRef<PubSubService | null>(null);
+  const onMessageRef = useRef(onMessage);
+  onMessageRef.current = onMessage;
 
   useEffect(() => {
     if (!autoConnect) return;
-    serviceRef.current = new PubSubService(onMessage);
+    serviceRef.current = new PubSubService((...args) =>
+      onMessageRef.current(...args),
+    );
     return () => {
       serviceRef.current?.destroy();
       serviceRef.current = null;
     };
-  }, [autoConnect]); // onMessage intentionally excluded to avoid reconnects
+  }, [autoConnect]);
 
   const connectSession = useCallback((id: string) => {
     serviceRef.current?.connectSession(id);

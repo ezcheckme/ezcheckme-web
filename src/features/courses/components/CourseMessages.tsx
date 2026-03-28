@@ -23,7 +23,7 @@ export function CourseMessages() {
 
   const course = courses?.find((c) => c.id === courseId);
   const totalAttendees =
-    (course as any)?.maxattendance || course?.studentsCount || 0;
+    course?.maxattendance || course?.studentsCount || 0;
 
   useEffect(() => {
     if (courseId) {

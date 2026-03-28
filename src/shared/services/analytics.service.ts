@@ -30,8 +30,8 @@ export async function sendAnalytics(
     if (typeof window.gtag === "function") {
       window.gtag("event", action, { event_label: eventLabel });
     }
-  } catch {
-    // gtag not available
+  } catch (error) {
+    console.error("[analytics.gtag]", error);
   }
 
   // Backend logging
@@ -44,8 +44,8 @@ export async function sendAnalytics(
         name: user.displayName || "",
         email: user.email,
       });
-    } catch {
-      // Non-critical
+    } catch (error) {
+      console.error("[analytics.sendInfo]", error);
     }
   }
 }

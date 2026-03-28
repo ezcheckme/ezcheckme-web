@@ -14,10 +14,19 @@ import {
   redirect,
 } from "@tanstack/react-router";
 import { AppLayout } from "./layout/AppLayout";
-import { AdminReportsView } from "@/features/admin/pages/AdminReportsView";
-import { AdminUsageView } from "@/features/admin/pages/AdminUsageView";
+const AdminReportsView = lazy(() =>
+  import("@/features/admin/pages/AdminReportsView").then((m) => ({
+    default: m.AdminReportsView,
+  })),
+);
+const AdminUsageView = lazy(() =>
+  import("@/features/admin/pages/AdminUsageView").then((m) => ({
+    default: m.AdminUsageView,
+  })),
+);
 import { SplashScreen } from "@/shared/components/SplashScreen";
 import { ProtectedRoute } from "@/shared/components/ProtectedRoute";
+import { useCourseStore } from "@/features/courses/store/course.store";
 
 // ---------------------------------------------------------------------------
 // Page imports — real pages vs. stubs
@@ -403,11 +412,20 @@ const coursesRoute = createRoute({
 const courseIndexRoute = createRoute({
   getParentRoute: () => coursesRoute,
   path: "/",
-  component: () => (
-    <div className="flex flex-1 items-center justify-center text-gray-400">
-      <p className="text-sm">Select a course from the list</p>
-    </div>
-  ),
+  component: function CourseIndex() {
+    const loading = useCourseStore((s) => s.loading);
+    const courses = useCourseStore((s) => s.courses);
+    // While courses are loading or auto-select hasn't fired yet, render nothing
+    // to prevent a "Select a course" flash before auto-navigation kicks in
+    if (loading || (courses && courses.length > 0)) {
+      return null;
+    }
+    return (
+      <div className="flex flex-1 items-center justify-center text-gray-400">
+        <p className="text-sm">Select a course from the list</p>
+      </div>
+    );
+  },
 });
 
 const courseIdRoute = createRoute({

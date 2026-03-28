@@ -5,6 +5,7 @@
  */
 
 import { create } from "zustand";
+import { handleError } from "@/shared/utils/error.utils";
 import type {
   Student,
   CheckinRequest,
@@ -94,7 +95,8 @@ export const useStudentStore = create<StudentState & StudentActions>()(
           courseId,
         )) as Student[];
         set({ students, courseId, loading: false });
-      } catch {
+      } catch (error) {
+        handleError(error, "students.getCourseStudents", { message: "Failed to load students" });
         set({ students: [], loading: false });
       }
     },
@@ -104,7 +106,8 @@ export const useStudentStore = create<StudentState & StudentActions>()(
         const checkinRequests =
           await sessionService.getCheckinPendingRequests();
         set({ checkinRequests });
-      } catch {
+      } catch (error) {
+        handleError(error, "students.getCheckinRequests", { toast: false });
         set({ checkinRequests: [] });
       }
     },

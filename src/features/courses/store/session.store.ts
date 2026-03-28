@@ -5,6 +5,7 @@
  */
 
 import { create } from "zustand";
+import { handleError } from "@/shared/utils/error.utils";
 import type { Session, CheckinPayload } from "@/shared/types";
 import * as sessionService from "@/shared/services/session.service";
 
@@ -121,7 +122,8 @@ export const useSessionStore = create<SessionState & SessionActions>()(
           } as Session;
         });
         set({ sessions, courseId, loading: false });
-      } catch {
+      } catch (error) {
+        handleError(error, "sessions.getCourseSessions", { message: "Failed to load sessions" });
         set({ sessions: [], loading: false });
       }
     },
@@ -179,7 +181,7 @@ export const useSessionStore = create<SessionState & SessionActions>()(
       await get().getCourseSessions(courseId);
     },
 
-    updateSession: async (courseId, sessionId, data) => {
+    updateSession: async (_courseId, sessionId, data) => {
       // Optimistic update — patch local state immediately to avoid skeleton flash
       set((state) => ({
         sessions: state.sessions.map((s) =>

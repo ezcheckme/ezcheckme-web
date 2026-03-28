@@ -153,7 +153,7 @@ export function CourseHeader() {
                   Run a new check-in session
                 </button>
               )}
-              {(user as any)?.autoMode && (
+              {user?.autoMode && (
                 <button
                   onClick={() => {
                     localStorage.setItem("_course_id_", JSON.stringify(courseId));

@@ -85,7 +85,7 @@ const initialState = {
   customQrInterval: null,
 };
 
-export const useSessionStore = create<SessionState>()(
+export const useLiveSessionStore = create<SessionState>()(
   devtools(
     (set) => ({
       ...initialState,

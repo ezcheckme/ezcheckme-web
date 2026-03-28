@@ -7,7 +7,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { useSessionStore } from "../store/sessionStore";
+import { useLiveSessionStore } from "../store/sessionStore";
 import { cn } from "@/lib/utils";
 
 const IvrInstructions = ({
@@ -90,7 +90,7 @@ const InstructionsText = ({
 };
 
 export const Instructions = () => {
-  const { liveSessionData, iconQuizEnabled, ivrEnabled } = useSessionStore();
+  const { liveSessionData, iconQuizEnabled, ivrEnabled } = useLiveSessionStore();
   const { t, i18n } = useTranslation();
 
   const isRtl = i18n.language === "he";

@@ -5,6 +5,7 @@
  */
 
 import { create } from "zustand";
+import { handleError } from "@/shared/utils/error.utils";
 import * as sessionService from "@/shared/services/session.service";
 import { getIsCourseLockedForDynamicAddingAttendees } from "@/shared/services/course.service";
 
@@ -118,7 +119,8 @@ export const useCheckinStore = create<CheckinState & CheckinActions>()(
           session,
           status: "quiz",
         });
-      } catch {
+      } catch (error) {
+        handleError(error, "checkin.loadSession", { message: "Session not found" });
         set({ status: "idle", error: "Session not found" });
       }
     },
@@ -131,8 +133,8 @@ export const useCheckinStore = create<CheckinState & CheckinActions>()(
       set({ user });
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-      } catch {
-        // localStorage unavailable
+      } catch (error) {
+        handleError(error, "checkin.setUser.localStorage", { toast: false });
       }
     },
 
@@ -144,8 +146,8 @@ export const useCheckinStore = create<CheckinState & CheckinActions>()(
           set({ user });
           return user;
         }
-      } catch {
-        // parse error
+      } catch (error) {
+        handleError(error, "checkin.loadStoredUser", { toast: false });
       }
       return null;
     },
@@ -170,15 +172,17 @@ export const useCheckinStore = create<CheckinState & CheckinActions>()(
             if (newAttempts >= MAX_ATTEMPTS) {
               try {
                 localStorage.setItem(`locked:${sessionId}`, String(Date.now()));
-              } catch {}
+              } catch (error) {
+                handleError(error, "checkin.attemptQuiz.lockStorage", { toast: false });
+              }
               set({ status: "course_locked", attempts: newAttempts });
             } else {
               set({ status: "course_locked", attempts: newAttempts });
             }
             return;
           }
-        } catch {
-          // If check fails, proceed with check-in anyway
+        } catch (error) {
+          handleError(error, "checkin.attemptQuiz.lockCheck", { toast: false });
         }
 
         // ── Check in with "WAQUIZ" method (matching old app) ──
@@ -196,7 +200,8 @@ export const useCheckinStore = create<CheckinState & CheckinActions>()(
             email: user.email,
           });
           set({ status: "success" });
-        } catch {
+        } catch (error) {
+          handleError(error, "checkin.attemptQuiz.checkIn", { message: "Check-in failed" });
           set({ status: "fail", error: "Check-in failed" });
         }
       } else {
@@ -205,8 +210,8 @@ export const useCheckinStore = create<CheckinState & CheckinActions>()(
           // Lock the user out
           try {
             localStorage.setItem(`locked:${sessionId}`, String(Date.now()));
-          } catch {
-            // localStorage unavailable
+          } catch (error) {
+            handleError(error, "checkin.attemptQuiz.lockStorage", { toast: false });
           }
           set({ status: "locked", attempts: newAttempts });
         } else {
@@ -255,7 +260,8 @@ export const useCheckinStore = create<CheckinState & CheckinActions>()(
 
         // Go to quiz
         set({ status: "quiz" });
-      } catch {
+      } catch (error) {
+        handleError(error, "checkin.directCheckin", { message: "Session not found" });
         set({ status: "idle", error: "Session not found" });
       }
     },

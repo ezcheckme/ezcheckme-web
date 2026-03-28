@@ -47,7 +47,8 @@ export function decryptJSON<T = unknown>(
   try {
     const decrypted = decrypt(ciphertext, key);
     return JSON.parse(decrypted) as T;
-  } catch {
+  } catch (error) {
+    console.error("[crypto.decryptJSON]", error);
     return null;
   }
 }

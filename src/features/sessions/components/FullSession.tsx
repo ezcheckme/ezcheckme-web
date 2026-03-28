@@ -11,7 +11,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
-import { useSessionStore } from "../store/sessionStore";
+import { useLiveSessionStore } from "../store/sessionStore";
 import { useQrCode } from "../hooks/useQrCode";
 import { Instructions } from "./Instructions";
 import { StudentsCounter } from "./StudentsCounter";
@@ -27,7 +27,7 @@ export const FullSession = () => {
     setShowMinimized,
     category,
     customQrInterval,
-  } = useSessionStore();
+  } = useLiveSessionStore();
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === "he";
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -123,7 +123,7 @@ export const FullSession = () => {
   }
 
   function handleEndSession() {
-    useSessionStore.getState().setRemainingTime(0);
+    useLiveSessionStore.getState().setRemainingTime(0);
   }
 
   if (!liveSessionData) return null;

@@ -5,6 +5,7 @@
  */
 
 import { create } from "zustand";
+import { handleError } from "@/shared/utils/error.utils";
 import { USER_ROLES } from "@/config/constants";
 import type { UserRole } from "@/config/constants";
 import type { UserData, ConnectionData } from "@/shared/types";
@@ -155,8 +156,8 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
       try {
         const attrs = await cognito.getUserAttributes();
         hostId = attrs["custom:hostid"] || null;
-      } catch {
-        // Attribute fetch failed — continue to fallback
+      } catch (error) {
+        handleError(error, "auth.getUserAttributes", { toast: false });
       }
     }
 
@@ -194,7 +195,8 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
         fetched: true,
         init: true,
       });
-    } catch {
+    } catch (error) {
+      handleError(error, "auth.setUserFromCognito", { message: "Failed to load account data" });
       clearAuthToken();
       set({ role: USER_ROLES.GUEST, init: true });
     }
@@ -243,8 +245,8 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
       set((state) => ({
         user: state.user ? { ...state.user, ...data } : null,
       }));
-    } catch {
-      // Update failed — could show snackbar
+    } catch (error) {
+      handleError(error, "auth.updateUserData", { message: "Failed to save profile" });
     }
   },
 
@@ -257,8 +259,8 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
           : null,
         fetched: true,
       }));
-    } catch {
-      // Failed to refresh
+    } catch (error) {
+      handleError(error, "auth.getHostData", { toast: false });
     }
   },
 
@@ -273,8 +275,8 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
           ? { ...state.user, ...(hostData as Partial<UserData>), impersonateId }
           : null,
       }));
-    } catch {
-      // Failed
+    } catch (error) {
+      handleError(error, "auth.setImpersonate", { message: "Failed to impersonate user" });
     }
   },
 
@@ -300,8 +302,8 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
     try {
       const data = await hostService.getConnectionData();
       set({ connectionData: data as unknown as ConnectionData });
-    } catch {
-      // Non-critical — fail silently
+    } catch (error) {
+      handleError(error, "auth.fetchConnectionData", { toast: false });
     }
   },
 
@@ -310,8 +312,8 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
     try {
       const data = await hostService.getUniversitiesData();
       set({ universitiesData: data });
-    } catch {
-      // Non-critical
+    } catch (error) {
+      handleError(error, "auth.fetchUniversitiesData", { toast: false });
     }
   },
 

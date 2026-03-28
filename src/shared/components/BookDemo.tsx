@@ -34,8 +34,8 @@ export function BookDemo({ buttonColor, caps }: BookDemoProps) {
     try {
       await sendInvitationToDemo(email);
       setSent(true);
-    } catch {
-      // Silently handled
+    } catch (error) {
+      console.error("[BookDemo.handleSubmit]", error);
     } finally {
       setSending(false);
     }

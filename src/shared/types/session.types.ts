@@ -21,10 +21,14 @@ export interface Session {
   mode: SessionMode;
   /** Short ID for attendee lookup */
   shortId?: string;
+  /** Lowercase shortid variant from API */
+  shortid?: string;
   /** Display numbering (reverse-indexed) */
   serialId?: number;
   /** Label / type identifier */
   label?: string;
+  /** Session description */
+  description?: string;
   /** Session start time */
   begins: number;
   /** Session end time */
@@ -39,6 +43,14 @@ export interface Session {
   attendanceRate?: number;
   /** QR code data */
   codes?: SessionCodes;
+  /** Attendees array (populated by some API responses) */
+  attendees?: unknown[];
+  /** Location data */
+  location?: {
+    latLng?: { lat: number; lng: number };
+    locationText?: string;
+    radius?: number;
+  };
   /** Created timestamp */
   createdAt?: number;
 }

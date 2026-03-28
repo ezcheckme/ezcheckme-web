@@ -5,6 +5,7 @@
  */
 
 import { create } from "zustand";
+import { handleError } from "@/shared/utils/error.utils";
 import type { CourseView } from "@/config/constants";
 import { COURSE_VIEWS } from "@/config/constants";
 import type { Course, CourseMessage, FieldCheckin } from "@/shared/types";
@@ -100,6 +101,7 @@ export const useCourseStore = create<CourseState & CourseActions>()(
         const courses = await courseService.getAllCourses();
         set({ courses, loading: false });
       } catch (err) {
+        handleError(err, "courses.getCourses", { message: "Failed to load courses" });
         set({
           error: (err as Error).message || "Failed to load courses",
           loading: false,
@@ -120,6 +122,7 @@ export const useCourseStore = create<CourseState & CourseActions>()(
         });
         return course.id;
       } catch (err) {
+        handleError(err, "courses.createCourse", { message: "Failed to create course" });
         set({
           error: (err as Error).message || "Failed to create course",
           loading: false,
@@ -133,6 +136,7 @@ export const useCourseStore = create<CourseState & CourseActions>()(
         await courseService.updateCourse(props);
         await get().getCourses();
       } catch (err) {
+        handleError(err, "courses.updateCourse", { message: "Failed to update course" });
         set({ error: (err as Error).message || "Failed to update course" });
       }
     },
@@ -149,6 +153,7 @@ export const useCourseStore = create<CourseState & CourseActions>()(
           set({ courseId: null });
         }
       } catch (err) {
+        handleError(err, "courses.deleteCourse", { message: "Failed to delete course" });
         set({ error: (err as Error).message || "Failed to delete course" });
       }
     },
@@ -183,6 +188,7 @@ export const useCourseStore = create<CourseState & CourseActions>()(
         await messagingService.sendMessage(courseId, title, message);
         await get().getCourseMessages(courseId);
       } catch (err) {
+        handleError(err, "courses.sendMessage", { message: "Failed to send message" });
         set({ error: (err as Error).message || "Failed to send message" });
       }
     },
@@ -192,6 +198,7 @@ export const useCourseStore = create<CourseState & CourseActions>()(
         await messagingService.deleteMessage(courseId, messageId);
         await get().getCourseMessages(courseId);
       } catch (err) {
+        handleError(err, "courses.deleteMessage", { message: "Failed to delete message" });
         set({ error: (err as Error).message || "Failed to delete message" });
       }
     },
@@ -200,8 +207,8 @@ export const useCourseStore = create<CourseState & CourseActions>()(
       try {
         const messages = await messagingService.getCourseMessages(courseId);
         set({ messages });
-      } catch {
-        // Fail silently for messages
+      } catch (error) {
+        handleError(error, "courses.getCourseMessages", { toast: false });
       }
     },
 
@@ -210,7 +217,8 @@ export const useCourseStore = create<CourseState & CourseActions>()(
       try {
         const autoSessions = await sessionService.getAutoSessions(room);
         set({ autoSessions });
-      } catch {
+      } catch (error) {
+        handleError(error, "courses.getAutoSessions", { toast: false });
         set({ autoSessions: [] });
       }
     },
@@ -220,7 +228,8 @@ export const useCourseStore = create<CourseState & CourseActions>()(
       try {
         const checkins = await courseService.getCourseFieldCheckins(courseId);
         set({ checkins });
-      } catch {
+      } catch (error) {
+        handleError(error, "courses.getCourseFieldCheckins", { toast: false });
         set({ checkins: [] });
       }
     },

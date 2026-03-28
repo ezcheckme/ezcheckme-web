@@ -15,7 +15,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { useSessionStore, setSessionPubSub } from "../store/sessionStore";
+import { useLiveSessionStore, setSessionPubSub } from "../store/sessionStore";
 import { FullSession } from "./FullSession";
 import { SessionOpenInMinimized } from "./SessionOpenInMinimized";
 import { PubSubService } from "@/shared/services/pubsub.service";
@@ -44,7 +44,7 @@ export const SessionProvider = () => {
     incrementNameCounter,
     addToVerificationBuffer,
     clearSession,
-  } = useSessionStore();
+  } = useLiveSessionStore();
 
   const pubsubRef = useRef<PubSubService | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -100,7 +100,7 @@ export const SessionProvider = () => {
 
   // ---- End Session ----
   const endSessionByHost = useCallback(async () => {
-    const state = useSessionStore.getState();
+    const state = useLiveSessionStore.getState();
     const sessionData = state.liveSessionData;
     if (!sessionData || !running.current) return;
 
@@ -163,8 +163,8 @@ export const SessionProvider = () => {
     let sessionData: LiveSessionData;
     try {
       sessionData = JSON.parse(rawSession) as LiveSessionData;
-    } catch {
-      console.error("Failed to parse session data");
+    } catch (error) {
+      console.error("[SessionProvider] Failed to parse session data", error);
       navigate({ to: "/courses" });
       return;
     }
@@ -200,7 +200,7 @@ export const SessionProvider = () => {
     setLiveSessionData(sessionData);
     setRemainingTime(remaining);
 
-    useSessionStore.setState({
+    useLiveSessionStore.setState({
       initialCount: rawCount ? JSON.parse(rawCount) : sessionData.checkins || 0,
       iconQuizEnabled: sessionData.iconQuizEnabled !== false,
       ivrEnabled: !!sessionData.ivrEnabled,
@@ -219,8 +219,8 @@ export const SessionProvider = () => {
       if (elem.requestFullscreen) {
         elem.requestFullscreen().catch(() => {});
       }
-    } catch {
-      // Fullscreen not available
+    } catch (error) {
+      console.error("[SessionProvider] Fullscreen not available", error);
     }
 
     return () => {
@@ -234,7 +234,7 @@ export const SessionProvider = () => {
     if (!liveSessionData || isPaused) return;
 
     timerRef.current = setInterval(() => {
-      const state = useSessionStore.getState();
+      const state = useLiveSessionStore.getState();
       const newTime = state.remainingTime - 1;
 
       if (newTime <= 0) {
@@ -303,7 +303,7 @@ export const SessionProvider = () => {
             // Only process if we haven't seen this attendee yet
             if (
               attendeeId &&
-              !useSessionStore
+              !useLiveSessionStore
                 .getState()
                 .attendeesVerificationBuffer.includes(attendeeId)
             ) {
@@ -327,7 +327,7 @@ export const SessionProvider = () => {
           } | null;
           const requestId = request?._id || request?.id;
           if (requestId) {
-            useSessionStore.getState().addCheckInRequest({
+            useLiveSessionStore.getState().addCheckInRequest({
               id: requestId,
               sessionId: liveSessionData.id,
               courseId: liveSessionData.courseid,

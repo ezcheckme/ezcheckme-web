@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import QRLogo from "qr-logo";
-import { useSessionStore, getSessionPubSub } from "../store/sessionStore";
+import { useLiveSessionStore, getSessionPubSub } from "../store/sessionStore";
 import { updateSessionCodes } from "@/shared/services/session.service";
 
 interface UseQrCodeProps {
@@ -69,7 +69,7 @@ export const useQrCode = ({
 
   const generateQrImage = useCallback(
     async (code: number, iconIndex: number) => {
-      const { iconQuizEnabled } = useSessionStore.getState();
+      const { iconQuizEnabled } = useLiveSessionStore.getState();
       const cat = categoryRef.current;
       const sid = shortIdRef.current;
       const size = qrSizeRef.current;
@@ -139,7 +139,7 @@ export const useQrCode = ({
     if (!sid || !isMountedRef.current) return;
 
     // Check pause state from store directly (avoid stale closures)
-    if (useSessionStore.getState().isPaused) return;
+    if (useLiveSessionStore.getState().isPaused) return;
 
     // Generate random 6-digit code
     const code = Math.floor(Math.random() * 899999 + 100000);
@@ -152,7 +152,7 @@ export const useQrCode = ({
 
     if (qrImage) {
       setQrCodeDataUrl(qrImage);
-      useSessionStore.getState().setQrCode(qrImage); // Store for MinimizedSession
+      useLiveSessionStore.getState().setQrCode(qrImage); // Store for MinimizedSession
     }
 
     // Update prevIcon AFTER successful generation (matching old app L691)
@@ -168,9 +168,9 @@ export const useQrCode = ({
         if (!isMountedRef.current) return;
         const resp = responseData as Record<string, unknown> | undefined;
         if (resp && typeof resp.checkins === "number") {
-          const { initialCount } = useSessionStore.getState();
+          const { initialCount } = useLiveSessionStore.getState();
           const serverNewCheckins = resp.checkins - initialCount;
-          useSessionStore.setState({ nameCounter: serverNewCheckins });
+          useLiveSessionStore.setState({ nameCounter: serverNewCheckins });
         }
 
         // Broadcast icons via PubSub — this is how the mobile app receives

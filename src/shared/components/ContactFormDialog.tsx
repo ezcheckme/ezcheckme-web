@@ -74,7 +74,8 @@ export function ContactFormDialog({
         title: title || "Contact Us",
       });
       setSubmitted(true);
-    } catch {
+    } catch (error) {
+      console.error("[ContactFormDialog.handleSubmit]", error);
       setErrors({ submit: "Failed to send. Please try again." });
     }
     setSending(false);

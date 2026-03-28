@@ -77,6 +77,8 @@ export interface UserData {
   adminRights?: Record<string, boolean>;
   /** Whether user has created first course */
   createdFirstCourse?: boolean;
+  /** Cookie consent timestamp */
+  cookiesAgreed?: number | string;
 }
 
 export interface UserSettings {

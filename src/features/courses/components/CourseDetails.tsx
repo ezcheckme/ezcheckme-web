@@ -10,9 +10,8 @@ import { COURSE_VIEWS, type CourseView } from "@/config/constants";
 import { CourseHeader } from "./CourseHeader";
 
 export function CourseDetails() {
-  const params: any = useParams({ strict: false });
+  const { courseId: urlCourseId } = useParams({ strict: false }) as { courseId?: string };
   const location = useLocation();
-  const urlCourseId = params.courseId;
   
   const courseId = useCourseStore((s) => s.courseId);
   const view = useCourseStore((s) => s.view);

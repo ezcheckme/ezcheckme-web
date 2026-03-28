@@ -48,7 +48,7 @@ export function CourseDashboard() {
 
   const analytics = useMemo(() => {
     const totalCourseAttendees =
-      (course as any)?.maxattendance || course?.studentsCount || students.length || 1;
+      course?.maxattendance || course?.studentsCount || students.length || 1;
     const totalSessions = sessions.length;
 
     // ---- Course Attendance Rate ----
@@ -63,7 +63,7 @@ export function CourseDashboard() {
     chronologicalSessions.forEach((session) => {
       let sessionAttendees = 0;
       students.forEach((student) => {
-        const studentSessions = (student as any).sessions;
+        const studentSessions = student.sessions;
         if (studentSessions && studentSessions[session.id]) {
           const req = studentSessions[session.id]?.request;
           // Legacy excludes "pending" and "denied"
@@ -96,7 +96,7 @@ export function CourseDashboard() {
     if (latestSession) {
       let latestAttendees = 0;
       students.forEach((student) => {
-        const studentSessions = (student as any).sessions;
+        const studentSessions = student.sessions;
         if (studentSessions && studentSessions[latestSession.id]) {
           latestAttendees += 1;
         }
@@ -111,7 +111,7 @@ export function CourseDashboard() {
     const studentsData = students.map((student) => {
       let attendance = 0;
       let missed = 0;
-      const studentSessions = (student as any).sessions || {};
+      const studentSessions = student.sessions || {};
       sessions.forEach((session) => {
         if (studentSessions[session.id]) {
           const req = studentSessions[session.id]?.request;
@@ -134,8 +134,8 @@ export function CourseDashboard() {
       return {
         id: student.id,
         name:
-          (student as any).name ||
-          `${(student as any).firstName || ""} ${(student as any).lastName || ""}`.trim() ||
+          student.name ||
+          `${student.firstName || ""} ${student.lastName || ""}`.trim() ||
           "Unknown",
         attendanceRate,
         missed,
@@ -145,7 +145,7 @@ export function CourseDashboard() {
     // ---- Latest Session Absentees ----
     const lastSessionAbsentees = latestSession
       ? studentsData.filter((s) => {
-          const studentSessions = (students.find((st) => st.id === s.id) as any)?.sessions || {};
+          const studentSessions = students.find((st) => st.id === s.id)?.sessions || {};
           return !studentSessions[latestSession.id];
         })
       : [];

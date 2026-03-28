@@ -1,7 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { useQrCode } from "../hooks/useQrCode";
-import { useSessionStore } from "../store/sessionStore";
+import { useLiveSessionStore } from "../store/sessionStore";
 import { post } from "@/shared/services/api-client";
 
 // Mock the API client
@@ -25,7 +25,7 @@ describe("useQrCode hook", () => {
 
     // Reset store
     act(() => {
-      const store = useSessionStore.getState();
+      const store = useLiveSessionStore.getState();
       store.clearSession();
       store.setSession({
         id: "sess-123",
@@ -66,14 +66,14 @@ describe("useQrCode hook", () => {
     expect(result.current).toBe("data:image/png;base64,mockqrimagedata");
     expect(post).toHaveBeenCalledTimes(1);
 
-    const store = useSessionStore.getState();
+    const store = useLiveSessionStore.getState();
     expect(store.qrCode).toBe("data:image/png;base64,mockqrimagedata");
   });
 
   it("should respect pause state from store", async () => {
     // Start paused
     act(() => {
-      useSessionStore.setState({ isPaused: true });
+      useLiveSessionStore.setState({ isPaused: true });
     });
 
     renderHook(() =>
@@ -95,7 +95,7 @@ describe("useQrCode hook", () => {
 
     // Unpause
     act(() => {
-      useSessionStore.setState({ isPaused: false });
+      useLiveSessionStore.setState({ isPaused: false });
     });
 
     await act(async () => {

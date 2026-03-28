@@ -5,6 +5,7 @@
  */
 
 import { create } from "zustand";
+import { handleError } from "@/shared/utils/error.utils";
 import { ADMIN_VIEWS } from "@/config/constants";
 import type { AdminView } from "@/config/constants";
 import type {
@@ -98,7 +99,8 @@ export const useAdminStore = create<AdminState & AdminActions>()((set) => ({
     try {
       const stats = await adminService.getAdminGeneralStatistics(data);
       set({ adminStats: stats, loading: false });
-    } catch {
+    } catch (error) {
+      handleError(error, "admin.getGeneralStats", { message: "Failed to load admin stats" });
       set({ loading: false });
     }
   },
@@ -108,7 +110,8 @@ export const useAdminStore = create<AdminState & AdminActions>()((set) => ({
     try {
       const stats = await adminService.getAdminCoursesGeneralStatistics(data);
       set({ coursesStats: stats, loading: false });
-    } catch {
+    } catch (error) {
+      handleError(error, "admin.getCoursesStats", { message: "Failed to load course stats" });
       set({ loading: false });
     }
   },
@@ -118,7 +121,8 @@ export const useAdminStore = create<AdminState & AdminActions>()((set) => ({
     try {
       const stats = await adminService.getAdminCoursesGraphStatistics(data);
       set({ coursesGraphStats: stats, graphLoading: false });
-    } catch {
+    } catch (error) {
+      handleError(error, "admin.getCoursesGraphStats", { toast: false });
       set({ graphLoading: false });
     }
   },
@@ -128,7 +132,8 @@ export const useAdminStore = create<AdminState & AdminActions>()((set) => ({
     try {
       const stats = await adminService.getAdminHostsGeneralStatistics(data);
       set({ hostsStats: stats, loading: false });
-    } catch {
+    } catch (error) {
+      handleError(error, "admin.getHostsStats", { message: "Failed to load host stats" });
       set({ loading: false });
     }
   },
@@ -138,7 +143,8 @@ export const useAdminStore = create<AdminState & AdminActions>()((set) => ({
     try {
       const stats = await adminService.getAdminHostsGraphStatistics(data);
       set({ hostsGraphStats: stats, graphLoading: false });
-    } catch {
+    } catch (error) {
+      handleError(error, "admin.getHostsGraphStats", { toast: false });
       set({ graphLoading: false });
     }
   },
@@ -148,7 +154,8 @@ export const useAdminStore = create<AdminState & AdminActions>()((set) => ({
     try {
       const stats = await adminService.getInstituteAttendeesStatistics(data);
       set({ instituteAttendeesStats: stats, loading: false });
-    } catch {
+    } catch (error) {
+      handleError(error, "admin.getInstituteAttendeesStats", { message: "Failed to load attendee stats" });
       set({ loading: false });
     }
   },
@@ -157,7 +164,8 @@ export const useAdminStore = create<AdminState & AdminActions>()((set) => ({
     try {
       const info = await adminService.getAttendeesInfo(attendees);
       set({ attendeesInfo: info });
-    } catch {
+    } catch (error) {
+      handleError(error, "admin.getAttendeesInfo", { toast: false });
       set({ attendeesInfo: null });
     }
   },
