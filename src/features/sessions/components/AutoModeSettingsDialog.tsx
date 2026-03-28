@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Dialog,
@@ -30,8 +30,12 @@ export function AutoModeSettingsDialog({
   const { t } = useTranslation();
   const [sessionDuration, setSessionDuration] = useState("7");
   const { config, setConfig } = useAutoModeStore();
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevConfig, setPrevConfig] = useState(config);
 
-  useEffect(() => {
+  if (open !== prevOpen || config !== prevConfig) {
+    setPrevOpen(open);
+    setPrevConfig(config);
     if (open) {
       // In old app, this was stored in localStorage as `_session_registration_length_`
       // We will read from the autoModeStore config, assuming it's synced.
@@ -39,10 +43,10 @@ export function AutoModeSettingsDialog({
       if (storedVal) {
         setSessionDuration(JSON.parse(storedVal).toString());
       } else {
-        setSessionDuration(config.registrationDuration.toString() || "7");
+        setSessionDuration(config.registrationDuration?.toString() || "7");
       }
     }
-  }, [open, config]);
+  }
 
   const handleSave = () => {
     const durationNum = parseInt(sessionDuration, 10);

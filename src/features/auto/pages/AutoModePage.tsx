@@ -79,9 +79,9 @@ export const AutoModePage = () => {
   };
 
   // Theme values from user data (matches old app: user.data?.theme)
-  const themeBgColor = (user as any)?.theme?.bgColor || "#EFEFEF";
-  const themeColor = (user as any)?.theme?.color || "#000";
-  const themeImage = (user as any)?.theme?.image || null;
+  const themeBgColor = user?.theme?.bgColor || "#EFEFEF";
+  const themeColor = user?.theme?.color || "#000";
+  const themeImage = user?.theme?.image || null;
 
   // Following sessions: exclude next session, pass with coursename field
   const followingSessions = nextSession

@@ -12,7 +12,7 @@
  *   Gray container with: "Phone number:" label | country code dropdown | number input | green "Text me the link!" button
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "@tanstack/react-router";
 import { API_PATHS } from "@/config/constants";
@@ -41,7 +41,10 @@ export function CheckInMessageDialog({
 
   // Auto-detect country code from connection data (IP geolocation)
   const connectionData = useAuthStore((s) => s.connectionData);
-  useEffect(() => {
+  const [prevConnectionData, setPrevConnectionData] = useState(connectionData);
+
+  if (connectionData !== prevConnectionData) {
+    setPrevConnectionData(connectionData);
     if (connectionData?.country_code) {
       const match = COUNTRY_CODES.find(
         (cc) =>
@@ -51,7 +54,7 @@ export function CheckInMessageDialog({
         setCountryCode(match.dialCode);
       }
     }
-  }, [connectionData]);
+  }
 
   if (!open) return null;
 

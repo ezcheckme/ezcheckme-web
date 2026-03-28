@@ -27,10 +27,10 @@ export function AttendeesByDomainPage() {
   const [from, setFrom] = useState(yesterday);
   const [to, setTo] = useState(now);
   const [data, setData] = useState<[string, number][]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const fetchData = async (f: Date, t: Date) => {
-    setLoading(true);
+  const fetchData = async (f: Date, t: Date, showLoading = true) => {
+    if (showLoading) setLoading(true);
     try {
       const res: any = await getAttendeesByDomain(
         formatDateParam(f),
@@ -48,7 +48,7 @@ export function AttendeesByDomainPage() {
   };
 
   useEffect(() => {
-    fetchData(from, to);
+    fetchData(from, to, false);
   }, []); // eslint-disable-line
 
   const totalAttendees = useMemo(

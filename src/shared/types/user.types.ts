@@ -13,7 +13,12 @@ export interface UserData {
   id: string;
   shortcuts: string[];
   settings: UserSettings;
-  theme: string;
+  theme?: {
+    bgColor?: string;
+    color?: string;
+    image?: string;
+    text?: string;
+  };
   /** Host-specific fields */
   plan?: string;
   premium?: boolean;
@@ -45,14 +50,28 @@ export interface UserData {
   sessionsCounter?: number;
   /** Impersonation flag */
   impersonateId?: string;
+  impid?: string;
   /** Group invitations */
   invitations?: GroupInvitation[];
   /** Is invited to group */
-  invitationToGroup?: boolean;
+  invitationToGroup?: string | Record<string, unknown>;
   /** Is superadmin */
   superadmin?: boolean;
   /** Payment account ID */
   accountId?: string;
+  /** Faculty manager group info */
+  facultyData?: {
+    name?: string;
+  };
+  /** Extended group info */
+  groupData?: {
+    id?: string;
+    _id?: string;
+    name?: string;
+    admin?: string;
+  };
+  /** Current discount code */
+  discountCode?: string;
   /** Faculty list (institutional) — conditional field in course dialog */
   faculties?: Array<{ _id?: string; id?: string; name: string }>;
   /** Auto-mode enabled */

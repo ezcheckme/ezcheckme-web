@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useCourseStore } from "../store/course.store";
 import { SendMessageDialog } from "./SendMessageDialog";
 import { MessageDetailsDialog } from "./MessageDetailsDialog";
+import type { CourseMessage } from "@/shared/types";
 
 export function CourseMessages() {
   const courseId = useCourseStore((s) => s.courseId);
@@ -19,29 +20,39 @@ export function CourseMessages() {
   const getCourseMessages = useCourseStore((s) => s.getCourseMessages);
   const [messagesLoading, setMessagesLoading] = useState(true);
   const [sendDialogOpen, setSendDialogOpen] = useState(false);
-  const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [selectedMessage, setSelectedMessage] = useState<CourseMessage | null>(null);
 
   const course = courses?.find((c) => c.id === courseId);
   const totalAttendees =
     course?.maxattendance || course?.studentsCount || 0;
 
   useEffect(() => {
-    if (courseId) {
+    let active = true;
+    async function fetchMessages() {
+      if (!courseId) return;
       setMessagesLoading(true);
-      getCourseMessages(courseId).finally(() => setMessagesLoading(false));
+      await getCourseMessages(courseId);
+      if (active) {
+        setMessagesLoading(false);
+      }
     }
+    fetchMessages();
+
+    return () => {
+      active = false;
+    };
   }, [courseId, getCourseMessages]);
 
   // Sort messages by createdat desc (newest first)
   const sortedMessages = Array.isArray(messages)
-    ? [...messages].sort((a: any, b: any) => {
+    ? [...messages].sort((a: CourseMessage, b: CourseMessage) => {
         const aDate = a.createdat || a.createdAt || a.sentAt || 0;
         const bDate = b.createdat || b.createdAt || b.sentAt || 0;
         return bDate > aDate ? 1 : -1;
       })
     : [];
 
-  const getReadStats = (msg: any) => {
+  const getReadStats = (msg: CourseMessage) => {
     const readByCount = msg.readBy ? msg.readBy.length : 0;
     const percentRead =
       totalAttendees > 0
@@ -50,7 +61,7 @@ export function CourseMessages() {
     return `${percentRead}% (${readByCount}/${totalAttendees} Attendees)`;
   };
 
-  const formatDate = (msg: any) => {
+  const formatDate = (msg: CourseMessage) => {
     const dateVal = msg.createdat || msg.createdAt || msg.sentAt;
     if (!dateVal) return "";
     try {
@@ -143,7 +154,7 @@ export function CourseMessages() {
         </div>
       ) : (
         <div>
-          {sortedMessages.map((msg: any, index: number) => (
+          {sortedMessages.map((msg: CourseMessage, index: number) => (
             <div key={msg._id || msg.id || `msg-${index}`}>
               <div
                 style={{

@@ -41,9 +41,10 @@ export function FieldCheckinBar({
   const barRef = useRef<HTMLDivElement>(null);
   const enterTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [now] = useState(() => Date.now());
 
   const width = (() => {
-    const end = checkin.checkedOutAt ?? Date.now();
+    const end = checkin.checkedOutAt ?? now;
     const w = (cellWidth * (end - checkin.checkedInAt)) / 86400000;
     return Math.max(w, BAR_MIN_WIDTH);
   })();

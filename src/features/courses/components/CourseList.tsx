@@ -10,7 +10,7 @@
  * - Inline styles → Tailwind classes
  */
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { BookOpen, MoreVertical, Trash2, Edit, Eye } from "lucide-react";
 import { useCourseStore } from "../store/course.store";
 import type { Course } from "@/shared/types";
@@ -84,56 +84,6 @@ export function CourseList() {
     );
   }, [courses]);
 
-
-  // -- Auto-select course with latest session (matching old app CourseList.js) --
-  const [latestCourseId, setLatestCourseId] = useState<string | null>(null);
-  const [latestCourseResolved, setLatestCourseResolved] = useState(false);
-
-  // Fetch the latest course on mount (runs in parallel with getCourses)
-  useEffect(() => {
-    import("@/shared/services/course.service").then(({ getLatestCourse }) => {
-      getLatestCourse()
-        .then((result) => {
-          if (result?.result?.courseid) {
-            setLatestCourseId(result.result.courseid);
-          }
-        })
-        .catch(() => {
-          // Ignore errors — will fall back to first course
-        })
-        .finally(() => {
-          setLatestCourseResolved(true);
-        });
-    });
-  }, []);
-
-  // When courses are loaded and latestCourse API has resolved, auto-select.
-  // This ref prevents the auto-select from firing more than once.
-  const autoSelectDone = useRef(false);
-
-  useEffect(() => {
-    if (autoSelectDone.current) return;
-    if (!latestCourseResolved) return;
-    if (!courses || courses.length === 0) return;
-
-    // Check if the URL already has a courseId (e.g. /courses/abc123/...)
-    const pathname = window.location.pathname;
-    const hasCourseIdInUrl = /^\/courses\/[^/]+/.test(pathname);
-    if (hasCourseIdInUrl) {
-      autoSelectDone.current = true;
-      return;
-    }
-
-    // If latestCourseId is set and found in courses, use it; otherwise fall back to first course
-    const targetId = latestCourseId
-      ? courses.some((c) => c.id === latestCourseId)
-        ? latestCourseId
-        : courses[0].id
-      : courses[0].id;
-
-    autoSelectDone.current = true;
-    handleSelectCourse(targetId);
-  }, [courses, latestCourseId, latestCourseResolved]);
 
   const courseCount = courses?.length ?? 0;
 

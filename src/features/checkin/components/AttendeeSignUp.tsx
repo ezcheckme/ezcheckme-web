@@ -37,10 +37,7 @@ const INITIAL_COUNTRY_CODE = "+1";
 const PHONE_COOKIE_KEY = "attendee:phone";
 const RESEND_CODE_TIMEOUT = 60;
 
-function getCookie(name: string): string | null {
-  const m = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
-  return m ? decodeURIComponent(m[1]) : null;
-}
+
 
 function setCookie(name: string, value: string) {
   document.cookie = `${name}=${encodeURIComponent(value)};path=/;max-age=31536000`;
@@ -57,8 +54,8 @@ export function AttendeeSignUp() {
   const [user, setUser] = useState<AttendeeUser | null>(null);
   const [onlyCode, setOnlyCode] = useState(false);
   const [scrambledPhone, setScrambledPhone] = useState("");
-  const [maskedNumber, setMaskedNumber] = useState("");
-  const [realNumber, setRealNumber] = useState("");
+  const [maskedNumber] = useState("");
+  const [realNumber] = useState("");
   const [updateUserData, setUpdateUserData] = useState<any>(null);
   const [confirmConditionsDialog, setConfirmConditionsDialog] = useState(false);
   const [resendCodeCounter, setResendCodeCounter] = useState(0);

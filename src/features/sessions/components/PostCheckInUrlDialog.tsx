@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Dialog,
@@ -34,13 +34,18 @@ export function PostCheckInUrlDialog({
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState("");
 
-  useEffect(() => {
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevInitialData, setPrevInitialData] = useState(initialData);
+
+  if (open !== prevOpen || initialData !== prevInitialData) {
+    setPrevOpen(open);
+    setPrevInitialData(initialData);
     if (open) {
       setMessage(initialData?.message || "");
       setUrl(initialData?.url || "");
       setUrlError("");
     }
-  }, [open, initialData]);
+  }
 
   const validateUrl = (value: string) => {
     if (!value) return true;

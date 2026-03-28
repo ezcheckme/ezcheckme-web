@@ -7,9 +7,26 @@ import {
 } from "@/shared/services/course.service";
 import { format } from "date-fns";
 
+export interface PendingRequest {
+  id?: string;
+  attendeeid?: string;
+  method?: "field";
+  sessionid?: string;
+  name?: string;
+  sessionName?: string;
+  coursename?: string;
+  reason?: string;
+  totalRequests?: number;
+  createdat?: number | string;
+}
+
+export interface PendingRequestsResponse {
+  requests: PendingRequest[];
+}
+
 export function NotificationsMenu() {
   const [open, setOpen] = useState(false);
-  const [requests, setRequests] = useState<any[]>([]);
+  const [requests, setRequests] = useState<PendingRequest[]>([]);
   const [loading, setLoading] = useState(false);
   const [handlingId, setHandlingId] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
@@ -42,7 +59,7 @@ export function NotificationsMenu() {
   async function fetchRequests() {
     try {
       setLoading(true);
-      const data: any = await getCheckinPendingRequests();
+      const data = (await getCheckinPendingRequests()) as PendingRequestsResponse;
       setRequests(data?.requests || []);
     } catch (e) {
       console.error("Error fetching checkin requests", e);
@@ -62,6 +79,7 @@ export function NotificationsMenu() {
     try {
       const promises = requests.map((req) => {
         if (req.method !== "field") {
+          if (!req.sessionid || !req.id) return Promise.resolve();
           return handleLateRequestCheckin(req.sessionid, {
             approval: "approved",
             attendeeid: req.id,
@@ -80,10 +98,14 @@ export function NotificationsMenu() {
     }
   }
 
-  async function handleRequest(approval: "approved" | "denied", request: any) {
+  async function handleRequest(
+    approval: "approved" | "denied",
+    request: PendingRequest,
+  ) {
     try {
-      setHandlingId(request.id || request.attendeeid); // use an ID tracker to show loading state
+      setHandlingId(request.id || request.attendeeid || null); // use an ID tracker to show loading state
       if (request.method !== "field") {
+        if (!request.sessionid || !request.id) return;
         await handleLateRequestCheckin(request.sessionid, {
           approval,
           attendeeid: request.id,
@@ -154,7 +176,7 @@ export function NotificationsMenu() {
 
             <div className="flex flex-col gap-2">
               {requests
-                .sort((a, b) => b.createdat - a.createdat)
+                .sort((a, b) => Number(b.createdat || 0) - Number(a.createdat || 0))
                 .map((req, idx) => (
                   <div
                     key={idx}
@@ -178,7 +200,7 @@ export function NotificationsMenu() {
                     </div>
 
                     <p className="text-[10px] text-gray-500 mt-1">
-                      {req.totalRequests > 1
+                      {(req.totalRequests || 0) > 1
                         ? `This attendee requested ${req.totalRequests} late check-ins at this course.`
                         : "This is the first late check-in request of this attendee at this course."}
                     </p>

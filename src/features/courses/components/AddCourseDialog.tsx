@@ -9,7 +9,7 @@
  * exactly matching the old app's behavior.
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Loader2, Save, HelpCircle, MapPin } from "lucide-react";
@@ -29,7 +29,6 @@ import {
 import { useCourseStore } from "../../courses/store/course.store";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { COURSE_TYPES } from "@/config/constants";
-import type { CourseType } from "@/config/constants";
 import { PostCheckInUrlDialog } from "./PostCheckInUrlDialog";
 import { LocationSetupDialog } from "./LocationSetupDialog";
 import { CourseTemplates } from "./CourseTemplates";
@@ -319,8 +318,13 @@ export function AddCourseDialog({
   const showLockDynamic = !!user?.enableCourseDynamicJoinLock;
   const showSessionNotification = !!user?.sessionStartNotificationEnabled;
 
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevUser, setPrevUser] = useState(user);
+
   // --- Initialize defaults based on user ---
-  useEffect(() => {
+  if (open !== prevOpen || user !== prevUser) {
+    setPrevOpen(open);
+    setPrevUser(user);
     if (open) {
       // Reset form
       setName("");
@@ -345,7 +349,7 @@ export function AddCourseDialog({
       setNameError("");
       setDescError("");
     }
-  }, [open, user]);
+  }
 
   // --- Validation (matching old app's Formsy rules) ---
   const validateName = (val: string) => {

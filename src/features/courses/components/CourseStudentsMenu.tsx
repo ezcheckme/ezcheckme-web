@@ -24,7 +24,6 @@ interface CourseStudentsMenuProps {
 }
 
 export function CourseStudentsMenu({
-  selectedCount = 0,
   onAddStudent,
   onDeleteSelected,
   onUploadList,

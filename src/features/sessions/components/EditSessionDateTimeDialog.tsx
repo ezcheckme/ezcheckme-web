@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { CalendarIcon, Clock } from "lucide-react";
@@ -34,13 +34,18 @@ export function EditSessionDateTimeDialog({
   const updateSession = useSessionStore((s) => s.updateSession);
 
   // Sync state when dialog opens
-  useEffect(() => {
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevSession, setPrevSession] = useState(session);
+
+  if (open !== prevOpen || session !== prevSession) {
+    setPrevOpen(open);
+    setPrevSession(session);
     if (open && session && session.begins) {
       const d = new Date(session.begins);
       setSelectedDate(format(d, "yyyy-MM-dd"));
       setSelectedTime(format(d, "HH:mm"));
     }
-  }, [open, session]);
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -4,7 +4,7 @@
  * Generates recurring weekly sessions between a date range.
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { format, addWeeks } from "date-fns";
 import { Loader2, Trash2, CalendarPlus, Clock } from "lucide-react";
@@ -44,8 +44,12 @@ export function CreateFutureSessionsDialog({
   const [time, setTime] = useState<string>("09:00");
   const [newSessions, setNewSessions] = useState<Date[]>([]);
 
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevInputs, setPrevInputs] = useState({ fromDate, toDate, time });
+
   // Initialize dates when opened
-  useEffect(() => {
+  if (open !== prevOpen) {
+    setPrevOpen(open);
     if (open) {
       const today = new Date();
       setFromDate(format(today, "yyyy-MM-dd"));
@@ -56,37 +60,41 @@ export function CreateFutureSessionsDialog({
       setTime("09:00");
       setLoading(false);
     }
-  }, [open]);
+  }
 
   // Generate sessions whenever inputs change
-  useEffect(() => {
+  if (
+    fromDate !== prevInputs.fromDate ||
+    toDate !== prevInputs.toDate ||
+    time !== prevInputs.time
+  ) {
+    setPrevInputs({ fromDate, toDate, time });
+
     if (!fromDate || !toDate || !time) {
       setNewSessions([]);
-      return;
+    } else {
+      const start = new Date(fromDate);
+      const end = new Date(toDate);
+      const [hours, minutes] = time.split(":").map(Number);
+
+      if (isNaN(start.getTime()) || isNaN(end.getTime()) || start > end) {
+        setNewSessions([]);
+      } else {
+        start.setHours(hours, minutes, 0, 0);
+        end.setHours(23, 59, 59, 999); // end of that day
+
+        const generated: Date[] = [];
+        let current = new Date(start);
+
+        while (current <= end) {
+          generated.push(new Date(current));
+          current = addWeeks(current, 1);
+        }
+
+        setNewSessions(generated);
+      }
     }
-
-    const start = new Date(fromDate);
-    const end = new Date(toDate);
-    const [hours, minutes] = time.split(":").map(Number);
-
-    if (isNaN(start.getTime()) || isNaN(end.getTime()) || start > end) {
-      setNewSessions([]);
-      return;
-    }
-
-    start.setHours(hours, minutes, 0, 0);
-    end.setHours(23, 59, 59, 999); // end of that day
-
-    const generated: Date[] = [];
-    let current = new Date(start);
-
-    while (current <= end) {
-      generated.push(new Date(current));
-      current = addWeeks(current, 1);
-    }
-
-    setNewSessions(generated);
-  }, [fromDate, toDate, time]);
+  }
 
   const removeSession = (index: number) => {
     setNewSessions((prev) => prev.filter((_, i) => i !== index));

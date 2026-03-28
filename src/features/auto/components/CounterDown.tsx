@@ -11,11 +11,7 @@ interface CounterDownProps {
  * Displays hours:minutes:seconds with blinking colons.
  */
 export const CounterDown = ({ startTime, onEndTimer }: CounterDownProps) => {
-  const [time, setTime] = useState<{
-    hours: number;
-    minutes: number;
-    seconds: number;
-  } | null>(null);
+  const [now, setNow] = useState(() => Date.now());
   const [areDotsVisible, setAreDotsVisible] = useState(true);
 
   const getTimeDifferenceElements = (start: number, end: number) => {
@@ -27,23 +23,23 @@ export const CounterDown = ({ startTime, onEndTimer }: CounterDownProps) => {
     return { hours, minutes, seconds };
   };
 
-  useEffect(() => {
-    setTime(getTimeDifferenceElements(Date.now(), startTime));
-  }, []);
+  const time = getTimeDifferenceElements(now, startTime);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const t = getTimeDifferenceElements(Date.now(), startTime);
-      setTime(t);
+      setNow(Date.now());
       setAreDotsVisible((prev) => !prev);
-      if (t.hours === 0 && t.minutes === 0 && t.seconds === 0) {
-        onEndTimer?.();
-      }
     }, 1000);
     return () => clearInterval(interval);
-  }, [startTime]);
+  }, []);
 
-  if (!time || (time.hours === 0 && time.minutes === 0 && time.seconds === 0))
+  useEffect(() => {
+    if (time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
+      onEndTimer?.();
+    }
+  }, [time.hours, time.minutes, time.seconds, onEndTimer]);
+
+  if (time.hours === 0 && time.minutes === 0 && time.seconds === 0)
     return null;
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /**
  * TanStack Router route tree.
  * Central route configuration replacing routesConfig.js (167 lines).
@@ -207,14 +208,56 @@ const AttendeeDownload = lazy(() =>
 // Suspense wrapper for lazy pages
 // ---------------------------------------------------------------------------
 
-function LazyPage({ children }: { children: React.ReactNode }) {
-  return <Suspense fallback={<SplashScreen />}>{children}</Suspense>;
+function withLazyPage(Component: React.ComponentType<any>) {
+  function WithLazyPage(props: any) {
+    return (
+      <Suspense fallback={<SplashScreen />}>
+        <Component {...props} />
+      </Suspense>
+    );
+  }
+  WithLazyPage.displayName = `withLazyPage(${Component.displayName || Component.name || "Component"})`;
+  return WithLazyPage;
 }
 
-/** Lightweight fallback for inner navigation (tab switches, drill-downs).
- *  Shows nothing to avoid the jarring full-screen splash on sub-route transitions. */
-function LazyInner({ children }: { children: React.ReactNode }) {
-  return <Suspense fallback={<div />}>{children}</Suspense>;
+function withLazyInner(Component: React.ComponentType<any>) {
+  function WithLazyInner(props: any) {
+    return (
+      <Suspense fallback={<div />}>
+        <Component {...props} />
+      </Suspense>
+    );
+  }
+  WithLazyInner.displayName = `withLazyInner(${Component.displayName || Component.name || "Component"})`;
+  return WithLazyInner;
+}
+
+function withProtected(Component: React.ComponentType<any>) {
+  function WithProtected(props: any) {
+    return (
+      <ProtectedRoute>
+        <Suspense fallback={<SplashScreen />}>
+          <Component {...props} />
+        </Suspense>
+      </ProtectedRoute>
+    );
+  }
+  WithProtected.displayName = `withProtected(${Component.displayName || Component.name || "Component"})`;
+  return WithProtected;
+}
+
+export function withProtectedInner(Component: React.ComponentType<any>) {
+  function WithProtectedInner(props: any) {
+    return (
+      <ProtectedRoute>
+        <Suspense fallback={<div />}>
+          <Component {...props} />
+        </Suspense>
+      </ProtectedRoute>
+    );
+  }
+  WithProtectedInner.displayName = `withProtectedInner(${Component.displayName || Component.name || "Component"})`;
+  return WithProtectedInner;
 }
 
 // ---------------------------------------------------------------------------
@@ -230,161 +273,97 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/home",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/login",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const signupRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/signup",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const forgotRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/forgot",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const verifyRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/verify/$email/$code",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const verifyPasswordRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/verify-password/$email/$code",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const referralRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/referral/$code",
-  component: () => (
-    <LazyPage>
-      <HomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(HomePage),
 });
 
 const pricingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/pricing",
-  component: () => (
-    <LazyPage>
-      <PricingPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(PricingPage),
 });
 
 const termsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/terms",
-  component: () => (
-    <LazyPage>
-      <TermsPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(TermsPage),
 });
 
 const privacyRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/privacy",
-  component: () => (
-    <LazyPage>
-      <PrivacyPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(PrivacyPage),
 });
 
 const aboutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/about",
-  component: () => (
-    <LazyPage>
-      <AboutPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AboutPage),
 });
 
 const accessibilityRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/accessibility",
-  component: () => (
-    <LazyPage>
-      <AccessibilityPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AccessibilityPage),
 });
 
 const versionRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/WhatVersion",
-  component: () => (
-    <LazyPage>
-      <VersionPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(VersionPage),
 });
 
 const blogRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/blog",
-  component: () => (
-    <LazyPage>
-      <BlogPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(BlogPage),
 });
 
 const blogPostRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/blog/$id",
-  component: () => (
-    <LazyPage>
-      <BlogPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(BlogPage),
 });
 
 // -- Auth-required routes (host) --
@@ -400,26 +379,36 @@ const coursesFirstRoute = createRoute({
 const coursesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/courses",
-  component: () => (
-    <ProtectedRoute>
-      <LazyPage>
-        <CoursesPage />
-      </LazyPage>
-    </ProtectedRoute>
-  ),
+  component: withProtected(CoursesPage),
 });
 
 const courseIndexRoute = createRoute({
   getParentRoute: () => coursesRoute,
   path: "/",
-  component: function CourseIndex() {
-    const loading = useCourseStore((s) => s.loading);
-    const courses = useCourseStore((s) => s.courses);
-    // While courses are loading or auto-select hasn't fired yet, render nothing
-    // to prevent a "Select a course" flash before auto-navigation kicks in
-    if (loading || (courses && courses.length > 0)) {
-      return null;
+  loader: async () => {
+    const store = useCourseStore.getState();
+    if (!store.courses) {
+      await store.getCourses();
     }
+    const courses = useCourseStore.getState().courses;
+    if (!courses || courses.length === 0) return;
+
+    let targetId = courses[0].id;
+    try {
+      // Opt-in to the latest course logic
+      const { getLatestCourse } = await import("@/shared/services/course.service");
+      const res = await getLatestCourse();
+      const courseId = res?.result?.courseid;
+      if (courseId && courses.some(c => c.id === courseId)) {
+        targetId = courseId;
+      }
+    } catch {}
+
+    const course = courses.find((c) => c.id === targetId);
+    const defaultTab = course?.fieldCheckin ? "attendees" : "sessions";
+    throw redirect({ to: `/courses/${targetId}/${defaultTab}` as any, replace: true });
+  },
+  component: function CourseIndex() {
     return (
       <div className="flex flex-1 items-center justify-center text-gray-400">
         <p className="text-sm">Select a course from the list</p>
@@ -431,93 +420,55 @@ const courseIndexRoute = createRoute({
 const courseIdRoute = createRoute({
   getParentRoute: () => coursesRoute,
   path: "$courseId",
-  component: () => (
-    <LazyPage>
-      <CourseDetailsLayout />
-    </LazyPage>
-  ),
+  component: withLazyPage(CourseDetailsLayout),
 });
 
 const courseIdIndexRoute = createRoute({
   getParentRoute: () => courseIdRoute,
   path: "/",
-  component: () => (
-    <LazyInner>
-      <CourseDefaultRedirector />
-    </LazyInner>
-  ),
+  component: withLazyInner(CourseDefaultRedirector),
 });
 
 const courseDashboardRoute = createRoute({
   getParentRoute: () => courseIdRoute,
   path: "dashboard",
-  component: () => (
-    <LazyInner>
-      <CourseDashboard />
-    </LazyInner>
-  ),
+  component: withLazyInner(CourseDashboard),
 });
 
 const courseSessionsRoute = createRoute({
   getParentRoute: () => courseIdRoute,
   path: "sessions",
-  component: () => (
-    <LazyInner>
-      <CourseSessions />
-    </LazyInner>
-  ),
+  component: withLazyInner(CourseSessions),
 });
 
 const courseAttendeesRoute = createRoute({
   getParentRoute: () => courseIdRoute,
   path: "attendees",
-  component: () => (
-    <LazyInner>
-      <CourseAttendeesWrapper />
-    </LazyInner>
-  ),
+  component: withLazyInner(CourseAttendeesWrapper),
 });
 
 const courseMessagesRoute = createRoute({
   getParentRoute: () => courseIdRoute,
   path: "messages",
-  component: () => (
-    <LazyInner>
-      <CourseMessages />
-    </LazyInner>
-  ),
+  component: withLazyInner(CourseMessages),
 });
 
 const sessionStudentsRoute = createRoute({
   getParentRoute: () => courseIdRoute,
   path: "session/$sessionId",
-  component: () => (
-    <LazyInner>
-      <SessionStudents />
-    </LazyInner>
-  ),
+  component: withLazyInner(SessionStudents),
 });
 
 const studentSessionsRoute = createRoute({
   getParentRoute: () => courseIdRoute,
   path: "student/$studentId",
-  component: () => (
-    <LazyInner>
-      <StudentSessions />
-    </LazyInner>
-  ),
+  component: withLazyInner(StudentSessions),
 });
 
 const adminRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/admin",
-  component: () => (
-    <ProtectedRoute>
-      <LazyPage>
-        <AdminLayoutPage />
-      </LazyPage>
-    </ProtectedRoute>
-  ),
+  component: withProtected(AdminLayoutPage),
 });
 
 const adminIndexRoute = createRoute({
@@ -528,165 +479,97 @@ const adminIndexRoute = createRoute({
       view: typeof search.view === "string" ? search.view : undefined,
     };
   },
-  component: () => (
-    <LazyInner>
-      <AdminDashboardView />
-    </LazyInner>
-  ),
+  component: withLazyInner(AdminDashboardView),
 });
 
 const adminAttendeesNestedRoute = createRoute({
   getParentRoute: () => adminRoute,
   path: "/attendees",
-  component: () => (
-    <LazyInner>
-      <AdminAttendeesView />
-    </LazyInner>
-  ),
+  component: withLazyInner(AdminAttendeesView),
 });
 
 const adminHostsActivityRoute = createRoute({
   getParentRoute: () => adminRoute,
   path: "hosts-activity",
-  component: () => (
-    <LazyInner>
-      <HostsActivityPage />
-    </LazyInner>
-  ),
+  component: withLazyInner(HostsActivityPage),
 });
 
 const adminAttendeesByDomainRoute = createRoute({
   getParentRoute: () => adminRoute,
   path: "attendees-by-domain",
-  component: () => (
-    <LazyInner>
-      <AttendeesByDomainPage />
-    </LazyInner>
-  ),
+  component: withLazyInner(AttendeesByDomainPage),
 });
 
 const adminReportsNestedRoute = createRoute({
   getParentRoute: () => adminRoute,
   path: "reports",
-  component: () => (
-    <LazyInner>
-      <AdminReportsView />
-    </LazyInner>
-  ),
+  component: withLazyInner(AdminReportsView),
 });
 
 const adminUsageNestedRoute = createRoute({
   getParentRoute: () => adminRoute,
   path: "usage",
-  component: () => (
-    <LazyInner>
-      <AdminUsageView />
-    </LazyInner>
-  ),
+  component: withLazyInner(AdminUsageView),
 });
 
 const sessionRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/session/$shortid",
-  component: () => (
-    <ProtectedRoute>
-      <LazyPage>
-        <SessionPage />
-      </LazyPage>
-    </ProtectedRoute>
-  ),
+  component: withProtected(SessionPage),
 });
 
 const minimizedSessionRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/m_session",
-  component: () => (
-    <LazyPage>
-      <MinimizedSessionPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(MinimizedSessionPage),
 });
 
 const autoModeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/auto",
-  component: () => (
-    <ProtectedRoute>
-      <LazyPage>
-        <AutoModePage />
-      </LazyPage>
-    </ProtectedRoute>
-  ),
+  component: withProtected(AutoModePage),
 });
 
 const attendeeSignupRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/attendee-signup",
-  component: () => (
-    <LazyPage>
-      <AttendeeSignUpPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeSignUpPage),
 });
 
 const attendeeSignupWithShortIdRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/attendee-signup/$shortid",
-  component: () => (
-    <LazyPage>
-      <AttendeeSignUpPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeSignUpPage),
 });
 
 const attendeeHomeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/attendee",
-  component: () => (
-    <LazyPage>
-      <AttendeeHomePage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeHomePage),
 });
 
 const attendeeTermsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/attendee/terms",
-  component: () => (
-    <LazyPage>
-      <AttendeeTermsPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeTermsPage),
 });
 
 const attendeePrivacyRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/attendee/privacy",
-  component: () => (
-    <LazyPage>
-      <AttendeePrivacyPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeePrivacyPage),
 });
 
 const attendeeDownloadRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/download",
-  component: () => (
-    <LazyPage>
-      <AttendeeDownload />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeDownload),
 });
 
 const attendeeHelpRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/w/help",
-  component: () => (
-    <LazyPage>
-      <AttendeeHelp />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeHelp),
 });
 
 // -- Attendee routes --
@@ -694,61 +577,37 @@ const attendeeHelpRoute = createRoute({
 const checkinRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/checkin",
-  component: () => (
-    <LazyPage>
-      <CheckinPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(CheckinPage),
 });
 
 const checkinWithParamsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/checkin/$shortid/$code/$icon",
-  component: () => (
-    <LazyPage>
-      <CheckinPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(CheckinPage),
 });
 
 const quizRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/quiz/$shortid",
-  component: () => (
-    <LazyPage>
-      <QuizPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(QuizPage),
 });
 
 const sessionLoginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/sessionlogin",
-  component: () => (
-    <LazyPage>
-      <AttendeeSignUpPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeSignUpPage),
 });
 
 const sessionLoginShortIdRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/sessionlogin/$shortid",
-  component: () => (
-    <LazyPage>
-      <AttendeeSignUpPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeSignUpPage),
 });
 
 const getSessionIdRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/getsessionid",
-  component: () => (
-    <LazyPage>
-      <CheckinPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(CheckinPage),
 });
 
 // -- /w/ prefix routes (used by old app for web browser redirects) --
@@ -756,61 +615,37 @@ const getSessionIdRoute = createRoute({
 const wSessionLoginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/w/sessionlogin",
-  component: () => (
-    <LazyPage>
-      <AttendeeSignUpPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeSignUpPage),
 });
 
 const wSessionLoginShortIdRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/w/sessionlogin/$shortid",
-  component: () => (
-    <LazyPage>
-      <AttendeeSignUpPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeSignUpPage),
 });
 
 const wGetSessionIdRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/w/getsessionid",
-  component: () => (
-    <LazyPage>
-      <CheckinPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(CheckinPage),
 });
 
 const wCheckinRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/w/checkin",
-  component: () => (
-    <LazyPage>
-      <CheckinPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(CheckinPage),
 });
 
 const wQuizRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/w/quiz/$shortid",
-  component: () => (
-    <LazyPage>
-      <QuizPage />
-    </LazyPage>
-  ),
+  component: withLazyPage(QuizPage),
 });
 
 const wDownloadRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/w/download",
-  component: () => (
-    <LazyPage>
-      <AttendeeDownload />
-    </LazyPage>
-  ),
+  component: withLazyPage(AttendeeDownload),
 });
 
 // ---------------------------------------------------------------------------

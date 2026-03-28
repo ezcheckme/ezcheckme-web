@@ -27,12 +27,14 @@ export function DataCellComp({
   const [dims, setDims] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
-    if (cellRef.current) {
-      setDims({
-        w: cellRef.current.offsetWidth,
-        h: cellRef.current.offsetHeight,
-      });
-    }
+    const el = cellRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      setDims({ w: width, h: height });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
   return (

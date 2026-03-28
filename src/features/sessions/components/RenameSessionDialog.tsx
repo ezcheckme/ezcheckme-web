@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Dialog,
@@ -31,11 +31,16 @@ export function RenameSessionDialog({
   const renameSession = useSessionStore((s) => s.renameSession);
 
   // Sync state when dialog opens
-  useEffect(() => {
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevSession, setPrevSession] = useState(session);
+
+  if (open !== prevOpen || session !== prevSession) {
+    setPrevOpen(open);
+    setPrevSession(session);
     if (open && session) {
       setSessionName(session.name || "");
     }
-  }, [open, session]);
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -104,7 +104,7 @@ export const useUIStore = create<UIState & UIActions>()((set) => ({
   ...initialState,
 
   // -- Table actions --
-  initSort: (_viewType) => set({ table: { ...initialTableState } }),
+  initSort: () => set({ table: { ...initialTableState } }),
 
   createSortHandler: (property) =>
     set((state) => {

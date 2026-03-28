@@ -101,9 +101,11 @@ export function FieldCourseStudents() {
   };
 
   // Auto-set currentMonth when fieldData changes
-  useEffect(() => {
+  const [prevFieldData, setPrevFieldData] = useState(fieldData);
+  if (fieldData !== prevFieldData) {
+    setPrevFieldData(fieldData);
     if (fieldData) setCurrentMonth(fieldData.currentMonth);
-  }, [fieldData]);
+  }
 
   // Filter dates for current month
   const visibleDates = useMemo(

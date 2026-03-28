@@ -32,7 +32,7 @@ export function AdminDashboardGraph() {
   } = useAdminStore();
 
   const navigate = useNavigate();
-  const search: Record<string, any> = useSearch({ strict: false });
+  const search = useSearch({ strict: false });
 
   // Sync URL view to store on load/change
   useEffect(() => {
@@ -46,12 +46,12 @@ export function AdminDashboardGraph() {
     changeView(newView as AdminView);
     navigate({
       to: "/admin",
-      search: (prev: Record<string, any>) => ({ ...prev, view: newView }),
+      search: (prev) => ({ ...prev, view: newView }),
     });
   };
 
-  const graphData = (adminStats as Record<string, any>)?.generalGraph || [];
-  const fieldGraph = (adminStats as Record<string, any>)?.fieldGraph || [];
+  const graphData = adminStats?.generalGraph || [];
+  const fieldGraph = adminStats?.fieldGraph || [];
 
   const defaultTo = endOfWeek(new Date());
   const defaultFrom = new Date(
@@ -111,9 +111,7 @@ export function AdminDashboardGraph() {
       displayLabel = format(startOfWeekDate, "MMM dd yyyy");
     }
 
-    const point = graphData.find(
-      (p: Record<string, any>) => p._id === lookupId || p.id === lookupId,
-    );
+    const point = graphData.find((p) => p._id === lookupId || p.id === lookupId);
     let value = 0;
     if (point) {
       value =
@@ -122,19 +120,19 @@ export function AdminDashboardGraph() {
           : point.checkins || 0;
     }
 
-    const dataPoint: Record<string, any> = {
+    const dataPoint: Record<string, string | number> = {
       name: displayLabel,
       value, // Always 'value' for average/overall
     };
 
     // Process fieldGraph for selected faculties
     if (fieldGraph && fieldGraph.length > 0) {
-      fieldGraph.forEach((facultyItem: Record<string, any>) => {
+      fieldGraph.forEach((facultyItem) => {
         if (selectedGraphItems.includes(facultyItem.itemId)) {
           let count = 0;
           let rate = 0;
           let checkins = 0;
-          facultyItem.dates?.forEach((d: Record<string, any>) => {
+          facultyItem.dates?.forEach((d) => {
             if (d.date === lookupId) {
               count++;
               rate += d.rate;
@@ -386,7 +384,7 @@ export function AdminDashboardGraph() {
                       }}
                     />
                   )}
-                  {fieldGraph.map((item: Record<string, any>, index: number) => {
+                  {fieldGraph.map((item, index: number) => {
                     if (!selectedGraphItems.includes(item.itemId)) return null;
                     return (
                       <Line

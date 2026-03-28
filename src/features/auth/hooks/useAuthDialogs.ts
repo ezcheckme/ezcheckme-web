@@ -4,7 +4,7 @@
  * Replaces the 6 useEffect triggers in legacy Home.js.
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "@tanstack/react-router";
 import { useAuthStore } from "../store/auth.store";
 import { USER_ROLES } from "@/config/constants";
@@ -33,8 +33,14 @@ export function useAuthDialogs() {
     code: "",
   });
 
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
+  const [prevIsAuth, setPrevIsAuth] = useState(isAuthenticated);
+
   // Route-based triggers
-  useEffect(() => {
+  if (location.pathname !== prevPathname || isAuthenticated !== prevIsAuth) {
+    setPrevPathname(location.pathname);
+    setPrevIsAuth(isAuthenticated);
+
     const path = location.pathname;
 
     if (path === "/login" && !isAuthenticated) {
@@ -62,7 +68,7 @@ export function useAuthDialogs() {
       const code = decodeURIComponent(segments[3] || "");
       setDialog({ open: true, step: "change-password", email, code });
     }
-  }, [location.pathname, isAuthenticated]);
+  }
 
   const openAuth = (step: AuthStep = "login", skipGateway = false) => {
     if (step === "signup" && !skipGateway) {

@@ -17,10 +17,12 @@ export function FormattedDate({
   format = "MMM dd, yyyy",
   className,
 }: FormattedDateProps) {
+  let displayValue = "—";
   try {
     const d = date instanceof Date ? date : new Date(date);
-    return <span className={className}>{formatDate(d, format)}</span>;
+    displayValue = formatDate(d, format);
   } catch {
-    return <span className={className}>—</span>;
+    // Valid fallback already set
   }
+  return <span className={className}>{displayValue}</span>;
 }

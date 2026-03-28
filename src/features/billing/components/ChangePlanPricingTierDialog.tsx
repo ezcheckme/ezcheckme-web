@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { updateHostPricingTierSendEmail } from "@/shared/services/host.service";
 import { useAuthStore } from "@/features/auth/store/auth.store";
-import { PRICING_TIERS_TITLES } from "@/config/constants";
+import { PRICING_TIERS_TITLES } from "../constants/billing.constants";
 
 interface ChangePlanPricingTierDialogProps {
   open: boolean;
@@ -40,7 +40,7 @@ export function ChangePlanPricingTierDialog({
     }
     try {
       setLoading(true);
-      await updateUserData({ pricingTier: newTier });
+      await updateUserData({ pricingTier: String(newTier) });
       await updateHostPricingTierSendEmail({ pricingTier: newTier });
       setNewTierSet(true);
     } catch (error) {

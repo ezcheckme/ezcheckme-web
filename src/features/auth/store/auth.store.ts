@@ -185,7 +185,6 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
         email: (hostData.email as string) || "",
         shortcuts: [],
         settings: {},
-        theme: "default",
         ...hostData,
       };
 
@@ -210,7 +209,6 @@ export const useAuthStore = create<AuthState & AuthActions>()((set, get) => ({
       email: data.email || "",
       shortcuts: [],
       settings: {},
-      theme: "default",
       ...data,
     };
 

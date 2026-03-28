@@ -15,10 +15,13 @@ export function useMediaQuery(query: string): boolean {
     const mql = window.matchMedia(query);
     const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
 
-    setMatches(mql.matches);
+    // Initial check (if not matched accurately in useState, queue it avoiding synchronous setState)
+    if (mql.matches !== matches) {
+      setMatches(mql.matches);
+    }
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
-  }, [query]);
+  }, [query, matches]);
 
   return matches;
 }

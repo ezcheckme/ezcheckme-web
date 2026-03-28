@@ -8,7 +8,7 @@
  * - Students counter with animated name display
  */
 
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 // ---------------------------------------------------------------------------

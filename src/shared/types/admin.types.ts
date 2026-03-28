@@ -26,6 +26,45 @@ export interface AdminMainElementsView {
   adminMainTableShow: boolean;
 }
 
+export interface AdminGraphPoint {
+  _id?: string;
+  id?: string;
+  rate?: number;
+  checkins?: number;
+}
+
+export interface AdminFieldGraphDatePoint {
+  date: string;
+  rate: number;
+  checkins: number;
+}
+
+export interface AdminFieldGraphItem {
+  itemId: string;
+  itemName?: string;
+  dates?: AdminFieldGraphDatePoint[];
+}
+
+export interface AdminFieldData {
+  faculty?: {
+    _id?: string;
+    id?: string;
+    name?: string;
+  };
+  courses?: string[];
+  sessions?: number;
+  activeAttendees?: number;
+  checkins?: number;
+  rate?: number;
+}
+
+export interface AdminGeneralData {
+  avgAttendanceRate?: number;
+  courses?: number;
+  sessions?: number;
+  checkins?: number;
+}
+
 /** General admin statistics */
 export interface AdminGeneralStats {
   totalHosts?: number;
@@ -34,6 +73,10 @@ export interface AdminGeneralStats {
   totalAttendees?: number;
   totalCheckins?: number;
   attendanceRate?: number;
+  generalGraph?: AdminGraphPoint[];
+  fieldGraph?: AdminFieldGraphItem[];
+  field?: AdminFieldData[];
+  general?: AdminGeneralData;
 }
 
 /** Course-level statistics row */

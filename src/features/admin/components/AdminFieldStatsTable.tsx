@@ -9,8 +9,8 @@ export function AdminFieldStatsTable() {
   const { adminStats, loading, selectedGraphItems, toggleGraphItem } =
     useAdminStore();
 
-  const fieldData = (adminStats as Record<string, any>)?.field || [];
-  const generalData = (adminStats as Record<string, any>)?.general || {};
+  const fieldData = adminStats?.field || [];
+  const generalData = adminStats?.general || {};
 
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -38,7 +38,7 @@ export function AdminFieldStatsTable() {
   };
 
   const filteredData = useMemo(() => {
-    return fieldData.filter((a: Record<string, any>) => {
+    return fieldData.filter((a) => {
       if (minCourses !== "" && (a.courses?.length || 0) < minCourses)
         return false;
       if (minSessions !== "" && (a.sessions || 0) < minSessions) return false;
@@ -52,7 +52,7 @@ export function AdminFieldStatsTable() {
   const sortedData = useMemo(() => {
     const sortableItems = [...filteredData];
     if (sortConfig !== null) {
-      sortableItems.sort((a: Record<string, any>, b: Record<string, any>) => {
+      sortableItems.sort((a, b) => {
         let aVal: string | number = 0;
         let bVal: string | number = 0;
 
@@ -70,8 +70,8 @@ export function AdminFieldStatsTable() {
             bVal = b.courses?.length || 0;
             break;
           default:
-            aVal = a[sortConfig.key] || 0;
-            bVal = b[sortConfig.key] || 0;
+            aVal = (a as unknown as Record<string, string | number>)[sortConfig.key] || 0;
+            bVal = (b as unknown as Record<string, string | number>)[sortConfig.key] || 0;
         }
 
         if (aVal < bVal) return sortConfig.direction === "asc" ? -1 : 1;
@@ -116,14 +116,14 @@ export function AdminFieldStatsTable() {
       Math.round((generalData.sessions || 0) / len),
       Math.round(
         fieldData.reduce(
-          (acc: number, r: Record<string, any>) => acc + (r.activeAttendees || 0),
+          (acc: number, r) => acc + (r.activeAttendees || 0),
           0,
         ) / len,
       ),
       Math.round((generalData.checkins || 0) / len),
     ]);
 
-    sortedData.forEach((row: Record<string, any>, i: number) => {
+    sortedData.forEach((row, i: number) => {
       sheet.addRow([
         i + 1,
         row.faculty?.name || "Unknown",
@@ -182,9 +182,9 @@ export function AdminFieldStatsTable() {
                   className="rounded border-gray-300 cursor-pointer"
                   checked={
                     selectedGraphItems.includes("all") &&
-                    fieldData.every((r: Record<string, any>) =>
+                    fieldData.every((r) =>
                       selectedGraphItems.includes(
-                        r.faculty?._id || r.faculty?.id,
+                        r.faculty?._id || r.faculty?.id || "",
                       ),
                     )
                   }
@@ -193,13 +193,13 @@ export function AdminFieldStatsTable() {
                     toggleGraphItem("all", true);
                     // Also toggle all rows if "all" is clicked (optional behavior, but typical)
                     if (isChecked) {
-                      fieldData.forEach((r: Record<string, any>) => {
+                      fieldData.forEach((r) => {
                         const id = r.faculty?._id || r.faculty?.id;
                         if (id && !selectedGraphItems.includes(id))
                           toggleGraphItem(id);
                       });
                     } else {
-                      fieldData.forEach((r: Record<string, any>) => {
+                      fieldData.forEach((r) => {
                         const id = r.faculty?._id || r.faculty?.id;
                         if (id && selectedGraphItems.includes(id))
                           toggleGraphItem(id);
@@ -317,7 +317,7 @@ export function AdminFieldStatsTable() {
               <td className="px-6 py-3">
                 {Math.round(
                   fieldData.reduce(
-                    (acc: number, r: Record<string, any>) => acc + (r.activeAttendees || 0),
+                    (acc: number, r) => acc + (r.activeAttendees || 0),
                     0,
                   ) / (fieldData.length || 1),
                 )}
@@ -331,7 +331,7 @@ export function AdminFieldStatsTable() {
             </tr>
 
             {/* Sorted Items */}
-            {paginatedData.map((row: Record<string, any>, index: number) => {
+            {paginatedData.map((row, index: number) => {
               return (
                 <tr
                   key={index}
@@ -342,10 +342,10 @@ export function AdminFieldStatsTable() {
                       type="checkbox"
                       className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                       checked={selectedGraphItems.includes(
-                        row.faculty?._id || row.faculty?.id,
+                        row.faculty?._id || row.faculty?.id || "",
                       )}
                       onChange={() =>
-                        toggleGraphItem(row.faculty?._id || row.faculty?.id)
+                        toggleGraphItem(row.faculty?._id || row.faculty?.id || "")
                       }
                     />
                   </td>

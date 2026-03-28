@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "@tanstack/react-router";
 import { useAuthStore } from "@/features/auth/store/auth.store";
@@ -14,7 +14,19 @@ export function CookieBanner() {
   const [show, setShow] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
-  useEffect(() => {
+  const [prevDeps, setPrevDeps] = useState({
+    user,
+    role,
+    pathname: location.pathname,
+  });
+
+  if (
+    user !== prevDeps.user ||
+    role !== prevDeps.role ||
+    location.pathname !== prevDeps.pathname
+  ) {
+    setPrevDeps({ user, role, pathname: location.pathname });
+
     // Determine whether to show the banner
     const agreedLocal = localStorage.getItem("cookiesAgreed");
     const agreedDB = user && user.cookiesAgreed;
@@ -38,7 +50,7 @@ export function CookieBanner() {
         setShow(false);
       }
     }
-  }, [user, role, location.pathname]);
+  }
 
   const handleAgree = async () => {
     const now = new Date().toString();

@@ -6,7 +6,7 @@
  * Source: old InstituteMembersDialog.js (359 lines) → ~200 lines.
  */
 
-import { useState, useEffect, useMemo, startTransition } from "react";
+import { useState, useMemo, startTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { Search, Trash2, Eye, UserPlus, Users } from "lucide-react";
 import {
@@ -54,9 +54,13 @@ export function InstituteMembersDialog({
   const [members, setMembers] = useState<GroupMember[]>([]);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [searchTerm, setSearchTerm] = useState("");
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevUser, setPrevUser] = useState(user);
 
   // Load members from user's group data
-  useEffect(() => {
+  if (open !== prevOpen || user !== prevUser) {
+    setPrevOpen(open);
+    setPrevUser(user);
     if (open && user) {
       const u = user as unknown as Record<string, unknown>;
       const gd = (u.data as Record<string, unknown>)?.groupData as
@@ -66,7 +70,7 @@ export function InstituteMembersDialog({
         setMembers(gd.members);
       }
     }
-  }, [open, user]);
+  }
 
   // Filter members
   const filtered = useMemo(() => {

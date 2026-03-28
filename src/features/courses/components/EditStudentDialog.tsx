@@ -4,7 +4,7 @@
  * ID type dropdown (Israel), and warning about cross-platform updates.
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Loader2 } from "lucide-react";
 import {
@@ -36,30 +36,45 @@ export function EditStudentDialog({
   student,
 }: EditStudentDialogProps) {
   const { t } = useTranslation();
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden bg-white text-gray-900">
+        <DialogHeader className="p-6 pb-2">
+          <DialogTitle className="text-[1.25rem] font-normal text-[rgba(0,0,0,0.87)] text-center tracking-tight">
+            {t("edit-student - title") || "Update Attendee Data"}
+          </DialogTitle>
+        </DialogHeader>
+
+        {student && open && (
+          <EditStudentForm
+            student={student}
+            onOpenChange={onOpenChange}
+          />
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function EditStudentForm({
+  student,
+  onOpenChange,
+}: {
+  student: Student;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const { t } = useTranslation();
   const updateAttendee = useStudentStore((s) => s.updateAttendee);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [studentId, setStudentId] = useState("");
+  const parts = (student.name || "").split(" ");
+  const [firstName, setFirstName] = useState(parts[0] || "");
+  const [lastName, setLastName] = useState(parts.slice(1).join(" ") || "");
+  const [email, setEmail] = useState(student.email || "");
+  const [phone, setPhone] = useState(student.phone || "");
+  const [studentId, setStudentId] = useState(student.studentId || "");
   const [idType, setIdType] = useState("zehut");
   const [loading, setLoading] = useState(false);
-
-  // Populate form when student changes
-  useEffect(() => {
-    if (student && open) {
-      // Split name into first/last if available
-      const parts = (student.name || "").split(" ");
-      setFirstName(parts[0] || "");
-      setLastName(parts.slice(1).join(" ") || "");
-      setEmail(student.email || "");
-      setPhone(student.phone || "");
-      setStudentId(student.studentId || "");
-      setIdType("zehut");
-      setLoading(false);
-    }
-  }, [student, open]);
 
   const isValid = firstName.trim().length >= 2;
 
@@ -85,23 +100,14 @@ export function EditStudentDialog({
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden bg-white text-gray-900">
-        <DialogHeader className="p-6 pb-2">
-          <DialogTitle className="text-[1.25rem] font-normal text-[rgba(0,0,0,0.87)] text-center tracking-tight">
-            {t("edit-student - title") || "Update Attendee Data"}
-          </DialogTitle>
-        </DialogHeader>
-
-        <div className="px-6 pb-6 pt-0">
-          {/* Warning message like legacy */}
-          <div className="bg-[#e3f2fd] border-l-4 border-accent px-3 py-2 mb-4 text-[13px] text-[#01579b]">
-            {t("edit-student - warning") ||
-              "Please note – updating an attendee details will update its profile across the entire platform, including the attendee's App"}
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {/* First Name */}
+    <>
+      <div className="px-6 pb-6 pt-0">
+        <div className="bg-[#e3f2fd] border-l-4 border-accent px-3 py-2 mb-4 text-[13px] text-[#01579b]">
+          {t("edit-student - warning") ||
+            "Please note – updating an attendee details will update its profile across the entire platform, including the attendee's App"}
+        </div>
+        <div className="flex flex-col gap-4">
+          {/* First Name */}
             <div className="flex items-center gap-4">
               <label className="w-[120px] text-[14px] text-gray-600 shrink-0">
                 {t("students-actions - add student dialog - first name") || "First Name"}
@@ -204,7 +210,6 @@ export function EditStudentDialog({
             )}
           </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+    </>
   );
 }

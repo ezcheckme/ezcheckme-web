@@ -14,7 +14,11 @@ interface ShiftTooltipProps {
   student: StudentData;
 }
 
+import { useState } from "react";
+
 export function ShiftTooltip({ checkin, student }: ShiftTooltipProps) {
+  const [now] = useState(() => Date.now());
+
   const getTimeDiffStr = (start: number, end: number) => {
     const dif = differenceInMinutes(new Date(end), new Date(start));
     const hours = Math.floor(dif / 60);
@@ -65,7 +69,7 @@ export function ShiftTooltip({ checkin, student }: ShiftTooltipProps) {
             Shift duration:{" "}
             {checkin.checkedOutAt
               ? getTimeDiffStr(checkin.checkedInAt, checkin.checkedOutAt)
-              : `${getTimeDiffStr(checkin.checkedInAt, Date.now())} (in progress)`}
+              : `${getTimeDiffStr(checkin.checkedInAt, now)} (in progress)`}
           </div>
         </div>
         <div

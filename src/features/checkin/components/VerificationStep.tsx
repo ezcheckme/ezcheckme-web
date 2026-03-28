@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowLeft, RefreshCw, ShieldCheck, Phone, MessageSquare } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Phone, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface VerificationStepProps {

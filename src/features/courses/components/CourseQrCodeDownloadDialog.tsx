@@ -148,11 +148,20 @@ export function CourseQrCodeDownloadDialog({
   const theme = (user as any)?.data?.theme;
   const courseId = course._id || course.id;
 
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevCourseId, setPrevCourseId] = useState(courseId);
+
+  if (open !== prevOpen || courseId !== prevCourseId) {
+    setPrevOpen(open);
+    setPrevCourseId(courseId);
+    if (open) {
+      setLoading(true);
+      setQrImage(null);
+    }
+  }
+
   useEffect(() => {
     if (!open) return;
-
-    setLoading(true);
-    setQrImage(null);
 
     const r = generateRandomString;
     const url = `https://ezcheck.me/${r()}${r()}${r()}/${r()}${courseId}${r()}/self`;

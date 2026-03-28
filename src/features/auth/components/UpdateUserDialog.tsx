@@ -3,7 +3,7 @@
  * Used from AppToolbar profile dropdown.
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Loader2, User } from "lucide-react";
 import {
@@ -43,8 +43,12 @@ export function UpdateUserDialog({
   const [email, setEmail] = useState("");
   const [institution, setInstitution] = useState("");
   const [loading, setLoading] = useState(false);
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevUser, setPrevUser] = useState(user);
 
-  useEffect(() => {
+  if (open !== prevOpen || user !== prevUser) {
+    setPrevOpen(open);
+    setPrevUser(user);
     if (open && user) {
       const u = user as unknown as Record<string, unknown>;
       setFirstName((u.firstName as string) || "");
@@ -52,7 +56,7 @@ export function UpdateUserDialog({
       setEmail(user.email || "");
       setInstitution((u.institution as string) || "");
     }
-  }, [open, user]);
+  }
 
   async function handleSubmit() {
     if (!firstName.trim()) return;

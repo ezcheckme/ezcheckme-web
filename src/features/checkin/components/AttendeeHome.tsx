@@ -131,11 +131,11 @@ export function AttendeeHome() {
         </div>
       </main>
 
-      <ConfirmConditions
-        open={showTerms}
-        onCancel={() => setShowTerms(false)}
-        onConfirm={handleTermsConfirm}
-      />
+      {showTerms && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          <ConfirmConditions onConfirm={handleTermsConfirm} />
+        </div>
+      )}
     </div>
   );
 }

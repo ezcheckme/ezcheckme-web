@@ -205,6 +205,8 @@ export function AppToolbar() {
 // User dropdown (authenticated) — matches original UserMenu.js
 // ---------------------------------------------------------------------------
 
+import { type UserData } from "@/shared/types/user.types";
+
 function UserDropdown({
   name,
   photoURL,
@@ -217,7 +219,7 @@ function UserDropdown({
   name: string;
   photoURL?: string;
   role: string;
-  user: any;
+  user: UserData | null;
   onLogout: () => void;
   setProfileOpen: (open: boolean) => void;
   setUsageOpen: (open: boolean) => void;

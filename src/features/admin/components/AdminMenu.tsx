@@ -5,6 +5,7 @@ import {
   FileBarChart,
   PieChart,
 } from "lucide-react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 import { useAuthStore } from "@/features/auth/store/auth.store";
@@ -26,10 +27,10 @@ export function AdminMenu() {
   const allMenuItems: Array<{
     path: string;
     label: string;
-    icon: any;
+    icon: React.ElementType;
     exact?: boolean;
     hiddenForFaculty?: boolean;
-    search?: Record<string, any>;
+    search?: Record<string, unknown>;
   }> = [
     {
       path: "/admin",
@@ -105,8 +106,8 @@ export function AdminMenu() {
           return (
             <Link
               key={item.label}
-              to={item.path as any}
-              search={item.search as any}
+              to={item.path}
+              search={item.search}
               activeOptions={{ exact: item.exact }}
               className={cn(
                 "group flex items-center h-[64px] px-[10px] bg-white text-[16px] transition-colors w-full text-left relative hover:bg-gray-50 text-gray-700",

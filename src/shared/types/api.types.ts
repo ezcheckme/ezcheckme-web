@@ -62,9 +62,11 @@ export interface CourseMessage {
   hostId: string;
   sentAt: number;
   /** Created timestamp (alias for sentAt) */
-  createdAt?: number;
+  createdAt?: number | string;
+  createdat?: number | string;
   /** Number of students who read this message */
   readCount?: number;
+  readBy?: string[];
   /** Delivery status */
   status?: string;
 }

@@ -21,7 +21,10 @@ export function usePubSub(
   const { autoConnect = true } = options;
   const serviceRef = useRef<PubSubService | null>(null);
   const onMessageRef = useRef(onMessage);
-  onMessageRef.current = onMessage;
+
+  useEffect(() => {
+    onMessageRef.current = onMessage;
+  }, [onMessage]);
 
   useEffect(() => {
     if (!autoConnect) return;
@@ -42,9 +45,15 @@ export function usePubSub(
     serviceRef.current?.disconnectSession(id);
   }, []);
 
-  const updateSession = useCallback((id: string, codes: string[]) => {
-    serviceRef.current?.updateSession(id, codes);
-  }, []);
+  const updateSession = useCallback(
+    (
+      id: string,
+      codes: { previous: { icon: number }; current: { icon: number } },
+    ) => {
+      serviceRef.current?.updateSession(id, codes);
+    },
+    [],
+  );
 
   const endSession = useCallback((id: string) => {
     serviceRef.current?.endSession(id);

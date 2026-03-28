@@ -20,16 +20,18 @@ function getTimeDiff(now: number, start: number) {
 }
 
 export function CounterDown({ startTime, className }: CounterDownProps) {
-  const [time, setTime] = useState(getTimeDiff(Date.now(), startTime));
+  const [now, setNow] = useState(() => Date.now());
   const [dotsVisible, setDotsVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(getTimeDiff(Date.now(), startTime));
+      setNow(Date.now());
       setDotsVisible((prev) => !prev);
     }, 1000);
     return () => clearInterval(interval);
-  }, [startTime]);
+  }, []);
+
+  const time = getTimeDiff(now, startTime);
 
   const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 
