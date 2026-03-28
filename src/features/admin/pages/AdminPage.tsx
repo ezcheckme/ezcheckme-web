@@ -21,11 +21,11 @@ function useAdminBasePayload() {
   );
   return {
     groupId:
-      (user as any)?.group ||
-      (user as any)?.groupData?.id ||
-      (user as any)?.groupData?._id,
+      user?.group ||
+      user?.groupData?.id ||
+      user?.groupData?._id,
     facultiesToInclude: null,
-    faculty: (user as any)?.facultyManager || null,
+    faculty: user?.facultyManager || null,
     datesViewType: (viewType?.datesType || "WEEK").toLowerCase(),
     fromDate: format(
       dates?.from ? parseISO(dates.from) : defaultFrom,
@@ -111,7 +111,8 @@ export function AttendeesView() {
   ]);
 
   const getAttendeeCount = () => {
-    const data = (instituteAttendeesStats as any)?.classroomData;
+    // We can assume it has classroomData or type it properly, let's type the stats
+    const data = (instituteAttendeesStats as Record<string, any>)?.classroomData;
     return Array.isArray(data) ? data.length : 0;
   };
 

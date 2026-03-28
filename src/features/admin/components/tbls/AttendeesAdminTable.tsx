@@ -18,16 +18,16 @@ export function AttendeesAdminTable() {
   const [page, setPage] = useState(0);
   const rowsPerPage = 25;
 
-  const attendeesData = (instituteAttendeesStats as any)?.classroomData;
+  const attendeesData = (instituteAttendeesStats as Record<string, any>)?.classroomData;
   const data = Array.isArray(attendeesData) ? attendeesData : [];
 
   const filteredData = useMemo(() => {
     if (!searchTerm) return data;
     const lower = searchTerm.toLowerCase();
     return data.filter(
-      (a: any) =>
-        a.name?.toLowerCase().includes(lower) ||
-        a.email?.toLowerCase().includes(lower),
+      (a: Record<string, any>) =>
+        a?.name?.toLowerCase().includes(lower) ||
+        a?.email?.toLowerCase().includes(lower),
     );
   }, [data, searchTerm]);
 
@@ -42,12 +42,12 @@ export function AttendeesAdminTable() {
     if (filteredData.length === 0) return;
 
     // Prepare data
-    const exportData = filteredData.map((a: any, idx: number) => [
+    const exportData = filteredData.map((a: Record<string, any>, idx: number) => [
       idx + 1,
-      a.name || "",
-      a.email || "—",
-      a.courses || 0,
-      a.sessions || 0,
+      a?.name || "",
+      a?.email || "—",
+      a?.courses || 0,
+      a?.sessions || 0,
     ]);
 
     // Header row goes first
@@ -149,25 +149,25 @@ export function AttendeesAdminTable() {
                 </td>
               </tr>
             ) : (
-              paginatedData.map((attendee: any, idx: number) => (
+              paginatedData.map((attendee: Record<string, any>, idx: number) => (
                 <tr
-                  key={attendee.id || idx}
+                  key={attendee?.id || idx}
                   className="hover:bg-[#e9e9e9] transition-colors cursor-pointer"
                 >
                   <td className="px-6 py-3">
                     <input type="checkbox" className="rounded text-blue-600 focus:ring-blue-500 cursor-pointer" />
                   </td>
                   <td className="px-6 py-3 font-medium text-gray-900">
-                    {attendee.name}
+                    {attendee?.name}
                   </td>
                   <td className="px-6 py-3 text-gray-500">
-                    {attendee.email || "—"}
+                    {attendee?.email || "—"}
                   </td>
                   <td className="px-6 py-3">
-                    {(attendee.courses || 0).toLocaleString()}
+                    {(attendee?.courses || 0).toLocaleString()}
                   </td>
                   <td className="px-6 py-3">
-                    {(attendee.sessions || 0).toLocaleString()}
+                    {(attendee?.sessions || 0).toLocaleString()}
                   </td>
                 </tr>
               ))

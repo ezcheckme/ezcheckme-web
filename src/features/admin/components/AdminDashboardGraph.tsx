@@ -14,6 +14,7 @@ import {
 
 import { useAdminStore } from "../store/admin.store";
 import { ADMIN_VIEWS } from "@/config/constants";
+import type { AdminView } from "@/config/constants";
 
 export function AdminDashboardGraph() {
   const { t } = useTranslation();
@@ -31,26 +32,26 @@ export function AdminDashboardGraph() {
   } = useAdminStore();
 
   const navigate = useNavigate();
-  const search: any = useSearch({ strict: false });
+  const search: Record<string, any> = useSearch({ strict: false });
 
   // Sync URL view to store on load/change
   useEffect(() => {
-    const desiredView = search.view || ADMIN_VIEWS.MAIN_DASHBOARD;
+    const desiredView = (search.view as AdminView) || ADMIN_VIEWS.MAIN_DASHBOARD;
     if (desiredView !== view) {
-      changeView(desiredView as any);
+      changeView(desiredView);
     }
   }, [search.view, view, changeView]);
 
   const handleDropdownChange = (newView: string) => {
-    changeView(newView as any);
+    changeView(newView as AdminView);
     navigate({
       to: "/admin",
-      search: (prev: any) => ({ ...prev, view: newView }),
+      search: (prev: Record<string, any>) => ({ ...prev, view: newView }),
     });
   };
 
-  const graphData = (adminStats as any)?.generalGraph || [];
-  const fieldGraph = (adminStats as any)?.fieldGraph || [];
+  const graphData = (adminStats as Record<string, any>)?.generalGraph || [];
+  const fieldGraph = (adminStats as Record<string, any>)?.fieldGraph || [];
 
   const defaultTo = endOfWeek(new Date());
   const defaultFrom = new Date(
@@ -111,7 +112,7 @@ export function AdminDashboardGraph() {
     }
 
     const point = graphData.find(
-      (p: any) => p._id === lookupId || p.id === lookupId,
+      (p: Record<string, any>) => p._id === lookupId || p.id === lookupId,
     );
     let value = 0;
     if (point) {
@@ -128,12 +129,12 @@ export function AdminDashboardGraph() {
 
     // Process fieldGraph for selected faculties
     if (fieldGraph && fieldGraph.length > 0) {
-      fieldGraph.forEach((facultyItem: any) => {
+      fieldGraph.forEach((facultyItem: Record<string, any>) => {
         if (selectedGraphItems.includes(facultyItem.itemId)) {
           let count = 0;
           let rate = 0;
           let checkins = 0;
-          facultyItem.dates?.forEach((d: any) => {
+          facultyItem.dates?.forEach((d: Record<string, any>) => {
             if (d.date === lookupId) {
               count++;
               rate += d.rate;
@@ -355,12 +356,15 @@ export function AdminDashboardGraph() {
                       border: "1px solid #E5E7EB",
                       boxShadow: "0 2px 4px -1px rgba(0, 0, 0, 0.1)",
                     }}
-                    formatter={(value: any) => [
-                      viewType.dataType === "PERCENT" ? `${value}%` : value,
-                      viewType.dataType === "PERCENT"
-                        ? t("Average")
-                        : t("Check-ins"),
-                    ]}
+                    formatter={(value: number | string | undefined) => {
+                      if (value === undefined) return ["", ""];
+                      return [
+                        viewType.dataType === "PERCENT" ? `${value}%` : value,
+                        viewType.dataType === "PERCENT"
+                          ? t("Average")
+                          : t("Check-ins"),
+                      ];
+                    }}
                   />
                   {selectedGraphItems.includes("all") && (
                     <Line
@@ -382,7 +386,7 @@ export function AdminDashboardGraph() {
                       }}
                     />
                   )}
-                  {fieldGraph.map((item: any, index: number) => {
+                  {fieldGraph.map((item: Record<string, any>, index: number) => {
                     if (!selectedGraphItems.includes(item.itemId)) return null;
                     return (
                       <Line

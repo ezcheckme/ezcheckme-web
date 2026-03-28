@@ -28,17 +28,17 @@ export function JoinAdminGroupDialog({
   const [submitEnabled, setSubmitEnabled] = useState(false);
   const [invitationAccepted, setInvitationAccepted] = useState(false);
 
-  const groupJoined = (user as any)?.invitationToGroup || {
+  const groupJoined = (user as Record<string, any>)?.invitationToGroup || {
     groupName: "",
     groupHostName: "",
   };
 
   const onSubmit = async () => {
-    if (!user || !(user as any).invitationToGroup) return;
+    if (!user || !(user as Record<string, any>).invitationToGroup) return;
 
     setSubmitEnabled(true);
     try {
-      await removeHostInviteToGroup(user.id, (user as any).invitationToGroup);
+      await removeHostInviteToGroup(user.id, (user as Record<string, any>).invitationToGroup);
       setInvitationAccepted(true);
 
       // Refresh user data so the group is updated

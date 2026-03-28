@@ -55,7 +55,7 @@ export function HostUsageDialog({ open, onOpenChange }: HostUsageDialogProps) {
       const to = `${String(lastDay).padStart(2, "0")}${mm}${yyyy}`;
 
       const hostId = user.impersonateId ? user.impersonateId : user.id;
-      const attendees: any = await getHostUniqueAttendees({ hostId, from, to });
+      const attendees = (await getHostUniqueAttendees({ hostId, from, to })) as Record<string, any>;
 
       setTotalUniqueAttendees(attendees.count || 0);
     } catch (err) {
@@ -82,19 +82,19 @@ export function HostUsageDialog({ open, onOpenChange }: HostUsageDialogProps) {
         <div
           className="flex flex-row justify-between items-center px-6 py-4"
           style={{
-            color: (theme as any).color || "#fff",
-            backgroundColor: (theme as any).bgColor || "#008096",
+            color: (theme as Record<string, any>).color || "#fff",
+            backgroundColor: (theme as Record<string, any>).bgColor || "#008096",
             minHeight: "50px",
           }}
         >
-          {(theme as any).image && (
+          {(theme as Record<string, any>).image && (
             <img
               className="h-12 object-contain"
-              src={(theme as any).image}
+              src={(theme as Record<string, any>).image}
               alt="Institute logo"
             />
           )}
-          <h2 className="text-2xl font-semibold">{(theme as any).text}</h2>
+          <h2 className="text-2xl font-semibold">{(theme as Record<string, any>).text}</h2>
         </div>
 
         <div className="p-6">

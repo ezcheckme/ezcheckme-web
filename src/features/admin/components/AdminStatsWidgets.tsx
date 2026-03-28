@@ -71,7 +71,7 @@ export function AdminStatsWidgets() {
   const { t } = useTranslation();
   const { adminStats, loading, dates } = useAdminStore();
 
-  if (!(adminStats as any)?.general) {
+  if (!(adminStats as Record<string, any>)?.general) {
     return (
       <div className="flex flex-row justify-between w-[calc(100%+40px)] -ml-5 mb-4 2xl:w-[calc(100%+20px)] 2xl:-ml-[10px]">
         {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -85,7 +85,7 @@ export function AdminStatsWidgets() {
     );
   }
 
-  const stats = (adminStats as any).general;
+  const stats = (adminStats as Record<string, any>).general;
   const fromStr = dates?.from
     ? format(new Date(dates.from), "MMM dd yyyy")
     : "";

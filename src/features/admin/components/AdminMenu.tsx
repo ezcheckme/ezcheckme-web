@@ -12,18 +12,25 @@ import { useAuthStore } from "@/features/auth/store/auth.store";
 export function AdminMenu() {
   const { t } = useTranslation();
   const { user } = useAuthStore();
-  const isFacultyManager = !!(user as any)?.facultyManager;
+  const isFacultyManager = !!user?.facultyManager;
 
   // Extract dynamic theme/group values from user object if available
-  const groupName = (user as any)?.groupData?.name || "Arie Group";
+  const groupName = user?.groupData?.name || "Arie Group";
   const facultyName =
-    (user as any)?.facultyManager && (user as any)?.facultyData?.name
-      ? (user as any).facultyData.name
+    user?.facultyManager && user?.facultyData?.name
+      ? user.facultyData.name
       : null;
-  const themeBgColor = (user as any)?.theme?.bgColor || "#1A4F41"; // Default dark green matching USF
-  const logoImage = (user as any)?.theme?.image || null;
+  const themeBgColor = user?.theme?.bgColor || "#1A4F41"; // Default dark green matching USF
+  const logoImage = user?.theme?.image || null;
 
-  const allMenuItems = [
+  const allMenuItems: Array<{
+    path: string;
+    label: string;
+    icon: any;
+    exact?: boolean;
+    hiddenForFaculty?: boolean;
+    search?: Record<string, any>;
+  }> = [
     {
       path: "/admin",
       label: t("admin menu - dashboard", "Dashboard"),
@@ -54,7 +61,7 @@ export function AdminMenu() {
 
   // Faculty managers don't see Monthly Usage (matches legacy menu.pop() behavior)
   const menuItems = isFacultyManager
-    ? allMenuItems.filter((item) => !(item as any).hiddenForFaculty)
+    ? allMenuItems.filter((item) => !item.hiddenForFaculty)
     : allMenuItems;
 
   return (
@@ -98,9 +105,9 @@ export function AdminMenu() {
           return (
             <Link
               key={item.label}
-              to={item.path}
-              search={(item as any).search}
-              activeOptions={{ exact: (item as any).exact }}
+              to={item.path as any}
+              search={item.search as any}
+              activeOptions={{ exact: item.exact }}
               className={cn(
                 "group flex items-center h-[64px] px-[10px] bg-white text-[16px] transition-colors w-full text-left relative hover:bg-gray-50 text-gray-700",
                 !isLast && "border-b border-[#e0e0e0]",

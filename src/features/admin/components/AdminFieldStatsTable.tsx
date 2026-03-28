@@ -9,8 +9,8 @@ export function AdminFieldStatsTable() {
   const { adminStats, loading, selectedGraphItems, toggleGraphItem } =
     useAdminStore();
 
-  const fieldData = (adminStats as any)?.field || [];
-  const generalData = (adminStats as any)?.general || {};
+  const fieldData = (adminStats as Record<string, any>)?.field || [];
+  const generalData = (adminStats as Record<string, any>)?.general || {};
 
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -38,7 +38,7 @@ export function AdminFieldStatsTable() {
   };
 
   const filteredData = useMemo(() => {
-    return fieldData.filter((a: any) => {
+    return fieldData.filter((a: Record<string, any>) => {
       if (minCourses !== "" && (a.courses?.length || 0) < minCourses)
         return false;
       if (minSessions !== "" && (a.sessions || 0) < minSessions) return false;
@@ -52,9 +52,9 @@ export function AdminFieldStatsTable() {
   const sortedData = useMemo(() => {
     const sortableItems = [...filteredData];
     if (sortConfig !== null) {
-      sortableItems.sort((a: any, b: any) => {
-        let aVal = a;
-        let bVal = b;
+      sortableItems.sort((a: Record<string, any>, b: Record<string, any>) => {
+        let aVal: string | number = 0;
+        let bVal: string | number = 0;
 
         switch (sortConfig.key) {
           case "name":
@@ -116,14 +116,14 @@ export function AdminFieldStatsTable() {
       Math.round((generalData.sessions || 0) / len),
       Math.round(
         fieldData.reduce(
-          (acc: number, r: any) => acc + (r.activeAttendees || 0),
+          (acc: number, r: Record<string, any>) => acc + (r.activeAttendees || 0),
           0,
         ) / len,
       ),
       Math.round((generalData.checkins || 0) / len),
     ]);
 
-    sortedData.forEach((row: any, i: number) => {
+    sortedData.forEach((row: Record<string, any>, i: number) => {
       sheet.addRow([
         i + 1,
         row.faculty?.name || "Unknown",
@@ -182,7 +182,7 @@ export function AdminFieldStatsTable() {
                   className="rounded border-gray-300 cursor-pointer"
                   checked={
                     selectedGraphItems.includes("all") &&
-                    fieldData.every((r: any) =>
+                    fieldData.every((r: Record<string, any>) =>
                       selectedGraphItems.includes(
                         r.faculty?._id || r.faculty?.id,
                       ),
@@ -193,13 +193,13 @@ export function AdminFieldStatsTable() {
                     toggleGraphItem("all", true);
                     // Also toggle all rows if "all" is clicked (optional behavior, but typical)
                     if (isChecked) {
-                      fieldData.forEach((r: any) => {
+                      fieldData.forEach((r: Record<string, any>) => {
                         const id = r.faculty?._id || r.faculty?.id;
                         if (id && !selectedGraphItems.includes(id))
                           toggleGraphItem(id);
                       });
                     } else {
-                      fieldData.forEach((r: any) => {
+                      fieldData.forEach((r: Record<string, any>) => {
                         const id = r.faculty?._id || r.faculty?.id;
                         if (id && selectedGraphItems.includes(id))
                           toggleGraphItem(id);
@@ -317,7 +317,7 @@ export function AdminFieldStatsTable() {
               <td className="px-6 py-3">
                 {Math.round(
                   fieldData.reduce(
-                    (acc: number, r: any) => acc + (r.activeAttendees || 0),
+                    (acc: number, r: Record<string, any>) => acc + (r.activeAttendees || 0),
                     0,
                   ) / (fieldData.length || 1),
                 )}
@@ -331,7 +331,7 @@ export function AdminFieldStatsTable() {
             </tr>
 
             {/* Sorted Items */}
-            {paginatedData.map((row: any, index: number) => {
+            {paginatedData.map((row: Record<string, any>, index: number) => {
               return (
                 <tr
                   key={index}

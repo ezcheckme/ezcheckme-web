@@ -18,7 +18,7 @@ export function AdminUsageView() {
   }, [selectedDate]);
 
   const fetchUsageData = async () => {
-    if (!(user as any)?.groupData?.admin) return;
+    if (!user?.groupData?.admin) return;
     setLoading(true);
 
     try {
@@ -26,10 +26,10 @@ export function AdminUsageView() {
       const to = format(endOfMonth(selectedDate), "yyyy-MM-dd");
 
       const res = (await getAdminUniqueAttendees({
-        id: (user as any)?.groupData?.admin || "",
+        id: user?.groupData?.admin || "",
         from,
         to,
-      })) as any;
+      })) as Record<string, any>;
 
       if (res) {
         setUniqueAttendees(res.countCourse || res.totalUniqueAttendees || 0);
