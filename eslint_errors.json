@@ -1,0 +1,765 @@
+[
+  {
+    "file": "src\\app\\layout\\AppToolbar.tsx",
+    "msgs": [
+      "220:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\app\\layout\\NotificationsMenu.tsx",
+    "msgs": [
+      "12:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "45:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "83:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\app\\routes.tsx",
+    "msgs": [
+      "210:react-refresh/only-export-components:Fast refresh only works when a file only exports components. Move your component(s) to a separate file.",
+      "216:react-refresh/only-export-components:Fast refresh only works when a file only exports components. Move your component(s) to a separate file."
+    ]
+  },
+  {
+    "file": "src\\components\\ui\\badge.tsx",
+    "msgs": [
+      "37:react-refresh/only-export-components:Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components."
+    ]
+  },
+  {
+    "file": "src\\components\\ui\\button.tsx",
+    "msgs": [
+      "51:react-refresh/only-export-components:Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components."
+    ]
+  },
+  {
+    "file": "src\\components\\ui\\toast.tsx",
+    "msgs": [
+      "30:react-refresh/only-export-components:Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\AddInstituteMemberDialog.tsx",
+    "msgs": [
+      "72:@typescript-eslint/no-unused-vars:'err' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\AdminDashboardGraph.tsx",
+    "msgs": [
+      "35:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "49:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "53:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "54:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "91:prefer-const:'date' is never reassigned. Use 'const' instead.",
+      "115:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "125:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "132:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "137:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "389:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\AdminFieldStatsTable.tsx",
+    "msgs": [
+      "12:react-hooks/exhaustive-deps:The 'fieldData' logical expression could make the dependencies of useMemo Hook (at line 50) change on every render. To fix this, wrap the initialization of 'fieldData' in its own useMemo() Hook.",
+      "12:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "13:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "41:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "55:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "55:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "119:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "126:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "185:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "196:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "202:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "320:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "334:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\AdminMenu.tsx",
+    "msgs": [
+      "29:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "32:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "108:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "109:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\AdminStatsWidgets.tsx",
+    "msgs": [
+      "74:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "88:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\HostUsageDialog.tsx",
+    "msgs": [
+      "37:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'fetchUniqueAttendees'. Either include it or remove the dependency array.",
+      "58:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "85:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "86:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "90:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "93:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "97:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\InstituteMembersDialog.tsx",
+    "msgs": [
+      "66:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\admin\\components\\InstituteMembersDialog.tsx:66:9\n  64 |         | undefined;\n  65 |       if (gd?.members) {\n> 66 |         setMembers(gd.members);\n     |         ^^^^^^^^^^ Avoid calling setState() directly within an effect\n  67 |       }\n  68 |     }\n  69 |   }, [open, user]);"
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\JoinAdminGroupDialog.tsx",
+    "msgs": [
+      "31:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "37:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "41:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\tbls\\AttendeesAdminTable.tsx",
+    "msgs": [
+      "21:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "22:react-hooks/exhaustive-deps:The 'data' conditional could make the dependencies of useMemo Hook (at line 32) change on every render. To fix this, wrap the initialization of 'data' in its own useMemo() Hook.",
+      "28:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "45:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "152:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\tbls\\CoursesAdminTable.tsx",
+    "msgs": [
+      "31:react-hooks/exhaustive-deps:The 'data' conditional could make the dependencies of useMemo Hook (at line 66) change on every render. To fix this, wrap the initialization of 'data' in its own useMemo() Hook.",
+      "46:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "71:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "71:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "98:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\components\\tbls\\HostsAdminTable.tsx",
+    "msgs": [
+      "30:react-hooks/exhaustive-deps:The 'data' conditional could make the dependencies of useMemo Hook (at line 61) change on every render. To fix this, wrap the initialization of 'data' in its own useMemo() Hook.",
+      "45:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "66:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "66:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "93:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\pages\\AdminPage.tsx",
+    "msgs": [
+      "66:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'payload'. Either include it or remove the dependency array.",
+      "104:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'payload'. Either include it or remove the dependency array.",
+      "115:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\pages\\AdminUsageView.tsx",
+    "msgs": [
+      "18:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'fetchUsageData'. Either include it or remove the dependency array.",
+      "32:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\pages\\AttendeesByDomainPage.tsx",
+    "msgs": [
+      "35:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "51:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\admin\\pages\\AttendeesByDomainPage.tsx:51:5\n  49 |\n  50 |   useEffect(() => {\n> 51 |     fetchData(from, to);\n     |     ^^^^^^^^^ Avoid calling setState() directly within an effect\n  52 |   }, []); // eslint-disable-line\n  53 |\n  54 |   const totalAttendees = useMemo("
+    ]
+  },
+  {
+    "file": "src\\features\\admin\\pages\\HostsActivityPage.tsx",
+    "msgs": [
+      "51:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\auth\\components\\ProfileDialog.tsx",
+    "msgs": [
+      "50:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\auth\\components\\SignupDialog.tsx",
+    "msgs": [
+      "98:react-hooks/incompatible-library:Compilation Skipped: Use of incompatible library\n\nThis API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.\n\nC:\\Development\\ezcheckme-web\\src\\features\\auth\\components\\SignupDialog.tsx:98:26\n   96 |   });\n   97 |\n>  98 |   const watchAcceptTos = watch(\"acceptTos\");\n      |                          ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.\n   99 |\n  100 |   async function onSubmit(data: SignupFormData) {\n  101 |     setErrorLine(\"\");",
+      "112:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\auth\\components\\UpdateUserDialog.tsx",
+    "msgs": [
+      "50:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\auth\\components\\UpdateUserDialog.tsx:50:7\n  48 |     if (open && user) {\n  49 |       const u = user as unknown as Record<string, unknown>;\n> 50 |       setFirstName((u.firstName as string) || \"\");\n     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  51 |       setLastName((u.lastName as string) || \"\");\n  52 |       setEmail(user.email || \"\");\n  53 |       setInstitution((u.institution as string) || \"\");"
+    ]
+  },
+  {
+    "file": "src\\features\\auth\\hooks\\useAuthDialogs.ts",
+    "msgs": [
+      "41:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\auth\\hooks\\useAuthDialogs.ts:41:7\n  39 |\n  40 |     if (path === \"/login\" && !isAuthenticated) {\n> 41 |       setGatewayOpen(false);\n     |       ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  42 |       setDialog({ open: true, step: \"login\", email: \"\", code: \"\" });\n  43 |     } else if (path === \"/signup\" && !isAuthenticated) {\n  44 |       // Open gateway first"
+    ]
+  },
+  {
+    "file": "src\\features\\auth\\store\\auth.store.ts",
+    "msgs": [
+      "235:@typescript-eslint/no-unused-vars:'_name' is defined but never used.",
+      "235:@typescript-eslint/no-unused-vars:'_email' is defined but never used.",
+      "235:@typescript-eslint/no-unused-vars:'_password' is defined but never used.",
+      "235:@typescript-eslint/no-unused-vars:'_referralCode' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\features\\auto\\components\\CounterDown.tsx",
+    "msgs": [
+      "31:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\auto\\components\\CounterDown.tsx:31:5\n  29 |\n  30 |   useEffect(() => {\n> 31 |     setTime(getTimeDifferenceElements(Date.now(), startTime));\n     |     ^^^^^^^ Avoid calling setState() directly within an effect\n  32 |   }, []);\n  33 |\n  34 |   useEffect(() => {",
+      "32:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'startTime'. Either include it or remove the dependency array. If 'setTime' needs the current value of 'startTime', you can also switch to useReducer instead of useState and read 'startTime' in the reducer.",
+      "44:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'onEndTimer'. Either include it or remove the dependency array. If 'onEndTimer' changes too often, find the parent component that defines it and wrap that definition in useCallback."
+    ]
+  },
+  {
+    "file": "src\\features\\auto\\pages\\AutoModePage.tsx",
+    "msgs": [
+      "31:@typescript-eslint/no-unused-vars:'e' is defined but never used.",
+      "54:react-hooks/immutability:Error: Cannot access variable before it is declared\n\n`handleStartSession` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.\n\nC:\\Development\\ezcheckme-web\\src\\features\\auto\\pages\\AutoModePage.tsx:54:7\n  52 |   useEffect(() => {\n  53 |     if (nextSession && timeToNextSession <= 2) {\n> 54 |       handleStartSession();\n     |       ^^^^^^^^^^^^^^^^^^ `handleStartSession` accessed before it is declared\n  55 |     }\n  56 |   }, [timeToNextSession, nextSession]);\n  57 |\n\nC:\\Development\\ezcheckme-web\\src\\features\\auto\\pages\\AutoModePage.tsx:58:3\n  56 |   }, [timeToNextSession, nextSession]);\n  57 |\n> 58 |   const handleStartSession = () => {\n     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 59 |     if (!nextSession) return;\n     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 60 |     navigate({ to: \"/session/$shortid\", params: { shortid: nextSession.id } });\n     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 61 |   };\n     | ^^^^^ `handleStartSession` is declared here\n  62 |\n  63 |   const handleExitAutoMode = () => {\n  64 |     // Navigate back to the selected course's info page",
+      "56:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'handleStartSession'. Either include it or remove the dependency array."
+    ]
+  },
+  {
+    "file": "src\\features\\billing\\components\\DiscountCodeDialog.tsx",
+    "msgs": [
+      "28:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "54:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "89:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\billing\\components\\PricingDialog.tsx",
+    "msgs": [
+      "27:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\billing\\components\\PricingTable.tsx",
+    "msgs": [
+      "35:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\blog\\pages\\BlogPage.tsx",
+    "msgs": [
+      "25:react-compiler/react-compiler:Hooks must always be called in a consistent order, and may not be called conditionally. See the Rules of Hooks (https://react.dev/warnings/invalid-hook-call-warning)",
+      "200:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\blog\\pages\\BlogPage.tsx:200:5\n  198 |\n  199 |   useEffect(() => {\n> 200 |     setLoading(true);\n      |     ^^^^^^^^^^ Avoid calling setState() directly within an effect\n  201 |     // Load both the current post and all posts (for \"Read Next\")\n  202 |     const loadPost = blogService\n  203 |       .getBlogPost(slug)",
+      "213:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'allPosts.length'. Either include it or remove the dependency array."
+    ]
+  },
+  {
+    "file": "src\\features\\checkin\\components\\AttendeeSignUp.tsx",
+    "msgs": [
+      "40:@typescript-eslint/no-unused-vars:'getCookie' is defined but never used.",
+      "60:@typescript-eslint/no-unused-vars:'setMaskedNumber' is assigned a value but never used.",
+      "61:@typescript-eslint/no-unused-vars:'setRealNumber' is assigned a value but never used.",
+      "62:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "147:react-hooks/immutability:Error: Cannot access variable before it is declared\n\n`resendCode` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.\n\nC:\\Development\\ezcheckme-web\\src\\features\\checkin\\components\\AttendeeSignUp.tsx:147:9\n  145 |         setOnlyCode(false);\n  146 |         setLoading(false);\n> 147 |         resendCode(false);\n      |         ^^^^^^^^^^ `resendCode` accessed before it is declared\n  148 |       }\n  149 |     },\n  150 |     [firstName, lastName, email, attendeeid, storeUser],\n\nC:\\Development\\ezcheckme-web\\src\\features\\checkin\\components\\AttendeeSignUp.tsx:154:3\n  152 |\n  153 |   // ── Resend code (SMS or voice) ──\n> 154 |   const resendCode = useCallback(\n      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 155 |     async (voice: boolean) => {\n      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 156 |       if (onlyCode) {\n      …\n      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 196 |     [onlyCode, user, countryCode, phoneNumber, firstName, lastName, email, attendeeid],\n      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 197 |   );\n      | ^^^^^ `resendCode` is declared here\n  198 |\n  199 |   // ── Sign up attendee (matching old signUpAttendee) ──\n  200 |   const signUpAttendee = useCallback(",
+      "150:react-hooks/exhaustive-deps:React Hook useCallback has a missing dependency: 'resendCode'. Either include it or remove the dependency array.",
+      "172:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "181:react-hooks/immutability:Error: Cannot access variable before it is declared\n\n`signUpAttendee` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.\n\nC:\\Development\\ezcheckme-web\\src\\features\\checkin\\components\\AttendeeSignUp.tsx:181:11\n  179 |         setLoading(false);\n  180 |         if (res?.sent === false && res?.details?.message === \"Phone already exists\") {\n> 181 |           signUpAttendee({ isPhoneExist: true });\n      |           ^^^^^^^^^^^^^^ `signUpAttendee` accessed before it is declared\n  182 |           setUpdateUserData({ firstName, lastName, email, attendeeid });\n  183 |         } else if (res?.sent === false) {\n  184 |           setError(res?.details?.message || \"Failed to send code\");\n\nC:\\Development\\ezcheckme-web\\src\\features\\checkin\\components\\AttendeeSignUp.tsx:200:3\n  198 |\n  199 |   // ── Sign up attendee (matching old signUpAttendee) ──\n> 200 |   const signUpAttendee = useCallback(\n      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 201 |     async (options: { isPhoneExist?: boolean; stateOverride?: any } = {}) => {\n      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 202 |       try {\n      …\n      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 224 |     [firstName, lastName, email, attendeeid, countryCode, phoneNumber, storeUser, applyUserData],\n      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n> 225 |   );\n      | ^^^^^ `signUpAttendee` is declared here\n  226 |\n  227 |   // ── Confirm attendee code (matching old confirmAttendee) ──\n  228 |   const confirmAttendee = useCallback(async () => {",
+      "196:react-hooks/exhaustive-deps:React Hook useCallback has a missing dependency: 'signUpAttendee'. Either include it or remove the dependency array.",
+      "201:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "212:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "217:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "235:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "253:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "277:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "307:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "366:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "396:react-hooks/exhaustive-deps:React Hook useCallback has missing dependencies: 'countryCode', 'firstName', 'lastName', 'phoneNumber', and 'user'. Either include them or remove the dependency array."
+    ]
+  },
+  {
+    "file": "src\\features\\checkin\\components\\CountryCodesModal.tsx",
+    "msgs": [
+      "194:react-refresh/only-export-components:Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components."
+    ]
+  },
+  {
+    "file": "src\\features\\checkin\\components\\VerificationStep.tsx",
+    "msgs": [
+      "9:@typescript-eslint/no-unused-vars:'RefreshCw' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\features\\checkin\\pages\\CheckinPage.tsx",
+    "msgs": [
+      "23:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "24:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "25:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "66:react-hooks/exhaustive-deps:React Hook useEffect has missing dependencies: 'code', 'directCheckin', 'handleSubmitWithId', 'icon', 'navigate', 'shortid', and 'storedUser'. Either include them or remove the dependency array."
+    ]
+  },
+  {
+    "file": "src\\features\\checkin\\pages\\QuizPage.tsx",
+    "msgs": [
+      "72:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "72:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "97:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "161:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\checkin\\pages\\QuizPage.tsx:161:7\n  159 |   useEffect(() => {\n  160 |     if (status === \"quiz\") {\n> 161 |       setSelectedIcon(null);\n      |       ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  162 |     }\n  163 |   }, [status]);\n  164 |"
+    ]
+  },
+  {
+    "file": "src\\features\\checkin\\store\\checkin.store.ts",
+    "msgs": [
+      "111:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "112:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "112:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "113:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "114:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "115:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "116:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "116:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "233:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "234:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "234:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "235:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "236:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "237:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "238:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "238:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\AddCourseDialog.tsx",
+    "msgs": [
+      "32:@typescript-eslint/no-unused-vars:'CourseType' is defined but never used.",
+      "326:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\AddCourseDialog.tsx:326:7\n  324 |     if (open) {\n  325 |       // Reset form\n> 326 |       setName(\"\");\n      |       ^^^^^^^ Avoid calling setState() directly within an effect\n  327 |       setFaculty(\"\");\n  328 |       setDescription(\"\");\n  329 |       setLanguage(\"en\");",
+      "403:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CheckInMessageDialog.tsx",
+    "msgs": [
+      "51:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\CheckInMessageDialog.tsx:51:9\n  49 |       );\n  50 |       if (match) {\n> 51 |         setCountryCode(match.dialCode);\n     |         ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  52 |       }\n  53 |     }\n  54 |   }, [connectionData]);"
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseAttendeesWrapper.tsx",
+    "msgs": [
+      "7:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseDefaultRedirector.tsx",
+    "msgs": [
+      "6:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseHeader.tsx",
+    "msgs": [
+      "96:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "98:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "160:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "206:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseList.tsx",
+    "msgs": [
+      "72:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "136:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'handleSelectCourse'. Either include it or remove the dependency array.",
+      "418:@typescript-eslint/no-unused-expressions:Expected an assignment or function call and instead saw an expression."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseMessages.tsx",
+    "msgs": [
+      "22:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "30:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\CourseMessages.tsx:30:7\n  28 |   useEffect(() => {\n  29 |     if (courseId) {\n> 30 |       setMessagesLoading(true);\n     |       ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  31 |       getCourseMessages(courseId).finally(() => setMessagesLoading(false));\n  32 |     }\n  33 |   }, [courseId, getCourseMessages]);",
+      "37:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "37:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "44:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "53:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "146:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseQrCodeDownloadDialog.tsx",
+    "msgs": [
+      "19:null:Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-require-imports').",
+      "148:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "154:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\CourseQrCodeDownloadDialog.tsx:154:5\n  152 |     if (!open) return;\n  153 |\n> 154 |     setLoading(true);\n      |     ^^^^^^^^^^ Avoid calling setState() directly within an effect\n  155 |     setQrImage(null);\n  156 |\n  157 |     const r = generateRandomString;",
+      "168:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseSessions.tsx",
+    "msgs": [
+      "180:@typescript-eslint/no-unused-vars:'_dates' is defined but never used.",
+      "188:@typescript-eslint/no-unused-vars:'_targetSessionId' is defined but never used.",
+      "189:@typescript-eslint/no-unused-vars:'_sessionIds' is defined but never used.",
+      "190:@typescript-eslint/no-unused-vars:'_mergeCourseId' is defined but never used.",
+      "191:@typescript-eslint/no-unused-vars:'_method' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseStudents.tsx",
+    "msgs": [
+      "51:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "62:react-hooks/exhaustive-deps:React Hook useEffect has a missing dependency: 'sessions.length'. Either include it or remove the dependency array.",
+      "113:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\CourseStudentsMenu.tsx",
+    "msgs": [
+      "27:@typescript-eslint/no-unused-vars:'selectedCount' is assigned a value but never used."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\EditCourseDialog.tsx",
+    "msgs": [
+      "74:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "97:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "101:react-hooks/exhaustive-deps:React Hook useEffect has missing dependencies: 'showRoom' and 'user?.autoModeRooms'. Either include them or remove the dependency array.",
+      "123:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\EditStudentDialog.tsx",
+    "msgs": [
+      "54:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\EditStudentDialog.tsx:54:7\n  52 |       // Split name into first/last if available\n  53 |       const parts = (student.name || \"\").split(\" \");\n> 54 |       setFirstName(parts[0] || \"\");\n     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  55 |       setLastName(parts.slice(1).join(\" \") || \"\");\n  56 |       setEmail(student.email || \"\");\n  57 |       setPhone(student.phone || \"\");"
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\FieldCourseStudents.tsx",
+    "msgs": [
+      "105:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\FieldCourseStudents.tsx:105:20\n  103 |   // Auto-set currentMonth when fieldData changes\n  104 |   useEffect(() => {\n> 105 |     if (fieldData) setCurrentMonth(fieldData.currentMonth);\n      |                    ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  106 |   }, [fieldData]);\n  107 |\n  108 |   // Filter dates for current month"
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\ImportAttendeesExcelDialog.tsx",
+    "msgs": [
+      "104:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "143:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "153:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "154:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "203:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "237:no-useless-escape:Unnecessary escape character: \\..",
+      "237:no-useless-escape:Unnecessary escape character: \\\".",
+      "237:no-useless-escape:Unnecessary escape character: \\..",
+      "237:no-useless-escape:Unnecessary escape character: \\\".",
+      "237:no-useless-escape:Unnecessary escape character: \\\".",
+      "237:no-useless-escape:Unnecessary escape character: \\\".",
+      "237:no-useless-escape:Unnecessary escape character: \\..",
+      "237:no-useless-escape:Unnecessary escape character: \\\".",
+      "237:no-useless-escape:Unnecessary escape character: \\..",
+      "237:no-useless-escape:Unnecessary escape character: \\\".",
+      "457:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\ImportGradingExcelDialog.tsx",
+    "msgs": [
+      "62:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "65:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "84:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "104:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "144:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "154:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "154:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "155:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "160:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "182:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "183:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "189:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "194:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "209:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "220:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "248:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "262:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "358:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "378:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\ImportSessionsFromExcelDialog.tsx",
+    "msgs": [
+      "86:prefer-const:'name' is never reassigned. Use 'const' instead.",
+      "118:@typescript-eslint/no-unused-vars:'err' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\LocationSetupDialog.tsx",
+    "msgs": [
+      "67:react-hooks/globals:Error: Cannot reassign variables declared outside of the component/hook\n\nVariable `_mapsLanguageLock` is declared outside of the component/hook. Reassigning this value during render is a form of side effect, which can cause unpredictable behavior depending on when the component happens to re-render. If this variable is used in rendering, use useState instead. Otherwise, consider updating it in an effect. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#side-effects-must-run-outside-of-render).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\LocationSetupDialog.tsx:67:5\n  65 |    // Lock the Maps language on the very first render across all mounts.\n  66 |   if (!_mapsLanguageLock) {\n> 67 |     _mapsLanguageLock = i18n.language || \"en\";\n     |     ^^^^^^^^^^^^^^^^^ `_mapsLanguageLock` cannot be reassigned\n  68 |   }\n  69 |\n  70 |   const { isLoaded, loadError } = useJsApiLoader({",
+      "67:react-compiler/react-compiler:Unexpected reassignment of a variable which was defined outside of the component. Components and hooks should be pure and side-effect free, but variable reassignment is a form of side-effect. If this variable is used in rendering, use useState instead. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#side-effects-must-run-outside-of-render)"
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\MessageDetailsDialog.tsx",
+    "msgs": [
+      "20:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "43:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "54:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "57:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "60:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "138:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "138:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "138:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "138:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "165:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "165:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "165:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "165:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\NewCourseTypeDialog.tsx",
+    "msgs": [
+      "26:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "27:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "34:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\PrintableSignDialog.tsx",
+    "msgs": [
+      "45:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\SessionStudents.tsx",
+    "msgs": [
+      "41:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "42:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "167:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\field\\DataCellComp.tsx",
+    "msgs": [
+      "89:react-refresh/only-export-components:Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\field\\FieldCheckinBar.tsx",
+    "msgs": [
+      "46:react-hooks/purity:Error: Cannot call impure function during render\n\n`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\field\\FieldCheckinBar.tsx:46:41\n  44 |\n  45 |   const width = (() => {\n> 46 |     const end = checkin.checkedOutAt ?? Date.now();\n     |                                         ^^^^^^^^^^ Cannot call impure function\n  47 |     const w = (cellWidth * (end - checkin.checkedInAt)) / 86400000;\n  48 |     return Math.max(w, BAR_MIN_WIDTH);\n  49 |   })();"
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\field\\ShiftTooltip.tsx",
+    "msgs": [
+      "68:react-hooks/purity:Error: Cannot call impure function during render\n\n`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).\n\nC:\\Development\\ezcheckme-web\\src\\features\\courses\\components\\field\\ShiftTooltip.tsx:68:56\n  66 |             {checkin.checkedOutAt\n  67 |               ? getTimeDiffStr(checkin.checkedInAt, checkin.checkedOutAt)\n> 68 |               : `${getTimeDiffStr(checkin.checkedInAt, Date.now())} (in progress)`}\n     |                                                        ^^^^^^^^^^ Cannot call impure function\n  69 |           </div>\n  70 |         </div>\n  71 |         <div"
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\components\\session\\InfoPane.tsx",
+    "msgs": [
+      "11:@typescript-eslint/no-unused-vars:'useRef' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\features\\courses\\store\\session.store.ts",
+    "msgs": [
+      "102:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "102:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "108:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\home\\components\\FeaturesSection.tsx",
+    "msgs": [
+      "134:prefer-const:'newIndex' is never reassigned. Use 'const' instead."
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\AutoModeSettingsDialog.tsx",
+    "msgs": [
+      "40:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\AutoModeSettingsDialog.tsx:40:9\n  38 |       const storedVal = localStorage.getItem(\"_session_registration_length_\");\n  39 |       if (storedVal) {\n> 40 |         setSessionDuration(JSON.parse(storedVal).toString());\n     |         ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  41 |       } else {\n  42 |         setSessionDuration(config.registrationDuration.toString() || \"7\");\n  43 |       }"
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\CounterDown.tsx",
+    "msgs": [
+      "23:react-hooks/purity:Error: Cannot call impure function during render\n\n`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\CounterDown.tsx:23:48\n  21 |\n  22 | export function CounterDown({ startTime, className }: CounterDownProps) {\n> 23 |   const [time, setTime] = useState(getTimeDiff(Date.now(), startTime));\n     |                                                ^^^^^^^^^^ Cannot call impure function\n  24 |   const [dotsVisible, setDotsVisible] = useState(true);\n  25 |\n  26 |   useEffect(() => {"
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\CreateFutureSessionsDialog.tsx",
+    "msgs": [
+      "28:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "51:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\CreateFutureSessionsDialog.tsx:51:7\n  49 |     if (open) {\n  50 |       const today = new Date();\n> 51 |       setFromDate(format(today, \"yyyy-MM-dd\"));\n     |       ^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  52 |       // Default to +4 months\n  53 |       const fourMonthsFromNow = new Date();\n  54 |       fourMonthsFromNow.setMonth(fourMonthsFromNow.getMonth() + 4);",
+      "64:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\CreateFutureSessionsDialog.tsx:64:7\n  62 |   useEffect(() => {\n  63 |     if (!fromDate || !toDate || !time) {\n> 64 |       setNewSessions([]);\n     |       ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  65 |       return;\n  66 |     }\n  67 |"
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\EditSessionDateTimeDialog.tsx",
+    "msgs": [
+      "40:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\EditSessionDateTimeDialog.tsx:40:7\n  38 |     if (open && session && session.begins) {\n  39 |       const d = new Date(session.begins);\n> 40 |       setSelectedDate(format(d, \"yyyy-MM-dd\"));\n     |       ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  41 |       setSelectedTime(format(d, \"HH:mm\"));\n  42 |     }\n  43 |   }, [open, session]);"
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\ImportSessionsFromExcelDialog.tsx",
+    "msgs": [
+      "30:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "48:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "89:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "108:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "109:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "134:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "162:prefer-const:'baseDate' is never reassigned. Use 'const' instead.",
+      "163:prefer-const:'computedDate' is never reassigned. Use 'const' instead.",
+      "375:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\MergeSessionsDialog.tsx",
+    "msgs": [
+      "213:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\PostCheckInUrlDialog.tsx",
+    "msgs": [
+      "39:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\PostCheckInUrlDialog.tsx:39:7\n  37 |   useEffect(() => {\n  38 |     if (open) {\n> 39 |       setMessage(initialData?.message || \"\");\n     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect\n  40 |       setUrl(initialData?.url || \"\");\n  41 |       setUrlError(\"\");\n  42 |     }"
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\RenameSessionDialog.tsx",
+    "msgs": [
+      "36:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\RenameSessionDialog.tsx:36:7\n  34 |   useEffect(() => {\n  35 |     if (open && session) {\n> 36 |       setSessionName(session.name || \"\");\n     |       ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect\n  37 |     }\n  38 |   }, [open, session]);\n  39 |"
+    ]
+  },
+  {
+    "file": "src\\features\\sessions\\components\\StartSessionDialog.tsx",
+    "msgs": [
+      "77:react-hooks/exhaustive-deps:The 'courses' logical expression could make the dependencies of useEffect Hook (at line 117) change on every render. To fix this, wrap the initialization of 'courses' in its own useMemo() Hook.",
+      "232:react-hooks/refs:Error: Cannot access refs during render\n\nReact refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).\n\nC:\\Development\\ezcheckme-web\\src\\features\\sessions\\components\\StartSessionDialog.tsx:232:3\n  230 |   // Store handleSubmit in ref for Enter key handler (avoids stale closure)\n  231 |   const handleSubmitRef = useRef(handleSubmit);\n> 232 |   handleSubmitRef.current = handleSubmit;\n      |   ^^^^^^^^^^^^^^^^^^^^^^^ Cannot update ref during render\n  233 |\n  234 |   // Enter key submits\n  235 |   useEffect(() => {"
+    ]
+  },
+  {
+    "file": "src\\shared\\components\\CookieBanner.tsx",
+    "msgs": [
+      "25:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\shared\\components\\CookieBanner.tsx:25:9\n  23 |     if (isGuest) {\n  24 |       if (!agreedLocal) {\n> 25 |         setShow(true);\n     |         ^^^^^^^ Avoid calling setState() directly within an effect\n  26 |       } else {\n  27 |         setShow(false);\n  28 |       }"
+    ]
+  },
+  {
+    "file": "src\\shared\\components\\ErrorToast.tsx",
+    "msgs": [
+      "21:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\shared\\components\\ErrorToast.tsx:21:7\n  19 |   useEffect(() => {\n  20 |     if (error) {\n> 21 |       setVisible(true);\n     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect\n  22 |       const timer = setTimeout(() => {\n  23 |         setVisible(false);\n  24 |         onDismiss();"
+    ]
+  },
+  {
+    "file": "src\\shared\\components\\FormattedDate.tsx",
+    "msgs": [
+      "22:react-hooks/error-boundaries:Error: Avoid constructing JSX within try/catch\n\nReact does not immediately render components when JSX is rendered, so any errors from this component will not be caught by the try/catch. To catch errors in rendering a given component, wrap that component in an error boundary. (https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary).\n\nC:\\Development\\ezcheckme-web\\src\\shared\\components\\FormattedDate.tsx:22:12\n  20 |   try {\n  21 |     const d = date instanceof Date ? date : new Date(date);\n> 22 |     return <span className={className}>{formatDate(d, format)}</span>;\n     |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid constructing JSX within try/catch\n  23 |   } catch {\n  24 |     return <span className={className}>—</span>;\n  25 |   }"
+    ]
+  },
+  {
+    "file": "src\\shared\\hooks\\useMediaQuery.ts",
+    "msgs": [
+      "18:react-hooks/set-state-in-effect:Error: Calling setState synchronously within an effect can trigger cascading renders\n\nEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:\n* Update external systems with the latest state from React.\n* Subscribe for updates from some external system, calling setState in a callback function when external state changes.\n\nCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).\n\nC:\\Development\\ezcheckme-web\\src\\shared\\hooks\\useMediaQuery.ts:18:5\n  16 |     const handler = (e: MediaQueryListEvent) => setMatches(e.matches);\n  17 |\n> 18 |     setMatches(mql.matches);\n     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect\n  19 |     mql.addEventListener(\"change\", handler);\n  20 |     return () => mql.removeEventListener(\"change\", handler);\n  21 |   }, [query]);"
+    ]
+  },
+  {
+    "file": "src\\shared\\hooks\\usePubSub.ts",
+    "msgs": [
+      "24:react-hooks/refs:Error: Cannot access refs during render\n\nReact refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).\n\nC:\\Development\\ezcheckme-web\\src\\shared\\hooks\\usePubSub.ts:24:3\n  22 |   const serviceRef = useRef<PubSubService | null>(null);\n  23 |   const onMessageRef = useRef(onMessage);\n> 24 |   onMessageRef.current = onMessage;\n     |   ^^^^^^^^^^^^^^^^^^^^ Cannot update ref during render\n  25 |\n  26 |   useEffect(() => {\n  27 |     if (!autoConnect) return;"
+    ]
+  },
+  {
+    "file": "src\\shared\\services\\admin.service.ts",
+    "msgs": [
+      "41:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "42:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "43:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "44:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "53:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "65:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "110:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\shared\\services\\course.service.ts",
+    "msgs": [
+      "128:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\shared\\services\\messaging.service.ts",
+    "msgs": [
+      "45:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\shared\\services\\report.service.ts",
+    "msgs": [
+      "53:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "124:@typescript-eslint/no-unused-vars:'index' is assigned a value but never used.",
+      "128:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "185:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\shared\\services\\session.service.ts",
+    "msgs": [
+      "140:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "142:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\shared\\services\\tawkto.service.ts",
+    "msgs": [
+      "12:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "12:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "54:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "57:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\shared\\store\\ui.store.ts",
+    "msgs": [
+      "107:@typescript-eslint/no-unused-vars:'_viewType' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\shared\\types\\user.types.ts",
+    "msgs": [
+      "56:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\shared\\utils\\date.utils.ts",
+    "msgs": [
+      "116:@typescript-eslint/no-unused-vars:'_text' is defined but never used."
+    ]
+  },
+  {
+    "file": "src\\shared\\utils\\export.utils.ts",
+    "msgs": [
+      "46:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type.",
+      "52:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "src\\types\\read-excel-file.d.ts",
+    "msgs": [
+      "2:@typescript-eslint/no-explicit-any:Unexpected any. Specify a different type."
+    ]
+  },
+  {
+    "file": "test_api.ts",
+    "msgs": [
+      "1:@typescript-eslint/no-unused-vars:'post' is defined but never used."
+    ]
+  },
+  {
+    "file": "test_week.ts",
+    "msgs": [
+      "32:prefer-const:'date' is never reassigned. Use 'const' instead."
+    ]
+  }
+]

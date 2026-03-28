@@ -1,0 +1,17 @@
+
+> ezcheckme-web@6.0.0-alpha.0 build
+> tsc -b && vite build
+
+src/features/auth/store/auth.store.ts(188,9): error TS2559: Type 'string' has no properties in common with type '{ bgColor?: string | undefined; color?: string | undefined; image?: string | undefined; text?: string | undefined; }'.
+src/features/auth/store/auth.store.ts(213,7): error TS2559: Type 'string' has no properties in common with type '{ bgColor?: string | undefined; color?: string | undefined; image?: string | undefined; text?: string | undefined; }'.
+src/features/billing/components/ChangePlanPricingTierDialog.tsx(13,10): error TS2305: Module '"@/config/constants"' has no exported member 'PRICING_TIERS_TITLES'.
+src/features/billing/components/ChangePlanPricingTierDialog.tsx(43,30): error TS2322: Type 'number' is not assignable to type 'string'.
+src/features/checkin/components/AttendeeHome.tsx(135,9): error TS2322: Type '{ open: boolean; onCancel: () => void; onConfirm: () => void; }' is not assignable to type 'IntrinsicAttributes & ConfirmConditionsProps'.
+  Property 'open' does not exist on type 'IntrinsicAttributes & ConfirmConditionsProps'.
+src/features/checkin/components/AttendeeSignUp.tsx(40,10): error TS6133: 'getCookie' is declared but its value is never read.
+src/features/checkin/components/AttendeeSignUp.tsx(60,24): error TS6133: 'setMaskedNumber' is declared but its value is never read.
+src/features/checkin/components/AttendeeSignUp.tsx(61,22): error TS6133: 'setRealNumber' is declared but its value is never read.
+src/features/checkin/components/VerificationStep.tsx(9,21): error TS6133: 'RefreshCw' is declared but its value is never read.
+src/features/courses/components/AddCourseDialog.tsx(32,1): error TS6133: 'CourseType' is declared but its value is never read.
+src/features/courses/components/CourseStudentsMenu.tsx(27,3): error TS6133: 'selectedCount' is declared but its value is never read.
+src/features/courses/components/session/InfoPane.tsx(11,27): error TS6133: 'useRef' is declared but its value is never read.

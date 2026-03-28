@@ -208,8 +208,8 @@ const AttendeeDownload = lazy(() =>
 // Suspense wrapper for lazy pages
 // ---------------------------------------------------------------------------
 
-function withLazyPage(Component: React.ComponentType<any>) {
-  function WithLazyPage(props: any) {
+function withLazyPage(Component: React.ComponentType<Record<string, unknown>>) {
+  function WithLazyPage(props: Record<string, unknown>) {
     return (
       <Suspense fallback={<SplashScreen />}>
         <Component {...props} />
@@ -220,8 +220,8 @@ function withLazyPage(Component: React.ComponentType<any>) {
   return WithLazyPage;
 }
 
-function withLazyInner(Component: React.ComponentType<any>) {
-  function WithLazyInner(props: any) {
+function withLazyInner(Component: React.ComponentType<Record<string, unknown>>) {
+  function WithLazyInner(props: Record<string, unknown>) {
     return (
       <Suspense fallback={<div />}>
         <Component {...props} />
@@ -232,8 +232,8 @@ function withLazyInner(Component: React.ComponentType<any>) {
   return WithLazyInner;
 }
 
-function withProtected(Component: React.ComponentType<any>) {
-  function WithProtected(props: any) {
+function withProtected(Component: React.ComponentType<Record<string, unknown>>) {
+  function WithProtected(props: Record<string, unknown>) {
     return (
       <ProtectedRoute>
         <Suspense fallback={<SplashScreen />}>
@@ -246,8 +246,8 @@ function withProtected(Component: React.ComponentType<any>) {
   return WithProtected;
 }
 
-export function withProtectedInner(Component: React.ComponentType<any>) {
-  function WithProtectedInner(props: any) {
+export function withProtectedInner(Component: React.ComponentType<Record<string, unknown>>) {
+  function WithProtectedInner(props: Record<string, unknown>) {
     return (
       <ProtectedRoute>
         <Suspense fallback={<div />}>
@@ -382,6 +382,14 @@ const coursesRoute = createRoute({
   component: withProtected(CoursesPage),
 });
 
+function CourseIndex() {
+  return (
+    <div className="flex flex-1 items-center justify-center text-gray-400">
+      <p className="text-sm">Select a course from the list</p>
+    </div>
+  );
+}
+
 const courseIndexRoute = createRoute({
   getParentRoute: () => coursesRoute,
   path: "/",
@@ -402,19 +410,17 @@ const courseIndexRoute = createRoute({
       if (courseId && courses.some(c => c.id === courseId)) {
         targetId = courseId;
       }
-    } catch {}
+    } catch {
+      // Ignore failed attempts to get the latest course and fallback to default
+    }
 
     const course = courses.find((c) => c.id === targetId);
     const defaultTab = course?.fieldCheckin ? "attendees" : "sessions";
+    // Using a type assertion to any for the dynamic redirect path as it's not strongly typed
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     throw redirect({ to: `/courses/${targetId}/${defaultTab}` as any, replace: true });
   },
-  component: function CourseIndex() {
-    return (
-      <div className="flex flex-1 items-center justify-center text-gray-400">
-        <p className="text-sm">Select a course from the list</p>
-      </div>
-    );
-  },
+  component: CourseIndex,
 });
 
 const courseIdRoute = createRoute({

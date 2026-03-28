@@ -1,0 +1,80 @@
+src/features/admin/components/AdminDashboardGraph.tsx:40:      changeView(desiredView as any);
+src/features/admin/components/AdminDashboardGraph.tsx:45:    changeView(newView as any);
+src/features/admin/components/AdminDashboardGraph.tsx:52:  const graphData = (adminStats as any)?.generalGraph || [];
+src/features/admin/components/AdminDashboardGraph.tsx:53:  const fieldGraph = (adminStats as any)?.fieldGraph || [];
+src/features/admin/components/AdminFieldStatsTable.tsx:12:  const fieldData = (adminStats as any)?.field || [];
+src/features/admin/components/AdminFieldStatsTable.tsx:13:  const generalData = (adminStats as any)?.general || {};
+src/features/admin/components/AdminMenu.tsx:15:  const isFacultyManager = !!(user as any)?.facultyManager;
+src/features/admin/components/AdminMenu.tsx:18:  const groupName = (user as any)?.groupData?.name || "Arie Group";
+src/features/admin/components/AdminMenu.tsx:20:    (user as any)?.facultyManager && (user as any)?.facultyData?.name
+src/features/admin/components/AdminMenu.tsx:21:      ? (user as any).facultyData.name
+src/features/admin/components/AdminMenu.tsx:23:  const themeBgColor = (user as any)?.theme?.bgColor || "#1A4F41"; // Default dark green matching USF
+src/features/admin/components/AdminMenu.tsx:24:  const logoImage = (user as any)?.theme?.image || null;
+src/features/admin/components/AdminMenu.tsx:57:    ? allMenuItems.filter((item) => !(item as any).hiddenForFaculty)
+src/features/admin/components/AdminMenu.tsx:102:              search={(item as any).search}
+src/features/admin/components/AdminMenu.tsx:103:              activeOptions={{ exact: (item as any).exact }}
+src/features/admin/components/AdminStatsWidgets.tsx:74:  if (!(adminStats as any)?.general) {
+src/features/admin/components/AdminStatsWidgets.tsx:88:  const stats = (adminStats as any).general;
+src/features/admin/components/HostUsageDialog.tsx:85:            color: (theme as any).color || "#fff",
+src/features/admin/components/HostUsageDialog.tsx:86:            backgroundColor: (theme as any).bgColor || "#008096",
+src/features/admin/components/HostUsageDialog.tsx:90:          {(theme as any).image && (
+src/features/admin/components/HostUsageDialog.tsx:93:              src={(theme as any).image}
+src/features/admin/components/HostUsageDialog.tsx:97:          <h2 className="text-2xl font-semibold">{(theme as any).text}</h2>
+src/features/admin/components/JoinAdminGroupDialog.tsx:31:  const groupJoined = (user as any)?.invitationToGroup || {
+src/features/admin/components/JoinAdminGroupDialog.tsx:37:    if (!user || !(user as any).invitationToGroup) return;
+src/features/admin/components/JoinAdminGroupDialog.tsx:41:      await removeHostInviteToGroup(user.id, (user as any).invitationToGroup);
+src/features/admin/components/tbls/AttendeesAdminTable.tsx:21:  const attendeesData = (instituteAttendeesStats as any)?.classroomData;
+src/features/admin/pages/AdminPage.tsx:24:      (user as any)?.group ||
+src/features/admin/pages/AdminPage.tsx:25:      (user as any)?.groupData?.id ||
+src/features/admin/pages/AdminPage.tsx:26:      (user as any)?.groupData?._id,
+src/features/admin/pages/AdminPage.tsx:28:    faculty: (user as any)?.facultyManager || null,
+src/features/admin/pages/AdminPage.tsx:114:    const data = (instituteAttendeesStats as any)?.classroomData;
+src/features/admin/pages/AdminReportsView.tsx:31:      className={`${baseStyle} ${(variants as any)[variant]} ${className}`}
+src/features/admin/pages/AdminUsageView.tsx:21:    if (!(user as any)?.groupData?.admin) return;
+src/features/admin/pages/AdminUsageView.tsx:29:        id: (user as any)?.groupData?.admin || "",
+src/features/admin/pages/AdminUsageView.tsx:32:      })) as any;
+src/features/auth/components/ProfileDialog.tsx:50:  const u = user as any;
+src/features/auto/pages/AutoModePage.tsx:82:  const themeBgColor = (user as any)?.theme?.bgColor || "#EFEFEF";
+src/features/auto/pages/AutoModePage.tsx:83:  const themeColor = (user as any)?.theme?.color || "#000";
+src/features/auto/pages/AutoModePage.tsx:84:  const themeImage = (user as any)?.theme?.image || null;
+src/features/billing/components/DiscountCodeDialog.tsx:89:      await updateUserData({ discountCode } as any);
+src/features/checkin/pages/CheckinPage.tsx:23:  const shortid = (params as any)?.shortid;
+src/features/checkin/pages/CheckinPage.tsx:24:  const code = (params as any)?.code;
+src/features/checkin/pages/CheckinPage.tsx:25:  const icon = (params as any)?.icon;
+src/features/checkin/pages/QuizPage.tsx:72:    const sessionId = (session as any).id || (session as any)._id;
+src/features/checkin/store/checkin.store.ts:111:          ...(res as any),
+src/features/checkin/store/checkin.store.ts:112:          id: (res as any)._id || (res as any).id,
+src/features/checkin/store/checkin.store.ts:113:          shortid: String((res as any).shortid || shortId),
+src/features/checkin/store/checkin.store.ts:114:          courseid: (res as any).courseid || "",
+src/features/checkin/store/checkin.store.ts:115:          name: (res as any).name || "",
+src/features/checkin/store/checkin.store.ts:116:          courseName: (res as any).coursename || (res as any).courseName || "",
+src/features/checkin/store/checkin.store.ts:233:          ...(res as any),
+src/features/checkin/store/checkin.store.ts:234:          id: (res as any)._id || (res as any).id,
+src/features/checkin/store/checkin.store.ts:235:          shortid: String((res as any).shortid || shortId),
+src/features/checkin/store/checkin.store.ts:236:          courseid: (res as any).courseid || "",
+src/features/checkin/store/checkin.store.ts:237:          name: (res as any).name || "",
+src/features/checkin/store/checkin.store.ts:238:          courseName: (res as any).coursename || (res as any).courseName || "",
+src/features/courses/components/AddCourseDialog.tsx:403:        navigate({ to: `/courses/${newCourseId}` as any });
+src/features/courses/components/CourseHeader.tsx:96:      navigate({ to: `/courses/${courseId}/sessions` as any });
+src/features/courses/components/CourseHeader.tsx:98:      navigate({ to: `/courses/${courseId}/attendees` as any });
+src/features/courses/components/CourseHeader.tsx:160:                    navigate({ to: "/auto" as any });
+src/features/courses/components/CourseHeader.tsx:206:                  to={`/courses/${courseId}/${pathSegment}` as any}
+src/features/courses/components/CourseList.tsx:72:    navigate({ to: `/courses/${id}/${defaultTab}` as any, replace: true });
+src/features/courses/components/CourseQrCodeDownloadDialog.tsx:148:  const theme = (user as any)?.data?.theme;
+src/features/courses/components/EditCourseDialog.tsx:74:      const loc = course.location as any;
+src/features/courses/components/EditCourseDialog.tsx:97:        setRoom((course as any).room || user?.autoModeRooms?.[0] || "");
+src/features/courses/components/EditCourseDialog.tsx:123:      } as any);
+src/features/courses/components/ImportGradingExcelDialog.tsx:154:    (sessions as any[]).forEach((session: any) => {
+src/features/courses/components/ImportGradingExcelDialog.tsx:160:    const sessionCount = (sessions as any[]).length || 1;
+src/features/courses/components/ImportGradingExcelDialog.tsx:182:      processData(data as any[][]);
+src/features/courses/components/MessageDetailsDialog.tsx:54:    readByArray.includes(s.id) || readByArray.includes((s as any)._id),
+src/features/courses/components/MessageDetailsDialog.tsx:57:    (s) => !readByArray.includes(s.id) && !readByArray.includes((s as any)._id),
+src/features/courses/components/MessageDetailsDialog.tsx:138:                  title={`${getStudentName(s)}${(s as any).email ? ` · ${(s as any).email}` : ""}${(s as any).phone ? ` · ${(s as any).phone}` : ""}`}
+src/features/courses/components/MessageDetailsDialog.tsx:165:                  title={`${getStudentName(s)}${(s as any).email ? ` · ${(s as any).email}` : ""}${(s as any).phone ? ` · ${(s as any).phone}` : ""}`}
+src/features/courses/components/PrintableSignDialog.tsx:45:  const theme = (user as any)?.theme;
+src/features/sessions/components/MergeSessionsDialog.tsx:213:                        {(s as any).attendees?.length || 0}
+src/shared/services/admin.service.ts:41:    general: (generalRes as any)?.overallData || generalRes,
+src/shared/services/admin.service.ts:42:    generalGraph: (generalGraphRes as any)?.overallGraphData || generalGraphRes,
+src/shared/services/admin.service.ts:43:    field: (fieldRes as any)?.facultiesData || fieldRes,
+src/shared/services/admin.service.ts:44:    fieldGraph: (fieldGraphRes as any)?.facultiesGraphData || fieldGraphRes,
+src/shared/utils/export.utils.ts:52:  (workbook as any).properties.defaultColWidth = 40;

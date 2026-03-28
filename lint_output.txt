@@ -1,0 +1,676 @@
+
+> ezcheckme-web@6.0.0-alpha.0 lint
+> eslint .
+
+
+C:\Development\ezcheckme-web\src\app\routes.tsx
+    1:1   warning  Unused eslint-disable directive (no problems were reported from 'react-refresh/only-export-components')
+  211:54  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  212:32  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  223:55  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  224:33  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  235:55  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  236:33  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  249:67  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  250:38  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+  405:13  error    Empty block statement                                                                                    no-empty
+  409:66  error    Unexpected any. Specify a different type                                                                 @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\components\ui\badge.tsx
+  37:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Development\ezcheckme-web\src\components\ui\button.tsx
+  51:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Development\ezcheckme-web\src\components\ui\toast.tsx
+  30:19  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Development\ezcheckme-web\src\features\admin\components\AddInstituteMemberDialog.tsx
+  72:14  error  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Development\ezcheckme-web\src\features\admin\components\AdminDashboardGraph.tsx
+  91:9  error  'date' is never reassigned. Use 'const' instead  prefer-const
+
+C:\Development\ezcheckme-web\src\features\admin\components\AdminFieldStatsTable.tsx
+  12:9  warning  The 'fieldData' logical expression could make the dependencies of useMemo Hook (at line 50) change on every render. To fix this, wrap the initialization of 'fieldData' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Development\ezcheckme-web\src\features\admin\components\AdminStatsWidgets.tsx
+  74:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  88:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\components\HostUsageDialog.tsx
+  37:6   warning  React Hook useEffect has a missing dependency: 'fetchUniqueAttendees'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  58:96  error    Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  85:45  error    Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  86:55  error    Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  90:37  error    Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  93:45  error    Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  97:76  error    Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\components\JoinAdminGroupDialog.tsx
+  31:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  37:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  41:70  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\components\tbls\AttendeesAdminTable.tsx
+   21:68  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+   22:9   warning  The 'data' conditional could make the dependencies of useMemo Hook (at line 32) change on every render. To fix this, wrap the initialization of 'data' in its own useMemo() Hook  react-hooks/exhaustive-deps
+   28:26  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+   45:60  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+  152:59  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\components\tbls\CoursesAdminTable.tsx
+  31:9   warning  The 'data' conditional could make the dependencies of useMemo Hook (at line 66) change on every render. To fix this, wrap the initialization of 'data' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  46:31  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+  71:30  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+  71:38  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+  98:45  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\components\tbls\HostsAdminTable.tsx
+  30:9   warning  The 'data' conditional could make the dependencies of useMemo Hook (at line 61) change on every render. To fix this, wrap the initialization of 'data' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  45:31  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+  66:30  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+  66:38  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+  93:45  error    Unexpected any. Specify a different type                                                                                                                                          @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\pages\AdminPage.tsx
+   66:6   warning  React Hook useEffect has a missing dependency: 'payload'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  104:6   warning  React Hook useEffect has a missing dependency: 'payload'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  115:61  error    Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\pages\AdminUsageView.tsx
+  18:6   warning  React Hook useEffect has a missing dependency: 'fetchUsageData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  32:29  error    Unexpected any. Specify a different type                                                                           @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\admin\pages\AttendeesByDomainPage.tsx
+  35:18  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-explicit-any
+  51:5   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Development\ezcheckme-web\src\features\admin\pages\AttendeesByDomainPage.tsx:51:5
+  49 |
+  50 |   useEffect(() => {
+> 51 |     fetchData(from, to);
+     |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  52 |   }, []); // eslint-disable-line
+  53 |
+  54 |   const totalAttendees = useMemo(  react-hooks/set-state-in-effect
+
+C:\Development\ezcheckme-web\src\features\admin\pages\GroupAdminPage.tsx
+  72:6  warning  React Hook useEffect has a missing dependency: 'fetchActivity'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Development\ezcheckme-web\src\features\admin\pages\HostsActivityPage.tsx
+  51:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\auth\components\ProfileDialog.tsx
+  50:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\auth\components\SignupDialog.tsx
+   98:26  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+C:\Development\ezcheckme-web\src\features\auth\components\SignupDialog.tsx:98:26
+   96 |   });
+   97 |
+>  98 |   const watchAcceptTos = watch("acceptTos");
+      |                          ^^^^^ React Hook Form's `useForm()` API returns a `watch()` function which cannot be memoized safely.
+   99 |
+  100 |   async function onSubmit(data: SignupFormData) {
+  101 |     setErrorLine("");  react-hooks/incompatible-library
+  112:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\auth\hooks\useAuthDialogs.ts
+  41:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Development\ezcheckme-web\src\features\auth\hooks\useAuthDialogs.ts:41:7
+  39 |
+  40 |     if (path === "/login" && !isAuthenticated) {
+> 41 |       setGatewayOpen(false);
+     |       ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  42 |       setDialog({ open: true, step: "login", email: "", code: "" });
+  43 |     } else if (path === "/signup" && !isAuthenticated) {
+  44 |       // Open gateway first  react-hooks/set-state-in-effect
+
+C:\Development\ezcheckme-web\src\features\auth\store\auth.store.ts
+  233:18  error  '_name' is defined but never used          @typescript-eslint/no-unused-vars
+  233:25  error  '_email' is defined but never used         @typescript-eslint/no-unused-vars
+  233:33  error  '_password' is defined but never used      @typescript-eslint/no-unused-vars
+  233:44  error  '_referralCode' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Development\ezcheckme-web\src\features\auto\pages\AutoModePage.tsx
+  31:16  error    'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  54:7   error    Error: Cannot access variable before it is declared
+
+`handleStartSession` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Development\ezcheckme-web\src\features\auto\pages\AutoModePage.tsx:54:7
+  52 |   useEffect(() => {
+  53 |     if (nextSession && timeToNextSession <= 2) {
+> 54 |       handleStartSession();
+     |       ^^^^^^^^^^^^^^^^^^ `handleStartSession` accessed before it is declared
+  55 |     }
+  56 |   }, [timeToNextSession, nextSession]);
+  57 |
+
+C:\Development\ezcheckme-web\src\features\auto\pages\AutoModePage.tsx:58:3
+  56 |   }, [timeToNextSession, nextSession]);
+  57 |
+> 58 |   const handleStartSession = () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 59 |     if (!nextSession) return;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 60 |     navigate({ to: "/session/$shortid", params: { shortid: nextSession.id } });
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 61 |   };
+     | ^^^^^ `handleStartSession` is declared here
+  62 |
+  63 |   const handleExitAutoMode = () => {
+  64 |     // Navigate back to the selected course's info page  react-hooks/immutability
+  56:6   warning  React Hook useEffect has a missing dependency: 'handleStartSession'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-hooks/exhaustive-deps
+
+C:\Development\ezcheckme-web\src\features\billing\components\DiscountCodeDialog.tsx
+  28:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  89:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\billing\components\PricingDialog.tsx
+  27:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\billing\components\PricingTable.tsx
+  35:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\blog\pages\BlogPage.tsx
+   25:20  warning  Hooks must always be called in a consistent order, and may not be called conditionally. See the Rules of Hooks (https://react.dev/warnings/invalid-hook-call-warning)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-compiler/react-compiler
+  200:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Development\ezcheckme-web\src\features\blog\pages\BlogPage.tsx:200:5
+  198 |
+  199 |   useEffect(() => {
+> 200 |     setLoading(true);
+      |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  201 |     // Load both the current post and all posts (for "Read Next")
+  202 |     const loadPost = blogService
+  203 |       .getBlogPost(slug)  react-hooks/set-state-in-effect
+  213:6   warning  React Hook useEffect has a missing dependency: 'allPosts.length'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+
+C:\Development\ezcheckme-web\src\features\checkin\components\AttendeeSignUp.tsx
+   59:56  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  144:9   error    Error: Cannot access variable before it is declared
+
+`resendCode` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Development\ezcheckme-web\src\features\checkin\components\AttendeeSignUp.tsx:144:9
+  142 |         setOnlyCode(false);
+  143 |         setLoading(false);
+> 144 |         resendCode(false);
+      |         ^^^^^^^^^^ `resendCode` accessed before it is declared
+  145 |       }
+  146 |     },
+  147 |     [firstName, lastName, email, attendeeid, storeUser],
+
+C:\Development\ezcheckme-web\src\features\checkin\components\AttendeeSignUp.tsx:151:3
+  149 |
+  150 |   // ── Resend code (SMS or voice) ──
+> 151 |   const resendCode = useCallback(
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 152 |     async (voice: boolean) => {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 153 |       if (onlyCode) {
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 193 |     [onlyCode, user, countryCode, phoneNumber, firstName, lastName, email, attendeeid],
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 194 |   );
+      | ^^^^^ `resendCode` is declared here
+  195 |
+  196 |   // ── Sign up attendee (matching old signUpAttendee) ──
+  197 |   const signUpAttendee = useCallback(                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/immutability
+  147:5   warning  React Hook useCallback has a missing dependency: 'resendCode'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+  169:18  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  178:11  error    Error: Cannot access variable before it is declared
+
+`signUpAttendee` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Development\ezcheckme-web\src\features\checkin\components\AttendeeSignUp.tsx:178:11
+  176 |         setLoading(false);
+  177 |         if (res?.sent === false && res?.details?.message === "Phone already exists") {
+> 178 |           signUpAttendee({ isPhoneExist: true });
+      |           ^^^^^^^^^^^^^^ `signUpAttendee` accessed before it is declared
+  179 |           setUpdateUserData({ firstName, lastName, email, attendeeid });
+  180 |         } else if (res?.sent === false) {
+  181 |           setError(res?.details?.message || "Failed to send code");
+
+C:\Development\ezcheckme-web\src\features\checkin\components\AttendeeSignUp.tsx:197:3
+  195 |
+  196 |   // ── Sign up attendee (matching old signUpAttendee) ──
+> 197 |   const signUpAttendee = useCallback(
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 198 |     async (options: { isPhoneExist?: boolean; stateOverride?: any } = {}) => {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 199 |       try {
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 221 |     [firstName, lastName, email, attendeeid, countryCode, phoneNumber, storeUser, applyUserData],
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 222 |   );
+      | ^^^^^ `signUpAttendee` is declared here
+  223 |
+  224 |   // ── Confirm attendee code (matching old confirmAttendee) ──
+  225 |   const confirmAttendee = useCallback(async () => {  react-hooks/immutability
+  193:5   warning  React Hook useCallback has a missing dependency: 'signUpAttendee'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-hooks/exhaustive-deps
+  198:63  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  209:20  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  214:21  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  232:18  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  250:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  274:24  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  304:25  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  363:24  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  393:5   warning  React Hook useCallback has missing dependencies: 'countryCode', 'firstName', 'lastName', 'phoneNumber', and 'user'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/exhaustive-deps
+
+C:\Development\ezcheckme-web\src\features\checkin\components\CountryCodesModal.tsx
+  194:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Development\ezcheckme-web\src\features\checkin\pages\CheckinPage.tsx
+  23:30  error    Unexpected any. Specify a different type                                                                                                                                                           @typescript-eslint/no-explicit-any
+  24:27  error    Unexpected any. Specify a different type                                                                                                                                                           @typescript-eslint/no-explicit-any
+  25:27  error    Unexpected any. Specify a different type                                                                                                                                                           @typescript-eslint/no-explicit-any
+  66:6   warning  React Hook useEffect has missing dependencies: 'code', 'directCheckin', 'handleSubmitWithId', 'icon', 'navigate', 'shortid', and 'storedUser'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Development\ezcheckme-web\src\features\checkin\pages\QuizPage.tsx
+   72:35  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+   72:58  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+   97:45  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+  161:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Development\ezcheckme-web\src\features\checkin\pages\QuizPage.tsx:161:7
+  159 |   useEffect(() => {
+  160 |     if (status === "quiz") {
+> 161 |       setSelectedIcon(null);
+      |       ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  162 |     }
+  163 |   }, [status]);
+  164 |  react-hooks/set-state-in-effect
+
+C:\Development\ezcheckme-web\src\features\checkin\store\checkin.store.ts
+  111:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  112:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  112:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  113:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  114:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  233:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  234:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  234:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  235:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  236:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  237:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  238:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  238:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\AddCourseDialog.tsx
+  407:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\CourseAttendeesWrapper.tsx
+  7:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\CourseDefaultRedirector.tsx
+  6:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\CourseHeader.tsx
+   96:57  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   98:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  160:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  206:64  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\CourseList.tsx
+   72:54  error  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  368:19  error  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+
+C:\Development\ezcheckme-web\src\features\courses\components\CourseQrCodeDownloadDialog.tsx
+   19:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-require-imports')
+  148:26  error    Unexpected any. Specify a different type                                                                  @typescript-eslint/no-explicit-any
+  177:20  error    Unexpected any. Specify a different type                                                                  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\CourseSessions.tsx
+  180:45  error  '_dates' is defined but never used            @typescript-eslint/no-unused-vars
+  188:5   error  '_targetSessionId' is defined but never used  @typescript-eslint/no-unused-vars
+  189:5   error  '_sessionIds' is defined but never used       @typescript-eslint/no-unused-vars
+  190:5   error  '_mergeCourseId' is defined but never used    @typescript-eslint/no-unused-vars
+  191:5   error  '_method' is defined but never used           @typescript-eslint/no-unused-vars
+
+C:\Development\ezcheckme-web\src\features\courses\components\CourseStudents.tsx
+   51:21  error    Unexpected any. Specify a different type                                                                            @typescript-eslint/no-explicit-any
+   62:6   warning  React Hook useEffect has a missing dependency: 'sessions.length'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  113:14  error    Unexpected any. Specify a different type                                                                            @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\CreateFutureSessionsDialog.tsx
+  60:6  warning  React Hook useEffect has a missing dependency: 'generateSessions'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Development\ezcheckme-web\src\features\courses\components\EditCourseDialog.tsx
+   74:38  error    Unexpected any. Specify a different type                                                                                                 @typescript-eslint/no-explicit-any
+   97:28  error    Unexpected any. Specify a different type                                                                                                 @typescript-eslint/no-explicit-any
+  101:6   warning  React Hook useEffect has missing dependencies: 'showRoom' and 'user?.autoModeRooms'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  123:12  error    Unexpected any. Specify a different type                                                                                                 @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\ImportAttendeesExcelDialog.tsx
+  104:36   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:19   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  153:35   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  154:39   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  203:22   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  237:22   error  Unnecessary escape character: \.          no-useless-escape
+  237:30   error  Unnecessary escape character: \"          no-useless-escape
+  237:46   error  Unnecessary escape character: \.          no-useless-escape
+  237:54   error  Unnecessary escape character: \"          no-useless-escape
+  237:63   error  Unnecessary escape character: \"          no-useless-escape
+  237:67   error  Unnecessary escape character: \"          no-useless-escape
+  237:83   error  Unnecessary escape character: \.          no-useless-escape
+  237:91   error  Unnecessary escape character: \"          no-useless-escape
+  237:108  error  Unnecessary escape character: \.          no-useless-escape
+  237:116  error  Unnecessary escape character: \"          no-useless-escape
+  457:39   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\ImportGradingExcelDialog.tsx
+   62:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   65:36  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   84:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  144:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  154:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  154:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  155:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  160:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  182:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  183:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  189:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  194:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  209:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  220:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  248:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  262:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  358:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  378:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\ImportSessionsFromExcelDialog.tsx
+   86:13  error  'name' is never reassigned. Use 'const' instead  prefer-const
+  118:14  error  'err' is defined but never used                  @typescript-eslint/no-unused-vars
+
+C:\Development\ezcheckme-web\src\features\courses\components\LocationSetupDialog.tsx
+  67:5  error    Error: Cannot reassign variables declared outside of the component/hook
+
+Variable `_mapsLanguageLock` is declared outside of the component/hook. Reassigning this value during render is a form of side effect, which can cause unpredictable behavior depending on when the component happens to re-render. If this variable is used in rendering, use useState instead. Otherwise, consider updating it in an effect. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#side-effects-must-run-outside-of-render).
+
+C:\Development\ezcheckme-web\src\features\courses\components\LocationSetupDialog.tsx:67:5
+  65 |    // Lock the Maps language on the very first render across all mounts.
+  66 |   if (!_mapsLanguageLock) {
+> 67 |     _mapsLanguageLock = i18n.language || "en";
+     |     ^^^^^^^^^^^^^^^^^ `_mapsLanguageLock` cannot be reassigned
+  68 |   }
+  69 |
+  70 |   const { isLoaded, loadError } = useJsApiLoader({  react-hooks/globals
+  67:5  warning  Unexpected reassignment of a variable which was defined outside of the component. Components and hooks should be pure and side-effect free, but variable reassignment is a form of side-effect. If this variable is used in rendering, use useState instead. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#side-effects-must-run-outside-of-render)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-compiler/react-compiler
+
+C:\Development\ezcheckme-web\src\features\courses\components\MessageDetailsDialog.tsx
+   20:12   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   43:30   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   54:62   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   57:71   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:36   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  138:55   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  138:80   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  138:106  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  138:131  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  165:55   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  165:80   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  165:106  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  165:131  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\NewCourseTypeDialog.tsx
+  26:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  34:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\PrintableSignDialog.tsx
+  45:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\SessionStudents.tsx
+   41:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   42:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  167:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\courses\components\field\DataCellComp.tsx
+  89:10  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Development\ezcheckme-web\src\features\courses\components\field\FieldCheckinBar.tsx
+   90:23  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Development\ezcheckme-web\src\features\courses\components\field\FieldCheckinBar.tsx:90:23
+  88 |       }
+  89 |     >
+> 90 |       {showTooltip && barRef.current && (
+     |                       ^^^^^^^^^^^^^^ Cannot access ref value during render
+  91 |         <div
+  92 |           style={{
+  93 |             position: "fixed",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/refs
+   90:23  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Development\ezcheckme-web\src\features\courses\components\field\FieldCheckinBar.tsx:90:23
+  88 |       }
+  89 |     >
+> 90 |       {showTooltip && barRef.current && (
+     |                       ^^^^^^^^^^^^^^ Cannot access ref value during render
+  91 |         <div
+  92 |           style={{
+  93 |             position: "fixed",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/refs
+   95:19  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Development\ezcheckme-web\src\features\courses\components\field\FieldCheckinBar.tsx:95:19
+   93 |             position: "fixed",
+   94 |             zIndex: 10000,
+>  95 |             top: (() => {
+      |                   ^^^^^^^
+>  96 |               const rect = barRef.current!.getBoundingClientRect();
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  97 |               const isUpperHalf = rect.top < window.innerHeight * 0.5;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  98 |               // left-start: align top of tooltip with top of bar
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  99 |               // left-end: tooltip appears above the bar
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 100 |               return isUpperHalf ? rect.top : rect.bottom - 8;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 101 |             })(),
+      | ^^^^^^^^^^^^^^ This function accesses a ref value
+  102 |             left: barRef.current.getBoundingClientRect().left - 370,
+  103 |             pointerEvents: "none",
+  104 |           }}  react-hooks/refs
+  102:19  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Development\ezcheckme-web\src\features\courses\components\field\FieldCheckinBar.tsx:102:19
+  100 |               return isUpperHalf ? rect.top : rect.bottom - 8;
+  101 |             })(),
+> 102 |             left: barRef.current.getBoundingClientRect().left - 370,
+      |                   ^^^^^^^^^^^^^^ Passing a ref to a function may read its value during render
+  103 |             pointerEvents: "none",
+  104 |           }}
+  105 |         >                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/refs
+  102:19  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Development\ezcheckme-web\src\features\courses\components\field\FieldCheckinBar.tsx:102:19
+  100 |               return isUpperHalf ? rect.top : rect.bottom - 8;
+  101 |             })(),
+> 102 |             left: barRef.current.getBoundingClientRect().left - 370,
+      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Passing a ref to a function may read its value during render
+  103 |             pointerEvents: "none",
+  104 |           }}
+  105 |         >                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             react-hooks/refs
+
+C:\Development\ezcheckme-web\src\features\courses\store\session.store.ts
+  102:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\home\components\FeaturesSection.tsx
+  134:13  error  'newIndex' is never reassigned. Use 'const' instead  prefer-const
+
+C:\Development\ezcheckme-web\src\features\sessions\components\CreateFutureSessionsDialog.tsx
+  28:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\sessions\components\ImportSessionsFromExcelDialog.tsx
+   30:19  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+   48:36  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+   89:19  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  108:35  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  109:39  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  134:22  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  162:13  error  'baseDate' is never reassigned. Use 'const' instead      prefer-const
+  163:13  error  'computedDate' is never reassigned. Use 'const' instead  prefer-const
+  375:39  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\sessions\components\MergeSessionsDialog.tsx
+  213:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\features\sessions\components\SessionProvider.tsx
+  229:5  warning  React Compiler has skipped optimizing this component because one or more React ESLint rules were disabled. React Compiler only works when your components follow all the rules of React, disabling them may result in unexpected or incorrect behavior  react-compiler/react-compiler
+
+C:\Development\ezcheckme-web\src\features\sessions\components\StartSessionDialog.tsx
+   77:9  warning  The 'courses' logical expression could make the dependencies of useEffect Hook (at line 117) change on every render. To fix this, wrap the initialization of 'courses' in its own useMemo() Hook                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+  232:3  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Development\ezcheckme-web\src\features\sessions\components\StartSessionDialog.tsx:232:3
+  230 |   // Store handleSubmit in ref for Enter key handler (avoids stale closure)
+  231 |   const handleSubmitRef = useRef(handleSubmit);
+> 232 |   handleSubmitRef.current = handleSubmit;
+      |   ^^^^^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  233 |
+  234 |   // Enter key submits
+  235 |   useEffect(() => {  react-hooks/refs
+
+C:\Development\ezcheckme-web\src\features\sessions\hooks\useQrCode.ts
+  234:5  warning  React Compiler has skipped optimizing this component because one or more React ESLint rules were disabled. React Compiler only works when your components follow all the rules of React, disabling them may result in unexpected or incorrect behavior  react-compiler/react-compiler
+
+C:\Development\ezcheckme-web\src\shared\components\ErrorToast.tsx
+  21:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Development\ezcheckme-web\src\shared\components\ErrorToast.tsx:21:7
+  19 |   useEffect(() => {
+  20 |     if (error) {
+> 21 |       setVisible(true);
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  22 |       const timer = setTimeout(() => {
+  23 |         setVisible(false);
+  24 |         onDismiss();  react-hooks/set-state-in-effect
+
+C:\Development\ezcheckme-web\src\shared\hooks\useMediaQuery.ts
+  20:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Development\ezcheckme-web\src\shared\hooks\useMediaQuery.ts:20:7
+  18 |     // Initial check (if not matched accurately in useState, queue it avoiding synchronous setState)
+  19 |     if (mql.matches !== matches) {
+> 20 |       setMatches(mql.matches);
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |     }
+  22 |     mql.addEventListener("change", handler);
+  23 |     return () => mql.removeEventListener("change", handler);  react-hooks/set-state-in-effect
+
+C:\Development\ezcheckme-web\src\shared\services\admin.service.ts
+   41:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   42:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   43:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   44:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   53:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   65:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  110:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\shared\services\course.service.ts
+  128:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\shared\services\messaging.service.ts
+  45:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\shared\services\report.service.ts
+   53:24  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  124:7   error  'index' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  128:16  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  185:25  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\shared\services\session.service.ts
+  140:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  142:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\shared\services\tawkto.service.ts
+  12:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\shared\utils\date.utils.ts
+  116:53  error  '_text' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Development\ezcheckme-web\src\shared\utils\export.utils.ts
+  46:9   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  52:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\src\types\read-excel-file.d.ts
+  2:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Development\ezcheckme-web\test_api.ts
+  1:10  error  'post' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Development\ezcheckme-web\test_week.ts
+  32:7  error  'date' is never reassigned. Use 'const' instead  prefer-const
+
+✖ 248 problems (222 errors, 26 warnings)
+  6 errors and 2 warnings potentially fixable with the `--fix` option.
+
