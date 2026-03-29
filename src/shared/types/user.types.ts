@@ -96,8 +96,12 @@ export interface UserData {
   adminRights?: Record<string, boolean>;
   /** Whether user has created first course */
   createdFirstCourse?: boolean;
+  /** Whether the UI has sent instructions for the very first time */
+  instructionsSentFirstTime?: boolean;
   /** Cookie consent timestamp */
   cookiesAgreed?: number | string;
+  /** Show attendee phone and ID columns */
+  showAttendeesPhoneAndId?: boolean;
 }
 
 export interface UserSettings {

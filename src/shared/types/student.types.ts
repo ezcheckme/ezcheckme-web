@@ -31,6 +31,8 @@ export interface Student {
     request?: string;
     time?: number;
     checkin?: boolean;
+    selfie?: string;
+    reason?: string;
     location?: {
       latLng?: { lat: number; lng: number };
       distance?: number;

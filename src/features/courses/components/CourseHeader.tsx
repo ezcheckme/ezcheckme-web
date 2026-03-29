@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PrintableSignDialog } from "./PrintableSignDialog";
 import { theme } from "@/config/theme";
 import {
@@ -23,6 +23,7 @@ import { StartSessionDialog } from "@/features/sessions/components/StartSessionD
 import { DownloadReportGatewayDialog } from "./DownloadReportGatewayDialog";
 import { DownloadExcelReportTeaser } from "@/features/billing/components/DownloadExcelReportTeaser";
 import { downloadCourseReport } from "@/shared/services/course-report.service";
+import { ImportGradingExcelDialog } from "./ImportGradingExcelDialog";
 
 const allTabs = [
   { id: COURSE_VIEWS.DASHBOARD, label: "Dashboard", Icon: LayoutDashboard },
@@ -41,17 +42,32 @@ export function CourseHeader() {
   const courses = useCourseStore((s) => s.courses);
   const courseId = useCourseStore((s) => s.courseId);
   const view = useCourseStore((s) => s.view);
+  const updateCourse = useCourseStore((s) => s.updateCourse);
   const user = useAuthStore((s) => s.user);
 
   const [startSessionOpen, setStartSessionOpen] = useState(false);
   const [printableSignOpen, setPrintableSignOpen] = useState(false);
   const [gatewayOpen, setGatewayOpen] = useState(false);
+  const [importGradingOpen, setImportGradingOpen] = useState(false);
   const [teaserOpen, setTeaserOpen] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   const course = courses?.find((c) => c.id === courseId);
   const isShiftCourse = course?.fieldCheckin === true;
   const tabs = isShiftCourse ? shiftTabs : allTabs;
+
+  // Legacy auto-open QR logic for first-time field check-in onboarding
+  useEffect(() => {
+    if (
+      course &&
+      course.fieldCheckin &&
+      !course.qrOpened &&
+      user?.instructionsSentFirstTime
+    ) {
+      setPrintableSignOpen(true);
+      updateCourse({ ...course, qrOpened: true }).catch(console.error);
+    }
+  }, [course, user, updateCourse]);
 
   // Plan gating: Standard users without excel import see the teaser
   const isStandard =
@@ -81,8 +97,7 @@ export function CourseHeader() {
         setDownloading(false);
       }
     } else if (type === "upload_and_modify") {
-      // TODO: Open UploadExcelForReport dialog (future implementation)
-      alert("Upload & Modify coming soon! For now, use 'Download Report'.");
+      setImportGradingOpen(true);
     }
   }
 
@@ -245,6 +260,14 @@ export function CourseHeader() {
         open={gatewayOpen}
         onOpenChange={setGatewayOpen}
         onSelect={handleGatewaySelect}
+      />
+
+      {/* Import for Grading / Upload & Modify Dialog */}
+      <ImportGradingExcelDialog
+        open={importGradingOpen}
+        onOpenChange={setImportGradingOpen}
+        courseId={courseId || ""}
+        courseName={course?.name || ""}
       />
 
       {/* Premium Teaser Dialog (for Standard users) */}

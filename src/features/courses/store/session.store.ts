@@ -45,6 +45,12 @@ interface SessionActions {
     sessionId: string,
     data: Record<string, unknown>,
   ) => Promise<void>;
+  mergeSessions: (data: {
+    toId: string;
+    fromIds: string[];
+    courseId: string;
+    method: string;
+  }) => Promise<void>;
 
   // Selection / Navigation
   selectSession: (courseId: string, sessionId: string) => void;
@@ -189,6 +195,18 @@ export const useSessionStore = create<SessionState & SessionActions>()(
         ),
       }));
       await sessionService.updateSessionData(data, sessionId);
+    },
+
+    mergeSessions: async (data) => {
+      set({ loading: true });
+      try {
+        await sessionService.mergeSessions(data);
+        await get().getCourseSessions(data.courseId);
+      } catch (error) {
+        handleError(error, "sessions.mergeSessions", { message: "Failed to merge sessions" });
+        set({ loading: false });
+        throw error;
+      }
     },
 
     selectSession: (courseId, sessionId) => {

@@ -1,0 +1,353 @@
+
+> ezcheckme-web@6.0.0-alpha.0 test:run
+> vitest run src/features/courses/components/__tests__/SessionStudents.test.tsx
+
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Development/ezcheckme-web[39m
+
+[90mstderr[2m | src/features/courses/components/__tests__/SessionStudents.test.tsx[2m > [22m[2mSessionStudents Premium Gating[2m > [22m[2mshould show 'Classroom' location for a Premium user
+[22m[39mAn update to SessionStudents inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/features/courses/components/__tests__/SessionStudents.test.tsx[2m > [22m[2mSessionStudents Premium Gating[2m > [22m[2mshould show 'N/A' location for a standard Free user
+[22m[39mAn update to SessionStudents inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [31m❯[39m src/features/courses/components/__tests__/SessionStudents.test.tsx [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 65[2mms[22m[39m
+[31m     [31m×[31m should show 'Classroom' location for a Premium user[39m[32m 52[2mms[22m[39m
+[31m     [31m×[31m should show 'N/A' location for a standard Free user[39m[32m 10[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/features/courses/components/__tests__/SessionStudents.test.tsx[2m > [22mSessionStudents Premium Gating[2m > [22mshould show 'Classroom' location for a Premium user
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: Classroom. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col h-full bg-white"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3 px-4 py-3 border-b border-gray-200"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"skeleton-shimmer"[39m
+          [33mstyle[39m=[32m"width: 24px; height: 24px; border-radius: 50%;"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 180px; height: 14px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer mt-1"[39m
+            [33mstyle[39m=[32m"width: 120px; height: 10px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-2 py-2 space-y-3"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 34%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/features/courses/components/__tests__/SessionStudents.test.tsx:[2m98:19[22m[39m
+    [90m 96| [39m
+    [90m 97| [39m    [90m// Since it's < 200m distance, we expect "Classroom"[39m
+    [90m 98| [39m    [34mexpect[39m(screen[33m.[39m[34mgetByText[39m([32m"Classroom"[39m))[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+    [90m   | [39m                  [31m^[39m
+    [90m 99| [39m    [90m// It should not show "N/A"[39m
+    [90m100| [39m    [34mexpect[39m(screen[33m.[39m[34mqueryByText[39m([32m"N/A"[39m))[33m.[39mnot[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/features/courses/components/__tests__/SessionStudents.test.tsx[2m > [22mSessionStudents Premium Gating[2m > [22mshould show 'N/A' location for a standard Free user
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: N/A. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col h-full bg-white"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3 px-4 py-3 border-b border-gray-200"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"skeleton-shimmer"[39m
+          [33mstyle[39m=[32m"width: 24px; height: 24px; border-radius: 50%;"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 180px; height: 14px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer mt-1"[39m
+            [33mstyle[39m=[32m"width: 120px; height: 10px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-2 py-2 space-y-3"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 34%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2m❯[22m src/features/courses/components/__tests__/SessionStudents.test.tsx:[2m114:19[22m[39m
+    [90m112| [39m
+    [90m113| [39m    [90m// Expect N/A instead of the location text[39m
+    [90m114| [39m    [34mexpect[39m(screen[33m.[39m[34mgetByText[39m([32m"N/A"[39m))[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+    [90m   | [39m                  [31m^[39m
+    [90m115| [39m    [90m// Must not show Classroom[39m
+    [90m116| [39m    [34mexpect[39m(screen[33m.[39m[34mqueryByText[39m([32m"Classroom"[39m))[33m.[39mnot[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m   Start at [22m 11:51:25
+[2m   Duration [22m 2.28s[2m (transform 254ms, setup 374ms, import 929ms, tests 65ms, environment 764ms)[22m
+

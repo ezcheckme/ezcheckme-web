@@ -1,0 +1,746 @@
+
+> ezcheckme-web@6.0.0-alpha.0 test:run
+> vitest run src/features/courses/components/__tests__/SessionStudents.test.tsx
+
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Development/ezcheckme-web[39m
+
+[90mstderr[2m | src/features/courses/components/__tests__/SessionStudents.test.tsx[2m > [22m[2mSessionStudents Premium Gating[2m > [22m[2mshould show 'Classroom' location for a Premium user
+[22m[39mreact-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next { code: [32m'NO_I18NEXT_INSTANCE'[39m }
+
+ [31m❯[39m src/features/courses/components/__tests__/SessionStudents.test.tsx [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 2053[2mms[22m[39m
+[31m     [31m×[31m should show 'Classroom' location for a Premium user[39m[33m 1037[2mms[22m[39m
+[31m     [31m×[31m should show 'N/A' location for a standard Free user[39m[33m 1013[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/features/courses/components/__tests__/SessionStudents.test.tsx[2m > [22mSessionStudents Premium Gating[2m > [22mshould show 'Classroom' location for a Premium user
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: Classroom. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col h-full bg-white"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3 px-4 py-3 border-b border-gray-200"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"skeleton-shimmer"[39m
+          [33mstyle[39m=[32m"width: 24px; height: 24px; border-radius: 50%;"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 180px; height: 14px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer mt-1"[39m
+            [33mstyle[39m=[32m"width: 120px; height: 10px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-2 py-2 space-y-3"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 34%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col h-full bg-white"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3 px-4 py-3 border-b border-gray-200"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"skeleton-shimmer"[39m
+          [33mstyle[39m=[32m"width: 24px; height: 24px; border-radius: 50%;"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 180px; height: 14px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer mt-1"[39m
+            [33mstyle[39m=[32m"width: 120px; height: 10px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-2 py-2 space-y-3"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 34%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2m❯[22m src/features/courses/components/__tests__/SessionStudents.test.tsx:[2m98:25[22m[39m
+    [90m 96| [39m
+    [90m 97| [39m    [90m// Since it's < 200m distance, we expect "Classroom"[39m
+    [90m 98| [39m    [34mexpect[39m([35mawait[39m screen[33m.[39m[34mfindByText[39m([32m"Classroom"[39m))[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+    [90m   | [39m                        [31m^[39m
+    [90m 99| [39m    [90m// It should not show "N/A"[39m
+    [90m100| [39m    [34mexpect[39m(screen[33m.[39m[34mqueryByText[39m([32m"N/A"[39m))[33m.[39mnot[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/features/courses/components/__tests__/SessionStudents.test.tsx[2m > [22mSessionStudents Premium Gating[2m > [22mshould show 'N/A' location for a standard Free user
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: N/A. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col h-full bg-white"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3 px-4 py-3 border-b border-gray-200"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"skeleton-shimmer"[39m
+          [33mstyle[39m=[32m"width: 24px; height: 24px; border-radius: 50%;"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 180px; height: 14px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer mt-1"[39m
+            [33mstyle[39m=[32m"width: 120px; height: 10px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-2 py-2 space-y-3"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 34%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col h-full bg-white"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3 px-4 py-3 border-b border-gray-200"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"skeleton-shimmer"[39m
+          [33mstyle[39m=[32m"width: 24px; height: 24px; border-radius: 50%;"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 180px; height: 14px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer mt-1"[39m
+            [33mstyle[39m=[32m"width: 120px; height: 10px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"px-2 py-2 space-y-3"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 34%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 20%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 25%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 px-2"[39m
+          [33mstyle[39m=[32m"height: 40px;"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 40px; height: 40px; border-radius: 4px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 27%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 15%; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"skeleton-shimmer"[39m
+            [33mstyle[39m=[32m"width: 52px; height: 12px; border-radius: 3px;"[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2m❯[22m src/features/courses/components/__tests__/SessionStudents.test.tsx:[2m114:25[22m[39m
+    [90m112| [39m
+    [90m113| [39m    [90m// Expect N/A instead of the location text[39m
+    [90m114| [39m    [34mexpect[39m([35mawait[39m screen[33m.[39m[34mfindByText[39m([32m"N/A"[39m))[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+    [90m   | [39m                        [31m^[39m
+    [90m115| [39m    [90m// Must not show Classroom[39m
+    [90m116| [39m    [34mexpect[39m(screen[33m.[39m[34mqueryByText[39m([32m"Classroom"[39m))[33m.[39mnot[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Unhandled Errors [49m[22m[31m⎯⎯⎯⎯⎯⎯[39m
+[31m[1m
+Vitest caught 7 unhandled errors during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.[22m[39m
+
+[31m⎯⎯⎯⎯[39m[1m[41m Unhandled Rejection [49m[22m[31m⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.[39m
+[90m [2m❯[22m getRootForUpdatedFiber node_modules/react-dom/cjs/react-dom-client.development.js:[2m4624:11[22m[39m
+[90m [2m❯[22m enqueueConcurrentHookUpdate node_modules/react-dom/cjs/react-dom-client.development.js:[2m4584:14[22m[39m
+[90m [2m❯[22m dispatchSetStateInternal node_modules/react-dom/cjs/react-dom-client.development.js:[2m9167:18[22m[39m
+[90m [2m❯[22m dispatchSetState node_modules/react-dom/cjs/react-dom-client.development.js:[2m9127:7[22m[39m
+[36m [2m❯[22m fetch src/features/courses/components/SessionStudents.tsx:[2m203:9[22m[39m
+    [90m201| [39m        [35mawait[39m [34mgetCourseStudents[39m(courseId)[33m;[39m
+    [90m202| [39m      } [35mfinally[39m {
+    [90m203| [39m        [34msetLoading[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m        [31m^[39m
+    [90m204| [39m      }
+    [90m205| [39m    }
+
+[31mThis error originated in "[1msrc/features/courses/components/__tests__/SessionStudents.test.tsx[22m" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.[39m
+[31mThe latest test that might've caused the error is "[1mshould show 'Classroom' location for a Premium user[22m". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.[39m
+
+[31m⎯⎯⎯⎯[39m[1m[41m Unhandled Rejection [49m[22m[31m⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.[39m
+[90m [2m❯[22m getRootForUpdatedFiber node_modules/react-dom/cjs/react-dom-client.development.js:[2m4624:11[22m[39m
+[90m [2m❯[22m enqueueConcurrentHookUpdate node_modules/react-dom/cjs/react-dom-client.development.js:[2m4584:14[22m[39m
+[90m [2m❯[22m dispatchSetStateInternal node_modules/react-dom/cjs/react-dom-client.development.js:[2m9167:18[22m[39m
+[90m [2m❯[22m dispatchSetState node_modules/react-dom/cjs/react-dom-client.development.js:[2m9127:7[22m[39m
+[36m [2m❯[22m fetch src/features/courses/components/SessionStudents.tsx:[2m203:9[22m[39m
+    [90m201| [39m        [35mawait[39m [34mgetCourseStudents[39m(courseId)[33m;[39m
+    [90m202| [39m      } [35mfinally[39m {
+    [90m203| [39m        [34msetLoading[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m        [31m^[39m
+    [90m204| [39m      }
+    [90m205| [39m    }
+
+[31mThis error originated in "[1msrc/features/courses/components/__tests__/SessionStudents.test.tsx[22m" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.[39m
+[31mThe latest test that might've caused the error is "[1mshould show 'Classroom' location for a Premium user[22m". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.[39m
+
+[31m⎯⎯⎯⎯[39m[1m[41m Unhandled Rejection [49m[22m[31m⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.[39m
+[90m [2m❯[22m getRootForUpdatedFiber node_modules/react-dom/cjs/react-dom-client.development.js:[2m4624:11[22m[39m
+[90m [2m❯[22m enqueueConcurrentHookUpdate node_modules/react-dom/cjs/react-dom-client.development.js:[2m4584:14[22m[39m
+[90m [2m❯[22m dispatchSetStateInternal node_modules/react-dom/cjs/react-dom-client.development.js:[2m9167:18[22m[39m
+[90m [2m❯[22m dispatchSetState node_modules/react-dom/cjs/react-dom-client.development.js:[2m9127:7[22m[39m
+[36m [2m❯[22m fetch src/features/courses/components/SessionStudents.tsx:[2m203:9[22m[39m
+    [90m201| [39m        [35mawait[39m [34mgetCourseStudents[39m(courseId)[33m;[39m
+    [90m202| [39m      } [35mfinally[39m {
+    [90m203| [39m        [34msetLoading[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m        [31m^[39m
+    [90m204| [39m      }
+    [90m205| [39m    }
+
+[31mThis error originated in "[1msrc/features/courses/components/__tests__/SessionStudents.test.tsx[22m" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.[39m
+[31mThe latest test that might've caused the error is "[1mshould show 'Classroom' location for a Premium user[22m". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.[39m
+
+[31m⎯⎯⎯⎯[39m[1m[41m Unhandled Rejection [49m[22m[31m⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.[39m
+[90m [2m❯[22m getRootForUpdatedFiber node_modules/react-dom/cjs/react-dom-client.development.js:[2m4624:11[22m[39m
+[90m [2m❯[22m enqueueConcurrentHookUpdate node_modules/react-dom/cjs/react-dom-client.development.js:[2m4584:14[22m[39m
+[90m [2m❯[22m dispatchSetStateInternal node_modules/react-dom/cjs/react-dom-client.development.js:[2m9167:18[22m[39m
+[90m [2m❯[22m dispatchSetState node_modules/react-dom/cjs/react-dom-client.development.js:[2m9127:7[22m[39m
+[36m [2m❯[22m fetch src/features/courses/components/SessionStudents.tsx:[2m203:9[22m[39m
+    [90m201| [39m        [35mawait[39m [34mgetCourseStudents[39m(courseId)[33m;[39m
+    [90m202| [39m      } [35mfinally[39m {
+    [90m203| [39m        [34msetLoading[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m        [31m^[39m
+    [90m204| [39m      }
+    [90m205| [39m    }
+
+[31mThis error originated in "[1msrc/features/courses/components/__tests__/SessionStudents.test.tsx[22m" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.[39m
+[31mThe latest test that might've caused the error is "[1mshould show 'N/A' location for a standard Free user[22m". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.[39m
+
+[31m⎯⎯⎯⎯[39m[1m[41m Unhandled Rejection [49m[22m[31m⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.[39m
+[90m [2m❯[22m getRootForUpdatedFiber node_modules/react-dom/cjs/react-dom-client.development.js:[2m4624:11[22m[39m
+[90m [2m❯[22m enqueueConcurrentHookUpdate node_modules/react-dom/cjs/react-dom-client.development.js:[2m4584:14[22m[39m
+[90m [2m❯[22m dispatchSetStateInternal node_modules/react-dom/cjs/react-dom-client.development.js:[2m9167:18[22m[39m
+[90m [2m❯[22m dispatchSetState node_modules/react-dom/cjs/react-dom-client.development.js:[2m9127:7[22m[39m
+[36m [2m❯[22m fetch src/features/courses/components/SessionStudents.tsx:[2m203:9[22m[39m
+    [90m201| [39m        [35mawait[39m [34mgetCourseStudents[39m(courseId)[33m;[39m
+    [90m202| [39m      } [35mfinally[39m {
+    [90m203| [39m        [34msetLoading[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m        [31m^[39m
+    [90m204| [39m      }
+    [90m205| [39m    }
+
+[31mThis error originated in "[1msrc/features/courses/components/__tests__/SessionStudents.test.tsx[22m" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.[39m
+[31mThe latest test that might've caused the error is "[1mshould show 'N/A' location for a standard Free user[22m". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.[39m
+
+[31m⎯⎯⎯⎯[39m[1m[41m Unhandled Rejection [49m[22m[31m⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.[39m
+[90m [2m❯[22m getRootForUpdatedFiber node_modules/react-dom/cjs/react-dom-client.development.js:[2m4624:11[22m[39m
+[90m [2m❯[22m enqueueConcurrentHookUpdate node_modules/react-dom/cjs/react-dom-client.development.js:[2m4584:14[22m[39m
+[90m [2m❯[22m dispatchSetStateInternal node_modules/react-dom/cjs/react-dom-client.development.js:[2m9167:18[22m[39m
+[90m [2m❯[22m dispatchSetState node_modules/react-dom/cjs/react-dom-client.development.js:[2m9127:7[22m[39m
+[36m [2m❯[22m fetch src/features/courses/components/SessionStudents.tsx:[2m203:9[22m[39m
+    [90m201| [39m        [35mawait[39m [34mgetCourseStudents[39m(courseId)[33m;[39m
+    [90m202| [39m      } [35mfinally[39m {
+    [90m203| [39m        [34msetLoading[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m        [31m^[39m
+    [90m204| [39m      }
+    [90m205| [39m    }
+
+[31mThis error originated in "[1msrc/features/courses/components/__tests__/SessionStudents.test.tsx[22m" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.[39m
+[31mThe latest test that might've caused the error is "[1mshould show 'N/A' location for a standard Free user[22m". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.[39m
+
+[31m⎯⎯⎯⎯[39m[1m[41m Unhandled Rejection [49m[22m[31m⎯⎯⎯⎯⎯[39m
+[31m[1mError[22m: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.[39m
+[90m [2m❯[22m getRootForUpdatedFiber node_modules/react-dom/cjs/react-dom-client.development.js:[2m4624:11[22m[39m
+[90m [2m❯[22m enqueueConcurrentHookUpdate node_modules/react-dom/cjs/react-dom-client.development.js:[2m4584:14[22m[39m
+[90m [2m❯[22m dispatchSetStateInternal node_modules/react-dom/cjs/react-dom-client.development.js:[2m9167:18[22m[39m
+[90m [2m❯[22m dispatchSetState node_modules/react-dom/cjs/react-dom-client.development.js:[2m9127:7[22m[39m
+[36m [2m❯[22m fetch src/features/courses/components/SessionStudents.tsx:[2m203:9[22m[39m
+    [90m201| [39m        [35mawait[39m [34mgetCourseStudents[39m(courseId)[33m;[39m
+    [90m202| [39m      } [35mfinally[39m {
+    [90m203| [39m        [34msetLoading[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m        [31m^[39m
+    [90m204| [39m      }
+    [90m205| [39m    }
+
+[31mThis error originated in "[1msrc/features/courses/components/__tests__/SessionStudents.test.tsx[22m" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.[39m
+[31mThe latest test that might've caused the error is "[1mshould show 'N/A' location for a standard Free user[22m". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.[39m
+[31m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m     Errors [22m [1m[31m7 errors[39m[22m
+[2m   Start at [22m 11:52:38
+[2m   Duration [22m 4.24s[2m (transform 274ms, setup 320ms, import 884ms, tests 2.05s, environment 815ms)[22m
+

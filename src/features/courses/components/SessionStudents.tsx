@@ -33,6 +33,7 @@ import { ManualCheckInDialog } from "./ManualCheckInDialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { StartSessionDialog } from "@/features/sessions/components/StartSessionDialog";
 import { useNavigate, useParams } from "@tanstack/react-router";
+import { useAuthStore } from "@/features/auth/store/auth.store";
 
 // ---------------------------------------------------------------------------
 // Location status helper — mirrors old app geoService.getLocationStatus
@@ -149,6 +150,7 @@ export function SessionStudents() {
   const checkUncheck = useSessionStore((s) => s.checkUncheck);
   const getCourseStudents = useStudentStore((s) => s.getCourseStudents);
   const allStudents = useStudentStore((s) => s.students) as Student[];
+  const isPremium = useAuthStore((s) => s.user?.plan === "Premium");
 
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -219,6 +221,8 @@ export function SessionStudents() {
         checkinLocation: loc,
         locationStatus: locStatus,
         request: sessionData?.request,
+        checkinSelfie: sessionData?.selfie,
+        checkinReason: sessionData?.reason,
       };
     });
   }, [allStudents, sessionId, course]);
@@ -561,8 +565,29 @@ export function SessionStudents() {
 
                     {/* ── C4 — Check-in method (TEXT, not icon) ── */}
                     <td className="px-4">
-                      {isCheckedIn && methodText ? (
-                        <span className="underline text-gray-700 cursor-pointer">
+                      {student.request ? (
+                        <div
+                          className="text-orange-600 font-medium cursor-help"
+                          title={student.checkinReason ? `Reason: ${student.checkinReason}` : "Late check-in request"}
+                        >
+                          {student.request.charAt(0).toUpperCase() + student.request.slice(1)} late check-in
+                        </div>
+                      ) : isCheckedIn && methodText ? (
+                        <span
+                          className={cn(
+                            "text-gray-700",
+                            student.checkinSelfie ? "underline cursor-pointer hover:text-blue-600" : ""
+                          )}
+                          onClick={(e) => {
+                            if (student.checkinSelfie) {
+                              e.stopPropagation();
+                              setCheckinImage({
+                                url: student.checkinSelfie,
+                                date: student.checkinTime ?? "",
+                              });
+                            }
+                          }}
+                        >
                           {methodText}
                         </span>
                       ) : null}
@@ -570,16 +595,23 @@ export function SessionStudents() {
 
                     {/* ── C5 — Location (icon + text label) ── */}
                     <td className="px-4">
-                      {isCheckedIn && locStatus !== "undetected" ? (
-                        <span
-                          className={cn(
-                            "inline-flex items-center gap-1",
-                            locColor,
-                          )}
-                        >
-                          <MapPin className="h-4 w-4" />
-                          <span>{locText}</span>
-                        </span>
+                      {isCheckedIn ? (
+                        isPremium ? (
+                          locStatus !== "undetected" ? (
+                            <span
+                              className={cn(
+                                "inline-flex items-center gap-1",
+                                locColor,
+                              )}
+                              title={locStatus === "verified" ? "Location check verified" : "Location check failed / beyond limit"}
+                            >
+                              <MapPin className="h-4 w-4" />
+                              <span>{locText}</span>
+                            </span>
+                          ) : null
+                        ) : (
+                          <span className="text-gray-400 font-medium">N/A</span>
+                        )
                       ) : null}
                     </td>
 

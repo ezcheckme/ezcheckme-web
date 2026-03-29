@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAuthStore } from "@/features/auth/store/auth.store";
+import { removeMembersFromAdminGroup } from "@/shared/services/group.service";
+import { handleError } from "@/shared/utils/error.utils";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -106,9 +108,32 @@ export function InstituteMembersDialog({
       `Remove ${selectedIds.size} member(s) from the group?`,
     );
     if (!confirmed) return;
-    // TODO: Call API to remove — for now just remove locally
-    setMembers((prev) => prev.filter((m) => !selectedIds.has(m.hostid)));
-    setSelectedIds(new Set());
+
+    try {
+      const u = user as unknown as Record<string, unknown>;
+      const gd = (u.data as Record<string, unknown>)?.groupData as Record<string, unknown> | undefined;
+      const groupId = gd?._id as string | undefined;
+
+      if (!groupId) {
+        throw new Error("Group ID not found");
+      }
+
+      // Convert selected ids to member objects as expected by backend
+      const membersToRemove = Array.from(selectedIds).map((id) => ({
+        hostid: id,
+      }));
+
+      await removeMembersFromAdminGroup(groupId, membersToRemove);
+      
+      // Removed locally for instant feedback
+      setMembers((prev) => prev.filter((m) => !selectedIds.has(m.hostid)));
+      setSelectedIds(new Set());
+
+      // Refresh host data to get the true latest list
+      await useAuthStore.getState().getHostData();
+    } catch (error) {
+      handleError(error, "handleRemoveSelected", { message: "Failed to remove members" });
+    }
   }
 
   function handleImpersonate(hostId: string) {

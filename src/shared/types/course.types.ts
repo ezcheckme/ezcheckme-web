@@ -56,6 +56,8 @@ export interface Course {
   postCheckinUrl?: PostCheckinUrlData | string;
   /** Whether this is a field/shift check-in course */
   fieldCheckin?: boolean;
+  /** Whether the printable QR code dialog has been shown initially */
+  qrOpened?: boolean;
   /** Faculty / department ID */
   faculty?: string;
   /** Auto-mode room assignment */

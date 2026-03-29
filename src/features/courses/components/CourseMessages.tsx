@@ -20,7 +20,7 @@ export function CourseMessages() {
   const getCourseMessages = useCourseStore((s) => s.getCourseMessages);
   const [messagesLoading, setMessagesLoading] = useState(true);
   const [sendDialogOpen, setSendDialogOpen] = useState(false);
-  const [selectedMessage, setSelectedMessage] = useState<CourseMessage | null>(null);
+  const [selectedMessageId, setSelectedMessageId] = useState<string | null>(null);
 
   const course = courses?.find((c) => c.id === courseId);
   const totalAttendees =
@@ -59,6 +59,17 @@ export function CourseMessages() {
         ? Math.floor((readByCount / totalAttendees) * 1000) / 10
         : 0;
     return `${percentRead}% (${readByCount}/${totalAttendees} Attendees)`;
+  };
+
+  const handleMessageClick = async (msg: CourseMessage) => {
+    const msgId = msg._id || msg.id;
+    if (msgId) {
+      setSelectedMessageId(msgId as string);
+      // Fetch latest read receipts when opening details
+      if (courseId) {
+        getCourseMessages(courseId).catch((err) => console.error("Failed to refresh message details", err));
+      }
+    }
   };
 
   const formatDate = (msg: CourseMessage) => {
@@ -142,15 +153,31 @@ export function CourseMessages() {
           ))}
         </div>
       ) : sortedMessages.length === 0 ? (
-        <div
-          style={{
-            padding: "48px 24px",
-            textAlign: "center",
-            color: "#999",
-            fontSize: 13,
-          }}
-        >
-          No messages yet
+        <div style={{ padding: "48px 24px" }}>
+          <div style={{ maxWidth: 600, margin: "0 auto", backgroundColor: "#f9f9f9", padding: 24, borderRadius: 8, border: "1px solid #eee" }}>
+            <h4 style={{ margin: "0 0 16px 0", fontSize: 16, color: "#333", fontWeight: 600 }}>
+              New in EZCheck.me - Instant Messages!
+            </h4>
+            <p style={{ margin: "0 0 16px 0", fontSize: 14, color: "#666", lineHeight: 1.5 }}>
+              Late for a lesson? Have an important announcement to make? You can now send instant messages to your attendees, and they will be notified about it instantly on their phones*.
+            </p>
+            <p style={{ margin: "0 0 16px 0", fontSize: 14, color: "#666", lineHeight: 1.5 }}>
+              Moreover, each message comes with a read receipt, so you will be able to see who saw your message and who hasn't.
+            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "0 0 24px 0", fontSize: 14, color: "#333" }}>
+              <span>Try it now!</span>
+              <div 
+                style={{ display: "flex", alignItems: "center", gap: 6, color: "#4caf50", cursor: "pointer", fontWeight: 600 }}
+                onClick={() => setSendDialogOpen(true)}
+              >
+                <PlusCircle style={{ width: 18, height: 18 }} />
+                <span style={{ textDecoration: "underline" }}>Send instant message to your attendees</span>
+              </div>
+            </div>
+            <p style={{ margin: 0, fontSize: 12, color: "#999", lineHeight: 1.4, fontStyle: "italic" }}>
+              *The attendees must update the App to the latest version to receive messages. To get notifications, they must allow App notifications.
+            </p>
+          </div>
         </div>
       ) : (
         <div>
@@ -170,7 +197,7 @@ export function CourseMessages() {
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.backgroundColor = "transparent")
                 }
-                onClick={() => setSelectedMessage(msg)}
+                onClick={() => handleMessageClick(msg)}
               >
                 {/* Icon */}
                 <div
@@ -235,9 +262,9 @@ export function CourseMessages() {
       )}
       {/* Message Details Dialog */}
       <MessageDetailsDialog
-        open={!!selectedMessage}
-        onOpenChange={(open) => !open && setSelectedMessage(null)}
-        message={selectedMessage}
+        open={!!selectedMessageId}
+        onOpenChange={(open) => !open && setSelectedMessageId(null)}
+        message={sortedMessages.find((m: CourseMessage) => (m._id || m.id) === selectedMessageId) || null}
         courseId={courseId || ""}
         totalAttendees={totalAttendees}
       />

@@ -22,8 +22,11 @@ import { CourseStudentsMenu } from "./CourseStudentsMenu";
 import { AddStudentDialog } from "./AddStudentDialog";
 import { DeleteStudentsDialog } from "./DeleteStudentsDialog";
 import { ManualCheckInDialog } from "./ManualCheckInDialog";
+import { ImportAttendeesExcelDialog } from "./ImportAttendeesExcelDialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/features/auth/store/auth.store";
+import { PricingDialog } from "@/features/billing/components/PricingDialog";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import type { Student } from "@/shared/types";
 
 export function CourseStudents() {
@@ -42,6 +45,8 @@ export function CourseStudents() {
   const [selected, setSelected] = useState<string[]>([]);
   const [addStudentOpen, setAddStudentOpen] = useState(false);
   const [deleteStudentsOpen, setDeleteStudentsOpen] = useState(false);
+  const [importAttendeesOpen, setImportAttendeesOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [page, setPage] = useState(0);
   const [checkinTarget, setCheckinTarget] = useState<{
@@ -68,13 +73,17 @@ export function CourseStudents() {
   );
 
   const filteredStudents = useMemo(() => {
-    const list = !searchTerm
+        const list = !searchTerm
       ? students
       : students.filter((s) => {
           const term = searchTerm.toLowerCase();
+          const checkPhoneAndId = user?.showAttendeesPhoneAndId;
           return (
             s.name?.toLowerCase().includes(term) ||
-            s.email?.toLowerCase().includes(term)
+            s.email?.toLowerCase().includes(term) ||
+            (checkPhoneAndId &&
+              (s.phone?.toLowerCase().includes(term) ||
+                s.attendeeid?.toLowerCase().includes(term)))
           );
         });
 
@@ -218,6 +227,7 @@ export function CourseStudents() {
             selectedCount={selected.length}
             onAddStudent={() => setAddStudentOpen(true)}
             onDeleteSelected={() => setDeleteStudentsOpen(true)}
+            onUploadList={() => setImportAttendeesOpen(true)}
           >
             <button className="p-1 rounded-full hover:bg-gray-100 text-gray-500">
               <MoreVertical className="h-5 w-5" />
@@ -279,6 +289,16 @@ export function CourseStudents() {
                 <th className="px-3 py-2 text-left font-normal text-xs text-gray-500">
                   First name
                 </th>
+                {user?.showAttendeesPhoneAndId && (
+                  <>
+                    <th className="px-3 py-2 text-left font-normal text-xs text-gray-500">
+                      Phone
+                    </th>
+                    <th className="px-3 py-2 text-left font-normal text-xs text-gray-500">
+                      ID
+                    </th>
+                  </>
+                )}
                 <th
                   className="px-3 py-2 text-center font-normal text-xs text-gray-500"
                   style={{ width: 100 }}
@@ -387,13 +407,57 @@ export function CourseStudents() {
                     >
                       {firstName}
                     </td>
+                    {/* Optional Phone/ID view */}
+                    {user?.showAttendeesPhoneAndId && (
+                      <>
+                        <td
+                          className="px-3 text-gray-700 truncate"
+                          style={{ maxWidth: 190 }}
+                          onClick={() => handleStudentClick(student.id)}
+                        >
+                          {student.phone || ""}
+                        </td>
+                        <td
+                          className="px-3 text-gray-700 truncate"
+                          style={{ maxWidth: 190 }}
+                          onClick={() => handleStudentClick(student.id)}
+                        >
+                          {student.attendeeid || ""}
+                        </td>
+                      </>
+                    )}
                     {/* Attendance Rate */}
                     <td
                       className="px-3 text-center font-medium text-gray-600"
-                      onClick={() => handleStudentClick(student.id)}
+                      onClick={(e) => {
+                        if (!isPremium) {
+                          e.stopPropagation();
+                          setPricingOpen(true);
+                          if (typeof window !== "undefined" && (window as any).gtag) {
+                            (window as any).gtag("event", "click-GetPremium-in-Course-students", {
+                              event_label: "Get Premium",
+                            });
+                          }
+                        } else {
+                          handleStudentClick(student.id);
+                        }
+                      }}
                       style={!isPremium ? { filter: "blur(5px)", userSelect: "none" } : undefined}
                     >
-                      {rate}%
+                      {!isPremium ? (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span>XX%</span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Premium account required. Click for details...</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      ) : (
+                        `${rate}%`
+                      )}
                     </td>
                     {/* Per-session green/red circle icons — matching legacy */}
                     {sessionsCopy.map((session) => {
@@ -509,6 +573,22 @@ export function CourseStudents() {
           onToggleCheckIn={handleToggleCheckIn}
         />
       )}
+
+      {/* Import Attendees Excel Dialog */}
+      {courseId && (
+        <ImportAttendeesExcelDialog
+          courseId={courseId}
+          open={importAttendeesOpen}
+          onOpenChange={setImportAttendeesOpen}
+        />
+      )}
+
+      {/* Pricing Teaser Dialog */}
+      <PricingDialog
+        open={pricingOpen}
+        onOpenChange={setPricingOpen}
+        onContactUs={() => setPricingOpen(false)}
+      />
     </div>
   );
 }

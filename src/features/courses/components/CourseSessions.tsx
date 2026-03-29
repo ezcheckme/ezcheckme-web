@@ -21,6 +21,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useCourseStore } from "../store/course.store";
 import { useSessionStore } from "../store/session.store";
+import { createFutureSession } from "@/shared/services/session.service";
 
 import {
   DropdownMenu,
@@ -190,9 +191,18 @@ export function CourseSessions() {
     _mergeCourseId: string,
     _method: "AND" | "OR",
   ) {
-    // TODO: Call merge sessions API
-    if (courseId) {
-      getCourseSessions(courseId);
+    if (!courseId) return;
+    try {
+      await useSessionStore.getState().mergeSessions({
+        toId: _targetSessionId,
+        fromIds: _sessionIds,
+        courseId: _mergeCourseId,
+        method: _method,
+      });
+      setShowMergeSessions(false);
+      setSelectedIds(new Set());
+    } catch (err) {
+      console.error("Failed to merge sessions:", err);
     }
   }
 
@@ -530,9 +540,41 @@ export function CourseSessions() {
         open={showImportSessions}
         onOpenChange={setShowImportSessions}
         courseName={course?.name || ""}
-        onImport={async (sessions) => {
-          // TODO: implement session import API call
-          void sessions;
+        onImport={async (importedSessions) => {
+          if (!courseId || !course) return;
+          let hasError = false;
+          
+          for (const s of importedSessions) {
+            try {
+              const sessionDate = new Date(s.date);
+              const [hours, minutes, seconds = 0] = s.time.split(":").map(Number);
+              sessionDate.setHours(hours, minutes, seconds);
+
+              await createFutureSession({
+                course: course,
+                name: s.name,
+                date: sessionDate.getTime(),
+                description: "",
+                duration: 7, // Default duration if reg length is missing
+                icongroup: "category-academy",
+                ivrEnabled: course.ivrenabled,
+                iconQuizEnabled: course.iconQuizEnabled ?? true,
+                qrinterval: course.qrinterval ?? 4,
+                location: course.location || {},
+              });
+            } catch (err) {
+              console.error(`Failed to import session ${s.name}:`, err);
+              hasError = true;
+            }
+          }
+
+          // Refresh the sessions list once after all imports
+          await getCourseSessions(courseId);
+          
+          if (hasError) {
+            // Ideally notify user, but component closes and resolves anyway
+            console.warn("Some sessions failed to import.");
+          }
         }}
       />
       <ConfirmationDialog

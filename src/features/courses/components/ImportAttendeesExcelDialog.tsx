@@ -7,7 +7,7 @@
 
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import readXlsxFile from "read-excel-file/web";
+import readXlsxFile from "read-excel-file/browser";
 import {
   Loader2,
   UploadCloud,
@@ -141,11 +141,15 @@ export function ImportAttendeesExcelDialog({
       }
       processExcelData(data);
     } catch (err: any) {
-      console.error(err);
-      setError(
-        err.message ||
-          "Invalid or empty file. Please upload a valid Excel file.",
-      );
+      console.error("Excel import error:", err);
+      let errorMessage = err.message || "Invalid or empty file.";
+      
+      // Provide user-friendly error for non-XLSX files uploaded (which get parsed as bad zips by fflate)
+      if (errorMessage.toLowerCase().includes("zip") || errorMessage.toLowerCase().includes("corrupt")) {
+        errorMessage = "Invalid Excel file. Please upload a valid .xlsx file.";
+      }
+
+      setError(errorMessage);
       setLoading(false);
     }
   }

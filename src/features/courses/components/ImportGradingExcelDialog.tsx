@@ -11,7 +11,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import readXlsxFile from "read-excel-file/web";
+import readXlsxFile from "read-excel-file/browser";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import {
