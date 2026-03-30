@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { FieldCheckinBar } from "./FieldCheckinBar";
 import { areDatesOnSameDay } from "../../utils/field-course.utils";
 import type { StudentData } from "../../utils/field-course.utils";
-import type { FieldCheckin } from "@/shared/types";
+import type { FieldCheckin, Course } from "@/shared/types";
 
 interface DataCellProps {
   checkins: FieldCheckin[];
@@ -14,6 +14,7 @@ interface DataCellProps {
   isToday: boolean;
   endWeek: boolean;
   endMonth: boolean;
+  course?: Course;
 }
 
 export function DataCellComp({
@@ -22,6 +23,7 @@ export function DataCellComp({
   isToday,
   endWeek,
   endMonth,
+  course,
 }: DataCellProps) {
   const cellRef = useRef<HTMLTableCellElement>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
@@ -76,6 +78,7 @@ export function DataCellComp({
                 student={student}
                 cellWidth={dims.w}
                 cellHeight={dims.h}
+                course={course}
               />
             </div>
           ))

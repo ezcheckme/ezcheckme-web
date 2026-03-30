@@ -475,6 +475,7 @@ export function FieldCourseStudents() {
                       isToday={isToday}
                       endWeek={endWeek}
                       endMonth={endMonth_}
+                      course={course}
                     />
                   );
                 })}

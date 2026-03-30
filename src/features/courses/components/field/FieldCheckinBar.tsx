@@ -7,13 +7,14 @@ import { useState, useRef } from "react";
 import { ShiftTooltip } from "./ShiftTooltip";
 import { theme } from "@/config/theme";
 import type { StudentData } from "../../utils/field-course.utils";
-import type { FieldCheckin } from "@/shared/types";
+import type { FieldCheckin, Course } from "@/shared/types";
 
 interface FieldCheckinBarProps {
   checkin: FieldCheckin;
   student: StudentData;
   cellWidth: number;
   cellHeight: number;
+  course?: Course;
 }
 
 const BAR_MIN_WIDTH = 4;
@@ -36,6 +37,7 @@ export function FieldCheckinBar({
   student,
   cellWidth,
   cellHeight,
+  course,
 }: FieldCheckinBarProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
@@ -89,21 +91,35 @@ export function FieldCheckinBar({
     >
       {showTooltip && barRef.current && (
         <div
+          onMouseEnter={() => {
+            if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+          }}
+          onMouseLeave={() => {
+            leaveTimerRef.current = setTimeout(
+              () => setShowTooltip(false),
+              300,
+            );
+          }}
           style={{
             position: "fixed",
             zIndex: 10000,
             top: (() => {
               const rect = barRef.current!.getBoundingClientRect();
               const isUpperHalf = rect.top < window.innerHeight * 0.5;
-              // left-start: align top of tooltip with top of bar
-              // left-end: tooltip appears above the bar
               return isUpperHalf ? rect.top : rect.bottom - 8;
             })(),
-            left: barRef.current.getBoundingClientRect().left - 370,
-            pointerEvents: "none",
+            left: (() => {
+              const rect = barRef.current!.getBoundingClientRect();
+              const tooltipWidth = 408;
+              // Try to position to the left of the bar
+              const leftPos = rect.left - tooltipWidth;
+              // If it would go off-screen left, position to the right instead
+              return leftPos < 0 ? rect.right + 8 : leftPos;
+            })(),
+            pointerEvents: "auto",
           }}
         >
-          <ShiftTooltip checkin={checkin} student={student} />
+          <ShiftTooltip checkin={checkin} student={student} course={course} />
         </div>
       )}
     </div>
