@@ -5,14 +5,13 @@
  * year, term, postCheckinUrl, IVR, lockDynamicAddingAttendees,
  * sessionStartNotificationEnabled.
  *
- * Conditional fields are shown/hidden based on user data flags,
- * exactly matching the old app's behavior.
+ * Shared form primitives extracted to CourseFormPrimitives.tsx.
  */
 
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Loader2, Save, HelpCircle, MapPin } from "lucide-react";
+import { Loader2, Save, MapPin } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -20,12 +19,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useCourseStore } from "../../courses/store/course.store";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { COURSE_TYPES } from "@/config/constants";
@@ -33,205 +26,17 @@ import { PostCheckInUrlDialog } from "./PostCheckInUrlDialog";
 import { LocationSetupDialog } from "./LocationSetupDialog";
 import { CourseTemplates } from "./CourseTemplates";
 import type { CourseTemplate } from "@/shared/types";
-
-// ---------------------------------------------------------------------------
-// Constants matching old app
-// ---------------------------------------------------------------------------
-
-const LANGUAGES = [
-  { value: "en", label: "English", icon: "format_textdirection_l_to_r" },
-  { value: "es", label: "Spanish", icon: "format_textdirection_l_to_r" },
-  { value: "pl", label: "Polish", icon: "format_textdirection_l_to_r" },
-  { value: "he", label: "עברית", icon: "format_textdirection_r_to_l" },
-];
-
-const currentYear = new Date().getFullYear();
-const years = [currentYear, currentYear + 1];
-
-// Term groups matching old app's getMenuItems() with i18n keys
-const TERM_GROUPS = [
-  {
-    label: "Semesters",
-    items: ["Semester A", "Semester B", "Summer Semester"],
-  },
-  {
-    label: "Trimesters",
-    items: ["Trimester 1", "Trimester 2", "Trimester 3"],
-  },
-  {
-    label: "Quarters",
-    items: ["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"],
-  },
-  {
-    label: "Seasonal Semesters",
-    items: ["Fall Semester", "Spring Semester", "Winter Semester"],
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Helper: HelpIcon tooltip
-// ---------------------------------------------------------------------------
-
-function HelpIcon({ tooltip }: { tooltip: string }) {
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger type="button" tabIndex={-1}>
-          <HelpCircle className="w-[14px] h-[14px] text-gray-500 ml-1 inline-block" />
-        </TooltipTrigger>
-        <TooltipContent>
-          <p className="text-xs">{tooltip}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Floating label input/select wrappers matching EditCourseDialog MUI style
-// ---------------------------------------------------------------------------
-
-function FloatingInput({
-  label,
-  value,
-  onChange,
-  required,
-  autoFocus,
-  maxLength,
-  disabled,
-  error,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  required?: boolean;
-  autoFocus?: boolean;
-  maxLength?: number;
-  disabled?: boolean;
-  error?: string;
-}) {
-  const hasValue = value.length > 0;
-  const isFocusedOrFilled = hasValue || autoFocus;
-  return (
-    <div className="relative">
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        autoFocus={autoFocus}
-        maxLength={maxLength}
-        disabled={disabled}
-        className={`w-full h-14 px-3 pt-4 pb-1 text-[16px] border ${error ? "border-red-500" : "border-gray-300"} rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
-      />
-      <label
-        className={`absolute left-3 pointer-events-none transition-all bg-white px-1 ${
-          isFocusedOrFilled
-            ? "-top-2 text-[12px] text-gray-500"
-            : "top-4 text-[16px] text-gray-500"
-        }`}
-      >
-        {label}
-        {required ? " *" : ""}
-      </label>
-      {error && <p className="text-xs text-red-500 mt-1 ml-1">{error}</p>}
-    </div>
-  );
-}
-
-function FloatingSelect({
-  label,
-  value,
-  onChange,
-  children,
-  icon,
-}: {
-  label: string;
-  value: string | number;
-  onChange: (v: string) => void;
-  children: React.ReactNode;
-  icon?: React.ReactNode;
-}) {
-  return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] appearance-none"
-        style={icon ? { paddingLeft: 40 } : undefined}
-      >
-        {children}
-      </select>
-      <label className="absolute left-3 -top-2 text-[12px] text-gray-500 bg-white px-1 pointer-events-none">
-        {label}
-      </label>
-      {icon && (
-        <div className="absolute left-3 top-4 text-gray-400 pointer-events-none">
-          {icon}
-        </div>
-      )}
-      <div className="absolute right-4 top-5 pointer-events-none text-gray-500">
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M7 10l5 5 5-5z" />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Checkbox matching old app style
-// ---------------------------------------------------------------------------
-
-function LegacyCheckbox({
-  checked,
-  onChange,
-  label,
-  tooltip,
-  disabled,
-}: {
-  checked: boolean;
-  onChange: (v: boolean) => void;
-  label: string;
-  tooltip: string;
-  disabled?: boolean;
-}) {
-  return (
-    <label
-      className={`flex items-center gap-2 cursor-pointer ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
-    >
-      <div
-        className={`w-5 h-5 rounded-[2px] border flex items-center justify-center transition-colors ${checked ? "bg-[var(--color-secondary)] border-[var(--color-secondary)]" : "border-gray-400"}`}
-      >
-        {checked && (
-          <svg
-            className="w-4 h-4 text-white"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth="3"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        )}
-      </div>
-      <input
-        type="checkbox"
-        className="hidden"
-        checked={checked}
-        disabled={disabled}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <span className="text-[15px] text-gray-600 flex items-center">
-        {label}
-        <HelpIcon tooltip={tooltip} />
-      </span>
-    </label>
-  );
-}
+import {
+  FloatingInput,
+  FloatingSelect,
+  LegacyCheckbox,
+  LanguageIcon,
+  LANGUAGES,
+  YEARS,
+  TERM_GROUPS,
+  validateCourseName,
+  validateCourseDescription,
+} from "./CourseFormPrimitives";
 
 // ---------------------------------------------------------------------------
 // Main Component
@@ -242,6 +47,8 @@ interface AddCourseDialogProps {
   onOpenChange: (open: boolean) => void;
   courseType?: string;
 }
+
+const currentYear = new Date().getFullYear();
 
 export function AddCourseDialog({
   open,
@@ -351,17 +158,6 @@ export function AddCourseDialog({
     }
   }
 
-  // --- Validation (matching old app's Formsy rules) ---
-  const validateName = (val: string) => {
-    if (val.length > 0 && val.length < 3) return t("edit course - invalid name") || "Must be at least 3 characters";
-    return "";
-  };
-
-  const validateDescription = (val: string) => {
-    if (val.length > 0 && val.length < 3) return t("edit course - invalid name") || "Must be at least 3 characters";
-    return "";
-  };
-
   const isValid =
     name.trim().length >= 3 &&
     !nameError &&
@@ -404,7 +200,7 @@ export function AddCourseDialog({
       });
       onOpenChange(false);
       if (newCourseId) {
-        navigate({ to: `/courses/${newCourseId}` as any });
+        navigate({ to: `/courses/${newCourseId}` as string });
       }
     } catch (error) {
       console.error("Failed to create course:", error);
@@ -448,7 +244,7 @@ export function AddCourseDialog({
                 value={name}
                 onChange={(v) => {
                   setName(v);
-                  setNameError(validateName(v));
+                  setNameError(validateCourseName(v));
                 }}
                 required
                 autoFocus
@@ -483,7 +279,7 @@ export function AddCourseDialog({
                 value={description}
                 onChange={(v) => {
                   setDescription(v);
-                  setDescError(validateDescription(v));
+                  setDescError(validateCourseDescription(v));
                 }}
                 error={descError}
               />
@@ -493,21 +289,7 @@ export function AddCourseDialog({
                 label={t("edit course - language") || "Language"}
                 value={language}
                 onChange={setLanguage}
-                icon={
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                    />
-                  </svg>
-                }
+                icon={<LanguageIcon />}
               >
                 {LANGUAGES.map((lang) => (
                   <option key={lang.value} value={lang.value}>
@@ -574,7 +356,7 @@ export function AddCourseDialog({
                 value={year}
                 onChange={(v) => setYear(Number(v))}
               >
-                {years.map((y) => (
+                {YEARS.map((y) => (
                   <option key={y} value={y}>
                     {y}
                   </option>

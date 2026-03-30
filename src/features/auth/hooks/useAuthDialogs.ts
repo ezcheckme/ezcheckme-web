@@ -4,7 +4,7 @@
  * Replaces the 6 useEffect triggers in legacy Home.js.
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "@tanstack/react-router";
 import { useAuthStore } from "../store/auth.store";
 import { USER_ROLES } from "@/config/constants";
@@ -33,21 +33,13 @@ export function useAuthDialogs() {
     code: "",
   });
 
-  const [prevPathname, setPrevPathname] = useState(location.pathname);
-  const [prevIsAuth, setPrevIsAuth] = useState(isAuthenticated);
-
-  // Route-based triggers
-  if (location.pathname !== prevPathname || isAuthenticated !== prevIsAuth) {
-    setPrevPathname(location.pathname);
-    setPrevIsAuth(isAuthenticated);
-
+  useEffect(() => {
     const path = location.pathname;
 
     if (path === "/login" && !isAuthenticated) {
       setGatewayOpen(false);
       setDialog({ open: true, step: "login", email: "", code: "" });
     } else if (path === "/signup" && !isAuthenticated) {
-      // Open gateway first
       setGatewayOpen(true);
       setDialog({ open: false, step: "signup", email: "", code: "" });
     } else if (path === "/forgot") {
@@ -56,19 +48,17 @@ export function useAuthDialogs() {
       path.startsWith("/verify/") &&
       !path.startsWith("/verify-password/")
     ) {
-      // /verify/:email/:code
       const segments = path.split("/");
       const email = decodeURIComponent(segments[2] || "");
       const code = decodeURIComponent(segments[3] || "");
       setDialog({ open: true, step: "verify", email, code });
     } else if (path.startsWith("/verify-password/")) {
-      // /verify-password/:email/:code
       const segments = path.split("/");
       const email = decodeURIComponent(segments[2] || "");
       const code = decodeURIComponent(segments[3] || "");
       setDialog({ open: true, step: "change-password", email, code });
     }
-  }
+  }, [location.pathname, isAuthenticated]);
 
   const openAuth = (step: AuthStep = "login", skipGateway = false) => {
     if (step === "signup" && !skipGateway) {
@@ -102,3 +92,4 @@ export function useAuthDialogs() {
     setGatewayOpen,
   };
 }
+

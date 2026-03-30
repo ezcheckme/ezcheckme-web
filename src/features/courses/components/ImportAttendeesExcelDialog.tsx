@@ -3,6 +3,8 @@
  * Replaces old ImportAttendeesExcelDialog.js (450 lines).
  * Handles reading XLSX files, mapping columns, validating phones/emails,
  * and bulk adding students via student.store.
+ *
+ * Validation logic extracted to ../utils/import.utils.ts
  */
 
 import React, { useState, useRef } from "react";
@@ -26,6 +28,10 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useStudentStore } from "../store/student.store";
+import {
+  validateAttendeeExcelData,
+  COLUMN_DEFINITIONS,
+} from "../utils/import.utils";
 
 interface ImportAttendeesExcelDialogProps {
   open: boolean;
@@ -33,59 +39,6 @@ interface ImportAttendeesExcelDialogProps {
   courseId: string;
   courseName?: string;
 }
-
-const COLUMN_DEFINITIONS = [
-  {
-    key: "firstName",
-    labels: ["first name", "given name", "personal name", "first", "שם פרטי"],
-  },
-  {
-    key: "lastName",
-    labels: ["last name", "family name", "surname", "last", "שם משפחה"],
-  },
-  {
-    key: "email",
-    labels: [
-      "email",
-      "mail",
-      "e-mail",
-      "email address",
-      "electronic mail",
-      "דואר אלקטרוני",
-      'דוא"ל',
-    ],
-  },
-  {
-    key: "countryCode",
-    labels: ["country code", "dial code", "country prefix", "קוד מדינה"],
-  },
-  {
-    key: "phoneNumber",
-    labels: [
-      "phone number",
-      "mobile",
-      "phone",
-      "cell phone",
-      "telephone",
-      "נייד",
-      "טלפון נייד",
-      "מספר נייד",
-    ],
-  },
-  {
-    key: "id",
-    labels: [
-      "id",
-      "id number",
-      "identity number",
-      "identity card",
-      "student id",
-      "ת.ז.",
-      "תעודת זהות",
-      "מספר מזהה",
-    ],
-  },
-];
 
 export function ImportAttendeesExcelDialog({
   open,
@@ -101,7 +54,7 @@ export function ImportAttendeesExcelDialog({
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [rows, setRows] = useState<any[]>([]); // parsed valid rows
+  const [rows, setRows] = useState<string[][]>([]);
   const [showPreview, setShowPreview] = useState(false);
 
   const [importing, setImporting] = useState(false);
@@ -136,162 +89,33 @@ export function ImportAttendeesExcelDialog({
 
     try {
       const data = await readXlsxFile(file);
-      if (!data || data.length < 2) {
-        throw new Error("No data rows found in the file.");
+      const result = validateAttendeeExcelData(data);
+
+      if (result.error) {
+        setError(result.error);
+        setLoading(false);
+        return;
       }
-      processExcelData(data);
-    } catch (err: any) {
+
+      setRows(result.validRows);
+      setShowPreview(true);
+      setLoading(false);
+    } catch (err: unknown) {
       console.error("Excel import error:", err);
-      let errorMessage = err.message || "Invalid or empty file.";
-      
-      // Provide user-friendly error for non-XLSX files uploaded (which get parsed as bad zips by fflate)
-      if (errorMessage.toLowerCase().includes("zip") || errorMessage.toLowerCase().includes("corrupt")) {
+      let errorMessage =
+        err instanceof Error ? err.message : "Invalid or empty file.";
+
+      // Provide user-friendly error for non-XLSX files (which get parsed as bad zips by fflate)
+      if (
+        errorMessage.toLowerCase().includes("zip") ||
+        errorMessage.toLowerCase().includes("corrupt")
+      ) {
         errorMessage = "Invalid Excel file. Please upload a valid .xlsx file.";
       }
 
       setError(errorMessage);
       setLoading(false);
     }
-  }
-
-  function processExcelData(data: any[]) {
-    const headerRow = data[0].map((c: any) =>
-      String(c || "")
-        .trim()
-        .toLowerCase(),
-    );
-    const dataRows = data.slice(1);
-
-    const colMap: Record<string, number> = {};
-    const missingColumns: string[] = [];
-    let isCountryCodeMissing = false;
-
-    // Detect columns
-    COLUMN_DEFINITIONS.forEach((def) => {
-      const idx = headerRow.findIndex((h: string) => def.labels.includes(h));
-      if (idx === -1) {
-        if (def.key === "countryCode") {
-          isCountryCodeMissing = true;
-        } else {
-          missingColumns.push(def.labels[0]);
-        }
-      } else {
-        colMap[def.key] = idx;
-      }
-    });
-
-    if (missingColumns.length > 0) {
-      setError(`Missing required columns: ${missingColumns.join(", ")}`);
-      setLoading(false);
-      return;
-    }
-
-    // Default country extraction heuristic (if missing)
-    let defaultCountryCode = "1"; // Default to US
-    if (isCountryCodeMissing) {
-      const firstNameHeader = String(data[0][colMap["firstName"]]);
-      const isHebrew = /[\u0590-\u05FF]/.test(firstNameHeader);
-      defaultCountryCode = isHebrew ? "972" : "1";
-    }
-
-    // Check duplicate mappings
-    const indices = Object.values(colMap);
-    if (new Set(indices).size !== indices.length) {
-      setError(
-        "Duplicate column mappings detected. Each required column must be unique.",
-      );
-      setLoading(false);
-      return;
-    }
-
-    const validRows: any[] = [];
-
-    // Validate each row
-    for (let i = 0; i < dataRows.length; i++) {
-      const row = dataRows[i];
-      const normalizedRow = COLUMN_DEFINITIONS.map((def) => {
-        if (def.key === "countryCode" && isCountryCodeMissing) {
-          return defaultCountryCode;
-        }
-        return row[colMap[def.key]];
-      });
-
-      // Avoid fully empty rows at the end of excel files
-      if (
-        normalizedRow.every(
-          (val) => val === null || val === undefined || val === "",
-        )
-      ) {
-        continue;
-      }
-
-      // Check missing data
-      if (
-        normalizedRow.some(
-          (val) => val === undefined || val === null || val === "",
-        )
-      ) {
-        setError(`Missing data in one or more columns in line ${i + 2}.`);
-        setLoading(false);
-        return;
-      }
-
-      const email = String(normalizedRow[2]);
-      const emailRegex =
-        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-      if (!emailRegex.test(email)) {
-        setError(`Invalid email "${email}" provided in line ${i + 2}.`);
-        setLoading(false);
-        return;
-      }
-
-      // Format country code
-      normalizedRow[3] = String(normalizedRow[3] || "").replace(/[^0-9]/g, "");
-      if (normalizedRow[3].length < 1) {
-        setError(`No country code detected in line ${i + 2}.`);
-        setLoading(false);
-        return;
-      }
-
-      // Format phone
-      normalizedRow[4] = String(normalizedRow[4] || "").replace(/[^0-9]/g, "");
-      if (normalizedRow[4].length < 6) {
-        setError(`Illegal phone number in line ${i + 2}.`);
-        setLoading(false);
-        return;
-      }
-
-      // Validate name
-      if (
-        String(normalizedRow[0]).trim().length < 1 ||
-        String(normalizedRow[1]).trim().length < 1
-      ) {
-        setError(
-          `Valid first and last name must be provided in line ${i + 2}.`,
-        );
-        setLoading(false);
-        return;
-      }
-
-      // Valid ID
-      if (String(normalizedRow[5]).trim().length < 1) {
-        setError(`Attendee ID number must be provided in line ${i + 2}.`);
-        setLoading(false);
-        return;
-      }
-
-      validRows.push(normalizedRow);
-    } // end for loop
-
-    if (validRows.length === 0) {
-      setError("No valid rows found to import.");
-      setLoading(false);
-      return;
-    }
-
-    setRows(validRows);
-    setShowPreview(true);
-    setLoading(false);
   }
 
   async function handleImport() {
@@ -305,7 +129,7 @@ export function ImportAttendeesExcelDialog({
       );
 
       const newStudentData = {
-        name: `${student[0]} ${student[1]}`, // Combine first and last name
+        name: `${student[0]} ${student[1]}`,
         email: student[2],
         studentId: String(student[5]),
         phone: `+${student[3]}${String(student[4]).startsWith("0") ? student[4].substring(1) : student[4]}`,
@@ -458,7 +282,7 @@ export function ImportAttendeesExcelDialog({
                 <tbody className="divide-y">
                   {rows.slice(0, 100).map((row, i) => (
                     <tr key={i} className="hover:bg-gray-50">
-                      {row.map((cell: any, cIdx: number) => (
+                      {row.map((cell: string, cIdx: number) => (
                         <td
                           key={cIdx}
                           className="px-4 py-2 text-gray-800 truncate max-w-[150px]"

@@ -1,3 +1,8 @@
+/**
+ * Edit Course Dialog — update an existing course.
+ * Shared form primitives imported from CourseFormPrimitives.tsx.
+ */
+
 import { useState, useEffect } from "react";
 import { useCourseStore } from "@/features/courses/store/course.store";
 import { useAuthStore } from "@/features/auth/store/auth.store";
@@ -9,14 +14,17 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { HelpCircle, Save, MapPin } from "lucide-react";
+import { Save, MapPin } from "lucide-react";
 import { LocationSetupDialog } from "./LocationSetupDialog";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  FloatingInput,
+  FloatingSelect,
+  LegacyCheckbox,
+  LanguageIcon,
+  LANGUAGES,
+  YEARS,
+  TERM_GROUPS,
+} from "./CourseFormPrimitives";
 
 type EditCourseDialogProps = {
   course: Course | null;
@@ -24,10 +32,7 @@ type EditCourseDialogProps = {
   onOpenChange: (open: boolean) => void;
 };
 
-// Mock terms array based on legacy
-const terms = ["Semester A", "Semester B", "Summer Semester"];
 const currentYear = new Date().getFullYear();
-const years = [currentYear, currentYear + 1];
 
 export function EditCourseDialog({
   course,
@@ -39,7 +44,7 @@ export function EditCourseDialog({
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [language, setLanguage] = useState("he"); // default hebrew per screenshot
+  const [language, setLanguage] = useState("he");
   const [location, setLocation] = useState<{
     latLng?: { lat: number; lng: number };
     locationText?: string;
@@ -71,11 +76,14 @@ export function EditCourseDialog({
       setDescription(course.description || "");
       setLanguage(course.language || "he");
       // Restore location object from course data
-      const loc = course.location as any;
+      const loc = course.location as Record<string, unknown> | undefined;
       if (loc?.latLng) {
-        setLocation({ latLng: loc.latLng, locationText: loc.locationText || loc.address || "" });
+        setLocation({
+          latLng: loc.latLng as { lat: number; lng: number },
+          locationText: (loc.locationText as string) || (loc.address as string) || "",
+        });
       } else if (loc?.address) {
-        setLocation({ locationText: loc.address });
+        setLocation({ locationText: loc.address as string });
       } else {
         setLocation({});
       }
@@ -85,8 +93,12 @@ export function EditCourseDialog({
       // postCheckinUrl can be an object {message, url} or a string
       const pcUrl = course.postCheckinUrl;
       if (pcUrl && typeof pcUrl === "object") {
-        setPostCheckinMessage((pcUrl as { message: string; url: string }).message || "");
-        setPostCheckinLink((pcUrl as { message: string; url: string }).url || "");
+        setPostCheckinMessage(
+          (pcUrl as { message: string; url: string }).message || "",
+        );
+        setPostCheckinLink(
+          (pcUrl as { message: string; url: string }).url || "",
+        );
       } else {
         setPostCheckinMessage(typeof pcUrl === "string" ? pcUrl : "");
         setPostCheckinLink("");
@@ -94,11 +106,14 @@ export function EditCourseDialog({
       setIvrEnabled(course.ivrenabled || false);
       // Room — init from course or first user room
       if (showRoom) {
-        setRoom((course as any).room || user?.autoModeRooms?.[0] || "");
+        setRoom(
+          ((course as unknown as Record<string, unknown>).room as string) ||
+          user?.autoModeRooms?.[0] ||
+          "",
+        );
       }
-      // Ensure defaults if missing from mock backend
     }
-  }, [course, open]);
+  }, [course, open, showRoom, user?.autoModeRooms]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -112,15 +127,21 @@ export function EditCourseDialog({
         description,
         language,
         location: location.latLng
-          ? { latLng: location.latLng, locationText: location.locationText, address: location.locationText }
+          ? {
+              latLng: location.latLng,
+              locationText: location.locationText,
+              address: location.locationText,
+            }
           : undefined,
         internalid,
         year,
         term,
-        postCheckinUrl: postCheckinMessage ? { message: postCheckinMessage, url: postCheckinLink } : undefined,
+        postCheckinUrl: postCheckinMessage
+          ? { message: postCheckinMessage, url: postCheckinLink }
+          : undefined,
         ivrenabled: ivrEnabled,
         room: room || undefined,
-      } as any);
+      } as Parameters<typeof updateCourse>[0]);
       onOpenChange(false);
     } catch (error) {
       console.error("Failed to update course", error);
@@ -129,19 +150,6 @@ export function EditCourseDialog({
       setLoading(false);
     }
   };
-
-  const HelpIcon = ({ tooltip }: { tooltip: string }) => (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger type="button" tabIndex={-1}>
-          <HelpCircle className="w-[14px] h-[14px] text-gray-500 ml-1" />
-        </TooltipTrigger>
-        <TooltipContent>
-          <p className="text-xs">{tooltip}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -154,125 +162,45 @@ export function EditCourseDialog({
 
         <form onSubmit={handleSubmit} className="px-6 pb-6 pt-2">
           <div className="flex flex-col gap-5">
-            {/* Templates */}
-            <div className="relative">
-              <select
-                className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] appearance-none cursor-pointer"
-                defaultValue=""
-              >
-                <option value="" disabled>
-                  Templates...
-                </option>
-                {/* Options would go here */}
-              </select>
-              <label className="absolute left-3 top-2 text-[12px] text-gray-500 bg-white px-1 pointer-events-none transition-all">
-                Templates...
-              </label>
-              <div className="absolute right-4 top-5 pointer-events-none text-gray-500">
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7 10l5 5 5-5z" />
-                </svg>
-              </div>
-            </div>
-
             {/* Course Name */}
-            <div className="relative mt-2">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-[var(--color-secondary)] rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)]"
-                required
-              />
-              <label className="absolute left-3 -top-2 text-[12px] text-[var(--color-secondary)] bg-white px-1 pointer-events-none transition-all">
-                Course Name *
-              </label>
-            </div>
+            <FloatingInput
+              label="Course Name"
+              value={name}
+              onChange={setName}
+              required
+              autoFocus
+            />
 
             {/* Course Description */}
-            <div className="relative">
-              <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)]"
-              />
-              <label className="absolute left-3 top-4 text-[16px] text-gray-500 pointer-events-none transition-all origin-left transform -translate-y-[1.4rem] scale-[0.75] bg-white px-1">
-                Course Description
-              </label>
-            </div>
+            <FloatingInput
+              label="Course Description"
+              value={description}
+              onChange={setDescription}
+            />
 
             {/* Language */}
-            <div className="relative">
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                className="w-full h-14 px-10 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] appearance-none"
-              >
-                <option value="en">English</option>
-                <option value="he">עברית</option>
-                <option value="ar">العربية</option>
-              </select>
-              <label className="absolute left-3 top-4 text-[16px] text-gray-500 pointer-events-none transition-all origin-left transform -translate-y-[1.4rem] scale-[0.75] bg-white px-1">
-                Language
-              </label>
-              <div className="absolute left-3 top-4 text-gray-400">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                  />
-                </svg>
-              </div>
-              <div className="absolute right-4 top-5 pointer-events-none text-gray-500">
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7 10l5 5 5-5z" />
-                </svg>
-              </div>
-            </div>
+            <FloatingSelect
+              label="Language"
+              value={language}
+              onChange={setLanguage}
+              icon={<LanguageIcon />}
+            >
+              {LANGUAGES.map((lang) => (
+                <option key={lang.value} value={lang.value}>
+                  {lang.label}
+                </option>
+              ))}
+            </FloatingSelect>
 
             {/* Room (conditional — only if user has autoMode with rooms) */}
             {showRoom && (
-              <div className="relative">
-                <select
-                  value={room}
-                  onChange={(e) => setRoom(e.target.value)}
-                  className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] appearance-none"
-                >
-                  {user?.autoModeRooms?.map((r) => (
-                    <option key={r} value={r}>
-                      {r}
-                    </option>
-                  ))}
-                </select>
-                <label className="absolute left-3 -top-2 text-[12px] text-gray-500 bg-white px-1 pointer-events-none">
-                  Room
-                </label>
-                <div className="absolute right-4 top-5 pointer-events-none text-gray-500">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M7 10l5 5 5-5z" />
-                  </svg>
-                </div>
-              </div>
+              <FloatingSelect label="Room" value={room} onChange={setRoom}>
+                {user?.autoModeRooms?.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </FloatingSelect>
             )}
 
             {/* Course Location — clicks open LocationSetupDialog */}
@@ -287,9 +215,7 @@ export function EditCourseDialog({
                   readOnly
                   className="w-full h-14 px-3 pr-20 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent cursor-pointer"
                   style={
-                    location.locationText
-                      ? { paddingLeft: 40 }
-                      : undefined
+                    location.locationText ? { paddingLeft: 40 } : undefined
                   }
                 />
                 <label className="absolute left-3 -top-2 text-[12px] text-gray-500 bg-white px-1 pointer-events-none">
@@ -305,71 +231,38 @@ export function EditCourseDialog({
             )}
 
             {/* Course ID */}
-            <div className="relative">
-              <input
-                type="text"
-                value={internalid}
-                onChange={(e) => setInternalid(e.target.value)}
-                className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)]"
-              />
-              <label className="absolute left-3 top-4 text-[16px] text-gray-500 pointer-events-none transition-all origin-left transform -translate-y-[1.4rem] scale-[0.75] bg-white px-1">
-                Course ID
-              </label>
-            </div>
+            <FloatingInput
+              label="Course ID"
+              value={internalid}
+              onChange={setInternalid}
+            />
 
             {/* Year */}
-            <div className="relative">
-              <select
-                value={year}
-                onChange={(e) => setYear(Number(e.target.value))}
-                className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] appearance-none"
-              >
-                {years.map((y) => (
-                  <option key={y} value={y}>
-                    {y}
-                  </option>
-                ))}
-              </select>
-              <label className="absolute left-3 top-4 text-[16px] text-gray-500 pointer-events-none transition-all origin-left transform -translate-y-[1.4rem] scale-[0.75] bg-white px-1">
-                Year
-              </label>
-              <div className="absolute right-4 top-5 pointer-events-none text-gray-500">
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7 10l5 5 5-5z" />
-                </svg>
-              </div>
-            </div>
+            <FloatingSelect
+              label="Year"
+              value={year}
+              onChange={(v) => setYear(Number(v))}
+            >
+              {YEARS.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </FloatingSelect>
 
             {/* Term */}
-            <div className="relative">
-              <select
-                value={term}
-                onChange={(e) => setTerm(e.target.value)}
-                className="w-full h-14 px-3 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)] appearance-none"
-              >
-                {terms.map((t) => (
-                  <option key={t} value={t}>
-                    • {t}
-                  </option>
-                ))}
-              </select>
-              <label className="absolute left-3 top-4 text-[16px] text-gray-500 pointer-events-none transition-all origin-left transform -translate-y-[1.4rem] scale-[0.75] bg-white px-1">
-                Term
-              </label>
-              <div className="absolute right-4 top-5 pointer-events-none text-gray-500">
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7 10l5 5 5-5z" />
-                </svg>
-              </div>
-            </div>
+            <FloatingSelect label="Term" value={term} onChange={setTerm}>
+              {TERM_GROUPS.map((group) => (
+                <optgroup key={group.label} label={group.label}>
+                  {group.items.map((item) => (
+                    <option key={`${group.label}-${item}`} value={item}>
+                      • {item}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+              <option value="Other">Other</option>
+            </FloatingSelect>
 
             {/* Post check-in message */}
             <div className="relative">
@@ -380,7 +273,7 @@ export function EditCourseDialog({
                 className="w-full h-14 px-3 pr-20 pt-4 pb-1 text-[16px] border border-gray-300 rounded-[4px] bg-transparent focus:outline-none focus:border-[var(--color-secondary)] focus:ring-1 focus:ring-[var(--color-secondary)]"
                 placeholder="Post Check-In Message..."
               />
-              <label className="absolute left-3 top-4 text-[16px] text-gray-500 pointer-events-none transition-all origin-left transform -translate-y-[1.4rem] scale-[0.75] bg-white px-1">
+              <label className="absolute left-3 -top-2 text-[12px] text-gray-500 bg-white px-1 pointer-events-none">
                 Post check-in message
               </label>
               <button
@@ -393,103 +286,24 @@ export function EditCourseDialog({
 
             {/* Checkboxes */}
             <div className="flex flex-col gap-2 mt-2">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <div
-                  className={`w-5 h-5 rounded-[2px] border flex items-center justify-center transition-colors ${ivrEnabled ? "bg-[var(--color-secondary)] border-[var(--color-secondary)]" : "border-gray-400"}`}
-                >
-                  {ivrEnabled && (
-                    <svg
-                      className="w-4 h-4 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="3"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  )}
-                </div>
-                <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={ivrEnabled}
-                  onChange={(e) => setIvrEnabled(e.target.checked)}
-                />
-                <span className="text-[15px] text-gray-600 flex items-center">
-                  Allow IVR Check-in (לבעלי טלפונים כשרים)
-                  <HelpIcon tooltip="Allow students to check-in via IVR phone system" />
-                </span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer">
-                <div
-                  className={`w-5 h-5 rounded-[2px] border flex items-center justify-center transition-colors ${lockCourse ? "bg-[var(--color-secondary)] border-[var(--color-secondary)]" : "border-gray-400"}`}
-                >
-                  {lockCourse && (
-                    <svg
-                      className="w-4 h-4 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="3"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  )}
-                </div>
-                <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={lockCourse}
-                  onChange={(e) => setLockCourse(e.target.checked)}
-                />
-                <span className="text-[15px] text-gray-600 flex items-center">
-                  Lock course
-                  <HelpIcon tooltip="Prevent new students from joining this course" />
-                </span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer">
-                <div
-                  className={`w-5 h-5 rounded-[2px] border flex items-center justify-center transition-colors ${enableSessionStartNotifications ? "bg-[var(--color-secondary)] border-[var(--color-secondary)]" : "border-gray-400"}`}
-                >
-                  {enableSessionStartNotifications && (
-                    <svg
-                      className="w-4 h-4 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="3"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  )}
-                </div>
-                <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={enableSessionStartNotifications}
-                  onChange={(e) =>
-                    setEnableSessionStartNotifications(e.target.checked)
-                  }
-                />
-                <span className="text-[15px] text-gray-600 flex items-center">
-                  Enable session start notifications
-                  <HelpIcon tooltip="Send notifications when a session begins" />
-                </span>
-              </label>
+              <LegacyCheckbox
+                checked={ivrEnabled}
+                onChange={setIvrEnabled}
+                label="Allow IVR Check-in (לבעלי טלפונים כשרים)"
+                tooltip="Allow students to check-in via IVR phone system"
+              />
+              <LegacyCheckbox
+                checked={lockCourse}
+                onChange={setLockCourse}
+                label="Lock course"
+                tooltip="Prevent new students from joining this course"
+              />
+              <LegacyCheckbox
+                checked={enableSessionStartNotifications}
+                onChange={setEnableSessionStartNotifications}
+                label="Enable session start notifications"
+                tooltip="Send notifications when a session begins"
+              />
             </div>
           </div>
 

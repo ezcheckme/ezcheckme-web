@@ -1,20 +1,9 @@
-/**
- * Session Students view — ALL course attendees with per-session check-in status.
- * Matches old app element-for-element:
- *   Header: ← All Sessions | Info bar | Search | Resume session...
- *   Table:  Attendee (avatar+name) | Check-in time (✅/❌ + date/"Check-in...") |
- *           Check-in method (text) | Location (icon + text)
- *   Footer: Previous/Next Session links | Rows per Page pagination
- */
-
 import { useEffect, useState, useMemo, startTransition } from "react";
 import {
   ArrowLeft,
   Search,
   Play,
   X,
-  Users,
-  MapPin,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -34,100 +23,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { StartSessionDialog } from "@/features/sessions/components/StartSessionDialog";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useAuthStore } from "@/features/auth/store/auth.store";
-
-// ---------------------------------------------------------------------------
-// Location status helper — mirrors old app geoService.getLocationStatus
-// ---------------------------------------------------------------------------
-function getLocationStatus(
-  location: any,
-  course: any,
-): "verified" | "remote" | "undetected" {
-  if (!location) return "undetected";
-  if (!location.latLng) return "undetected";
-  if (isNaN(location.distance)) return "undetected";
-  if (location.distance < 0) return "undetected";
-  // Derive tolerance: course.fieldCheckinRadius || user.fieldCheckinRadius || 200m default
-  const tolerance = course?.fieldCheckinRadius ?? 200;
-  if (location.distance > tolerance) return "remote";
-  return "verified";
-}
-
-/** Map location status → display label like old app */
-function locationLabel(status: "verified" | "remote" | "undetected") {
-  switch (status) {
-    case "verified":
-      return "Classroom";
-    case "remote":
-      return "Remote";
-    default:
-      return "";
-  }
-}
-
-/** Map method string → translated text like old app's i18n */
-function checkinMethodText(method?: string) {
-  if (!method) return "";
-  switch (method.toUpperCase()) {
-    case "QR":
-      return "QR scan";
-    case "MANUAL":
-      return "Manual";
-    case "GPS":
-      return "GPS";
-    case "SELFIE":
-      return "Selfie";
-    case "CODE":
-      return "Code";
-    case "LATE_REQUEST":
-      return "Late check-in";
-    default:
-      return method;
-  }
-}
-
-// ---------------------------------------------------------------------------
-// ✅/❌ Circle icon — matches old app XVicon
-// ---------------------------------------------------------------------------
-function XVIcon({
-  checked,
-  request,
-}: {
-  checked: boolean;
-  request?: string;
-}) {
-  // Derive icon type (same logic as old x-v-icon.js)
-  let color: string;
-  let symbol: React.ReactNode;
-
-  if (request === "pending") {
-    color = "#da8806";
-    symbol = "?";
-  } else if (request === "denied" || (!checked && !request)) {
-    color = "#8d181b";
-    symbol = <X className="h-2.5 w-2.5" strokeWidth={3} />;
-  } else {
-    color = "#58B947";
-    symbol = "✓";
-  }
-
-  return (
-    <span
-      className="inline-flex items-center justify-center shrink-0"
-      style={{
-        width: 18,
-        height: 18,
-        borderRadius: "50%",
-        backgroundColor: color,
-        color: "#fff",
-        fontSize: 11,
-        fontWeight: 700,
-        lineHeight: 1,
-      }}
-    >
-      {symbol}
-    </span>
-  );
-}
+import { useSessionAttendeesStats } from "../hooks/useSessionAttendeesStats";
+import { useStudentTable } from "../hooks/useStudentTable";
+import { SessionStudentsTable } from "./SessionStudentsTable";
 
 // ---------------------------------------------------------------------------
 // Component
@@ -153,9 +51,7 @@ export function SessionStudents() {
   const isPremium = useAuthStore((s) => s.user?.plan === "Premium");
 
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
+  
   const [checkinImage, setCheckinImage] = useState<{
     url: string;
     date: string | number;
@@ -207,57 +103,30 @@ export function SessionStudents() {
   }, [courseId, getCourseStudents]);
 
   // Derive check-in status per student from student.sessions[sessionId]
-  const studentsWithStatus = useMemo(() => {
-    if (!sessionId || !allStudents) return [];
-    return allStudents.map((s) => {
-      const sessionData = s.sessions?.[sessionId];
-      const loc = sessionData?.location;
-      const locStatus = getLocationStatus(loc, course);
-      return {
-        ...s,
-        checkedIn: !!(sessionData?.time),
-        checkinTime: sessionData?.time,
-        checkinMethod: sessionData?.method,
-        checkinLocation: loc,
-        locationStatus: locStatus,
-        request: sessionData?.request,
-        checkinSelfie: sessionData?.selfie,
-        checkinReason: sessionData?.reason,
-      };
-    });
-  }, [allStudents, sessionId, course]);
-
-  const checkedInCount = useMemo(
-    () => studentsWithStatus.filter((s) => s.checkedIn).length,
-    [studentsWithStatus],
+  const { studentsWithStatus, checkedInCount, attendanceRate } = useSessionAttendeesStats(
+    allStudents || [],
+    sessionId,
+    course
   );
 
-  const attendanceRate = useMemo(() => {
-    const maxAttendance = course?.maxattendance;
-    if (!maxAttendance || !checkedInCount) return 0;
-    return Math.round((checkedInCount / maxAttendance) * 100);
-  }, [course, checkedInCount]);
+  // Pagination & Filtering state management
+  const {
+    searchTerm,
+    setSearchTerm,
+    page,
+    setPage,
+    rowsPerPage,
+    setRowsPerPage,
+    paginatedData: pagedStudents,
+    totalItems: totalStudents,
+    startItem: startRow,
+    endItem: endRow,
+  } = useStudentTable({
+    data: studentsWithStatus,
+    sortAlphabetically: false, 
+  });
 
-  // Search filter
-  const filteredStudents = useMemo(() => {
-    if (!searchTerm) return studentsWithStatus;
-    const term = searchTerm.toLowerCase();
-    return studentsWithStatus.filter((s) =>
-      s.name?.toLowerCase().includes(term),
-    );
-  }, [studentsWithStatus, searchTerm]);
-
-  // Pagination
-  const totalStudents = filteredStudents.length;
-  const pagedStudents = useMemo(() => {
-    const start = page * rowsPerPage;
-    return filteredStudents.slice(start, start + rowsPerPage);
-  }, [filteredStudents, page, rowsPerPage]);
-
-  // Reset page on search/data change
-  useEffect(() => {
-    setPage(0);
-  }, [searchTerm, studentsWithStatus.length]);
+  const maxPage = Math.max(0, Math.ceil(totalStudents / rowsPerPage) - 1);
 
   function handleBack() {
     if (courseId) {
@@ -332,11 +201,6 @@ export function SessionStudents() {
 
   const locationText = session?.location?.locationText;
 
-  // Pagination range text
-  const startRow = totalStudents > 0 ? page * rowsPerPage + 1 : 0;
-  const endRow = Math.min((page + 1) * rowsPerPage, totalStudents);
-  const maxPage = Math.max(0, Math.ceil(totalStudents / rowsPerPage) - 1);
-
   return (
     <div className="flex flex-col h-full bg-white">
       {/* ═══ A1 — Back link ═══════════════════════════════════ */}
@@ -394,16 +258,13 @@ export function SessionStudents() {
 
       {/* ═══ A3 Search + A4 Resume session ════════════════════ */}
       <div className="flex items-center justify-between px-4 py-1.5">
-        {/* A3 — Search (right side in old app, but here we keep flex order) */}
         <div className="flex-1" />
         <div className="relative">
           <input
             type="text"
             placeholder="Search"
             value={searchTerm}
-            onChange={(e) =>
-              startTransition(() => setSearchTerm(e.target.value))
-            }
+            onChange={(e) => startTransition(() => setSearchTerm(e.target.value))}
             className={cn(
               "w-[200px] border-b border-gray-300 bg-white py-1 pr-7 text-sm text-gray-800",
               "placeholder:text-gray-400 focus:border-accent focus:outline-none transition-colors",
@@ -422,7 +283,7 @@ export function SessionStudents() {
         </div>
       </div>
 
-      {/* ═══ Resume session — right-aligned, above table ══════ */}
+      {/* ═══ Resume session ══════ */}
       <div className="flex justify-end px-4 pb-1">
         <button
           onClick={() => setResumeDialogOpen(true)}
@@ -434,202 +295,32 @@ export function SessionStudents() {
       </div>
 
       {/* ═══ TABLE ════════════════════════════════════════════ */}
-      {pagedStudents.length === 0 ? (
-        <div className="flex flex-col items-center gap-2 py-16 text-center flex-1">
-          <Users className="h-8 w-8 text-gray-300" />
-          <p className="text-sm text-gray-500">
-            {studentsWithStatus.length === 0
-              ? "No attendees enrolled"
-              : "No matching students"}
-          </p>
-        </div>
-      ) : (
-        <div className="overflow-x-auto flex-1">
-          <table className="w-full text-sm" style={{ tableLayout: 'fixed' }}>
-            <colgroup>
-              <col style={{ width: '30%' }} />
-              <col style={{ width: '28%' }} />
-              <col style={{ width: '22%' }} />
-              <col style={{ width: '18%' }} />
-              <col style={{ width: '2%' }} />
-            </colgroup>
-            {/* ── B1-B4 Headers (normal case, matching old app) ── */}
-            <thead>
-              <tr style={{ borderBottom: "1px solid rgba(0,0,0,0.2)" }}>
-                <th className="px-4 py-2 text-left font-normal text-gray-600">
-                  Attendee
-                </th>
-                <th className="px-4 py-2 text-left font-normal text-gray-600">
-                  Check-in time
-                </th>
-                <th className="px-4 py-2 text-left font-normal text-gray-600">
-                  Check-in method
-                </th>
-                <th className="px-4 py-2 text-left font-normal text-gray-600">
-                  Location
-                </th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {pagedStudents.map((student) => {
-                const isCheckedIn = student.checkedIn;
-                const methodText = checkinMethodText(student.checkinMethod);
-                const locStatus = student.locationStatus;
-                const locText = locationLabel(locStatus);
-                const locColor =
-                  locStatus === "verified"
-                    ? "text-green-600"
-                    : locStatus === "remote"
-                      ? "text-red-500"
-                      : "text-gray-400";
-
-                return (
-                  <tr
-                    key={student.id}
-                    onClick={() => handleStudentClick(student.id)}
-                    className="cursor-pointer hover:bg-gray-50 transition-colors"
-                    style={{
-                      height: 48,
-                      borderBottom: "1px solid rgba(0,0,0,0.08)",
-                    }}
-                  >
-                    {/* ── C1/D1 — Avatar + Name ── */}
-                    <td className="px-4">
-                      <div className="flex items-center gap-2">
-                        <img
-                          width={40}
-                          height={40}
-                          className="shrink-0 object-cover"
-                          style={{ borderRadius: 2 }}
-                          src={
-                            student.picture ||
-                            "/assets/images/icons/profile.jpg"
-                          }
-                          alt="avatar"
-                          onError={(e) => {
-                            const img = e.target as HTMLImageElement;
-                            if (!img.src.endsWith('/assets/images/icons/profile.jpg')) {
-                              img.src = '/assets/images/icons/profile.jpg';
-                            }
-                          }}
-                        />
-                        <span className="text-gray-800">
-                          {student.name}
-                        </span>
-                      </div>
-                    </td>
-
-                    {/* ── C3/D3 — Check-in time ── */}
-                    <td className="px-4">
-                      <div
-                        className="flex items-center gap-2 cursor-pointer"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCheckinStudent({
-                            id: student.id,
-                            name: student.name,
-                            email: student.email,
-                            attendee_manual: student.attendee_manual,
-                            sessionData: student.sessions?.[sessionId!] ?? null,
-                          });
-                        }}
-                      >
-                        {/* ✅ or ❌ icon */}
-                        <XVIcon
-                          checked={isCheckedIn}
-                          request={student.request}
-                        />
-                        {isCheckedIn ? (
-                          <span className="text-gray-700">
-                            {student.checkinTime
-                              ? new Date(
-                                  student.checkinTime,
-                                ).toLocaleString("en-US", {
-                                  year: "numeric",
-                                  month: "short",
-                                  day: "numeric",
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: false,
-                                })
-                              : "—"}
-                          </span>
-                        ) : (
-                          <span className="text-blue-600 underline hover:text-blue-800 text-sm">
-                            Check-in...
-                          </span>
-                        )}
-                      </div>
-                    </td>
-
-                    {/* ── C4 — Check-in method (TEXT, not icon) ── */}
-                    <td className="px-4">
-                      {student.request ? (
-                        <div
-                          className="text-orange-600 font-medium cursor-help"
-                          title={student.checkinReason ? `Reason: ${student.checkinReason}` : "Late check-in request"}
-                        >
-                          {student.request.charAt(0).toUpperCase() + student.request.slice(1)} late check-in
-                        </div>
-                      ) : isCheckedIn && methodText ? (
-                        <span
-                          className={cn(
-                            "text-gray-700",
-                            student.checkinSelfie ? "underline cursor-pointer hover:text-blue-600" : ""
-                          )}
-                          onClick={(e) => {
-                            if (student.checkinSelfie) {
-                              e.stopPropagation();
-                              setCheckinImage({
-                                url: student.checkinSelfie,
-                                date: student.checkinTime ?? "",
-                              });
-                            }
-                          }}
-                        >
-                          {methodText}
-                        </span>
-                      ) : null}
-                    </td>
-
-                    {/* ── C5 — Location (icon + text label) ── */}
-                    <td className="px-4">
-                      {isCheckedIn ? (
-                        isPremium ? (
-                          locStatus !== "undetected" ? (
-                            <span
-                              className={cn(
-                                "inline-flex items-center gap-1",
-                                locColor,
-                              )}
-                              title={locStatus === "verified" ? "Location check verified" : "Location check failed / beyond limit"}
-                            >
-                              <MapPin className="h-4 w-4" />
-                              <span>{locText}</span>
-                            </span>
-                          ) : null
-                        ) : (
-                          <span className="text-gray-400 font-medium">N/A</span>
-                        )
-                      ) : null}
-                    </td>
-
-                    <td />
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <SessionStudentsTable
+        students={pagedStudents}
+        isPremium={isPremium}
+        onStudentClick={handleStudentClick}
+        onCheckinClick={(_, student) => {
+          setCheckinStudent({
+            id: student.id,
+            name: student.name,
+            email: student.email,
+            attendee_manual: student.attendee_manual,
+            sessionData: student.sessions?.[sessionId!] ?? null,
+          });
+        }}
+        onSelfieClick={(_, student) => {
+          setCheckinImage({
+            url: student.checkinSelfie!,
+            date: student.checkinTime ?? "",
+          });
+        }}
+      />
 
       {/* ═══ E — FOOTER ══════════════════════════════════════ */}
       <div
         className="flex items-center justify-between px-4 py-2 border-t border-gray-200 text-sm shrink-0"
         style={{ minHeight: 48 }}
       >
-        {/* E1/E2 — Previous / Next Session links */}
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigateSession("prev")}
@@ -653,21 +344,19 @@ export function SessionStudents() {
           </button>
         </div>
 
-        {/* E3 — Rows per Page + pagination */}
         <div className="flex items-center gap-3 text-gray-600">
           <span>Rows per Page</span>
           <select
             value={rowsPerPage}
             onChange={(e) => {
               setRowsPerPage(Number(e.target.value));
-              setPage(0);
             }}
             className="border border-gray-300 rounded px-1 py-0.5 text-sm bg-white"
           >
             {[10, 25, 50, 100].map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
+               <option key={n} value={n}>
+                 {n}
+               </option>
             ))}
           </select>
           <span className="text-gray-500">
@@ -739,7 +428,6 @@ export function SessionStudents() {
           if (!courseId || !sessionId || !checkinStudent) return;
 
           if (action === "approve" || action === "deny") {
-            // Late check-in request: update the request status
             const updatedStudent = allStudents.find(s => s.id === checkinStudent.id);
             if (updatedStudent?.sessions?.[sessionId]) {
               updatedStudent.sessions[sessionId].request = action === "approve" ? "approved" : "denied";

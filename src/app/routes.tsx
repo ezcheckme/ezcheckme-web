@@ -270,52 +270,58 @@ const rootRoute = createRootRoute({
 
 // -- Public routes --
 
-const indexRoute = createRoute({
+import { Outlet } from "@tanstack/react-router";
+
+const LazyHomePage = withLazyPage(HomePage);
+
+const homeLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
+  id: "home-layout",
+  component: () => (
+    <LazyHomePage>
+      <Outlet />
+    </LazyHomePage>
+  ),
+});
+
+const indexRoute = createRoute({
+  getParentRoute: () => homeLayoutRoute,
   path: "/",
-  component: withLazyPage(HomePage),
 });
 
 const homeRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => homeLayoutRoute,
   path: "/home",
-  component: withLazyPage(HomePage),
 });
 
 const loginRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => homeLayoutRoute,
   path: "/login",
-  component: withLazyPage(HomePage),
 });
 
 const signupRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => homeLayoutRoute,
   path: "/signup",
-  component: withLazyPage(HomePage),
 });
 
 const forgotRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => homeLayoutRoute,
   path: "/forgot",
-  component: withLazyPage(HomePage),
 });
 
 const verifyRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => homeLayoutRoute,
   path: "/verify/$email/$code",
-  component: withLazyPage(HomePage),
 });
 
 const verifyPasswordRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => homeLayoutRoute,
   path: "/verify-password/$email/$code",
-  component: withLazyPage(HomePage),
 });
 
 const referralRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => homeLayoutRoute,
   path: "/referral/$code",
-  component: withLazyPage(HomePage),
 });
 
 const pricingRoute = createRoute({
@@ -659,14 +665,16 @@ const wDownloadRoute = createRoute({
 // ---------------------------------------------------------------------------
 
 const routeTree = rootRoute.addChildren([
-  indexRoute,
-  homeRoute,
-  loginRoute,
-  signupRoute,
-  forgotRoute,
-  verifyRoute,
-  verifyPasswordRoute,
-  referralRoute,
+  homeLayoutRoute.addChildren([
+    indexRoute,
+    homeRoute,
+    loginRoute,
+    signupRoute,
+    forgotRoute,
+    verifyRoute,
+    verifyPasswordRoute,
+    referralRoute,
+  ]),
   pricingRoute,
   termsRoute,
   privacyRoute,

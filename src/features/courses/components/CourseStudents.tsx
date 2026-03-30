@@ -1,19 +1,10 @@
 /**
  * Course Students tab view — matches legacy CourseStudents.js.
  * Table with columns: Checkbox | Last Name (avatar) | First Name | Attendance Rate | 1..N session ✓/✗
- *
- * Legacy key behaviors:
- * - Sessions reversed to show oldest→newest as columns 1..N
- * - Each session column header is the index (1, 2, 3...)
- * - Tooltip on session column header shows session name + date
- * - Green/red circle icons for each student×session cell
- * - Attendance rate = sessions attended / total sessions × 100
- * - "Attendees (N)" header with three-dot menu
- * - Pagination footer with "Rows per Page 25" + "N-M of T"
  */
 
-import { useEffect, useState, useMemo, startTransition } from "react";
-import { Search, Users, MoreVertical } from "lucide-react";
+import { useEffect, useState, useMemo } from "react";
+import { Search, Users, MoreVertical, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCourseStore } from "../store/course.store";
 import { useStudentStore } from "../store/student.store";
 import { useSessionStore } from "../store/session.store";
@@ -26,8 +17,9 @@ import { ImportAttendeesExcelDialog } from "./ImportAttendeesExcelDialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { PricingDialog } from "@/features/billing/components/PricingDialog";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import type { Student } from "@/shared/types";
+import { useStudentTable } from "../hooks/useStudentTable";
+import { CourseStudentRow } from "./CourseStudentRow";
 
 export function CourseStudents() {
   const courseId = useCourseStore((s) => s.courseId);
@@ -41,14 +33,12 @@ export function CourseStudents() {
   const user = useAuthStore((s) => s.user);
   const isPremium = user?.plan === "Premium";
 
-  const [searchTerm, setSearchTerm] = useState("");
   const [selected, setSelected] = useState<string[]>([]);
   const [addStudentOpen, setAddStudentOpen] = useState(false);
   const [deleteStudentsOpen, setDeleteStudentsOpen] = useState(false);
   const [importAttendeesOpen, setImportAttendeesOpen] = useState(false);
   const [pricingOpen, setPricingOpen] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
-  const [page, setPage] = useState(0);
+
   const [checkinTarget, setCheckinTarget] = useState<{
     student: Student;
     sessionId: string;
@@ -72,41 +62,24 @@ export function CourseStudents() {
     [sessions],
   );
 
-  const filteredStudents = useMemo(() => {
-        const list = !searchTerm
-      ? students
-      : students.filter((s) => {
-          const term = searchTerm.toLowerCase();
-          const checkPhoneAndId = user?.showAttendeesPhoneAndId;
-          return (
-            s.name?.toLowerCase().includes(term) ||
-            s.email?.toLowerCase().includes(term) ||
-            (checkPhoneAndId &&
-              (s.phone?.toLowerCase().includes(term) ||
-                s.attendeeid?.toLowerCase().includes(term)))
-          );
-        });
-
-    // Sort alphabetically by last name, then first name
-    return [...list].sort((a, b) => {
-      const aLast = (a.lastName || a.name?.split(" ").pop() || "").toLowerCase();
-      const bLast = (b.lastName || b.name?.split(" ").pop() || "").toLowerCase();
-      if (aLast !== bLast) return aLast.localeCompare(bLast);
-      const aFirst = (a.firstName || a.name?.split(" ").slice(0, -1).join(" ") || "").toLowerCase();
-      const bFirst = (b.firstName || b.name?.split(" ").slice(0, -1).join(" ") || "").toLowerCase();
-      return aFirst.localeCompare(bFirst);
-    });
-  }, [students, searchTerm]);
-
-  // Pagination
-  const totalItems = filteredStudents.length;
-  const totalPages = Math.ceil(totalItems / rowsPerPage);
-  const paginatedStudents = filteredStudents.slice(
-    page * rowsPerPage,
-    (page + 1) * rowsPerPage,
-  );
-  const startItem = totalItems > 0 ? page * rowsPerPage + 1 : 0;
-  const endItem = Math.min((page + 1) * rowsPerPage, totalItems);
+  const {
+    searchTerm,
+    setSearchTerm,
+    page,
+    setPage,
+    rowsPerPage,
+    setRowsPerPage,
+    paginatedData: paginatedStudents,
+    filteredData: filteredStudents,
+    totalItems,
+    totalPages,
+    startItem,
+    endItem,
+  } = useStudentTable({
+    data: students,
+    sortAlphabetically: true,
+    filterByPhoneAndId: user?.showAttendeesPhoneAndId ?? false,
+  });
 
   function handleStudentClick(studentId: string) {
     if (courseId) {
@@ -183,16 +156,24 @@ export function CourseStudents() {
     );
   }
 
+  function handlePricingClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    setPricingOpen(true);
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "click-GetPremium-in-Course-students", {
+        event_label: "Get Premium",
+      });
+    }
+  }
+
   if (loading) {
     return (
       <div className="flex flex-col h-full">
-        {/* Skeleton toolbar */}
         <div className="flex items-center gap-3 px-4 py-2 border-b" style={{ borderColor: "rgba(0,0,0,0.12)" }}>
           <Skeleton width={160} height={20} borderRadius={3} />
           <div className="flex-1" />
           <Skeleton width={160} height={24} borderRadius={3} />
         </div>
-        {/* Skeleton rows */}
         <div className="px-2 py-2 space-y-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="flex items-center gap-3 px-2" style={{ height: 36 }}>
@@ -243,7 +224,7 @@ export function CourseStudents() {
             type="text"
             placeholder="Search"
             value={searchTerm}
-            onChange={(e) => startTransition(() => setSearchTerm(e.target.value))}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full border-b border-gray-300 pb-1 text-sm focus:outline-none focus:border-blue-500 transition-colors pr-6"
           />
           <Search className="absolute right-0 bottom-2 h-4 w-4 text-gray-600" />
@@ -327,172 +308,20 @@ export function CourseStudents() {
               </tr>
             </thead>
             <tbody>
-              {paginatedStudents.map((student) => {
-                // Parse name into first/last
-                const firstName =
-                  student.firstName ||
-                  (student.name
-                    ? student.name.split(" ").slice(0, -1).join(" ")
-                    : "");
-                const lastName =
-                  student.lastName ||
-                  (student.name ? student.name.split(" ").pop() : "Unknown");
-
-                // Calculate attendance rate from sessions
-                const studentSessions = student.sessions || {};
-                const attendedCount = sessionsCopy.filter((s) => {
-                  const entry = studentSessions[s.id];
-                  return (
-                    entry &&
-                    entry.request !== "pending" &&
-                    entry.request !== "denied"
-                  );
-                }).length;
-                const rate =
-                  sessionsCopy.length > 0
-                    ? Math.round((attendedCount / sessionsCopy.length) * 100)
-                    : 0;
-
-                const isSelected = selected.includes(student.id);
-
-                return (
-                  <tr
-                    key={student.id}
-                    className="cursor-pointer hover:bg-gray-50 transition-colors"
-                    style={{
-                      height: 36,
-                      borderBottom: "1px solid rgba(0,0,0,0.08)",
-                    }}
-                  >
-                    {/* Checkbox */}
-                    <td
-                      className="px-2 text-center"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300"
-                        checked={isSelected}
-                        onChange={() => handleItemChecked(student.id)}
-                      />
-                    </td>
-                    {/* Last Name with avatar */}
-                    <td
-                      className="px-3"
-                      onClick={() => handleStudentClick(student.id)}
-                    >
-                      <div className="flex items-center gap-1.5">
-                        <img
-                          src={
-                            student.picture ||
-                            "/assets/images/icons/profile.jpg"
-                          }
-                          alt=""
-                          className="h-7 w-7 rounded-full object-cover shrink-0"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src =
-                              "/assets/images/icons/profile.jpg";
-                          }}
-                        />
-                        <span className="text-gray-700 truncate">
-                          {lastName}
-                        </span>
-                      </div>
-                    </td>
-                    {/* First Name */}
-                    <td
-                      className="px-3 text-gray-700 truncate"
-                      style={{ maxWidth: 190 }}
-                      onClick={() => handleStudentClick(student.id)}
-                    >
-                      {firstName}
-                    </td>
-                    {/* Optional Phone/ID view */}
-                    {user?.showAttendeesPhoneAndId && (
-                      <>
-                        <td
-                          className="px-3 text-gray-700 truncate"
-                          style={{ maxWidth: 190 }}
-                          onClick={() => handleStudentClick(student.id)}
-                        >
-                          {student.phone || ""}
-                        </td>
-                        <td
-                          className="px-3 text-gray-700 truncate"
-                          style={{ maxWidth: 190 }}
-                          onClick={() => handleStudentClick(student.id)}
-                        >
-                          {student.attendeeid || ""}
-                        </td>
-                      </>
-                    )}
-                    {/* Attendance Rate */}
-                    <td
-                      className="px-3 text-center font-medium text-gray-600"
-                      onClick={(e) => {
-                        if (!isPremium) {
-                          e.stopPropagation();
-                          setPricingOpen(true);
-                          if (typeof window !== "undefined" && (window as any).gtag) {
-                            (window as any).gtag("event", "click-GetPremium-in-Course-students", {
-                              event_label: "Get Premium",
-                            });
-                          }
-                        } else {
-                          handleStudentClick(student.id);
-                        }
-                      }}
-                      style={!isPremium ? { filter: "blur(5px)", userSelect: "none" } : undefined}
-                    >
-                      {!isPremium ? (
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <span>XX%</span>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Premium account required. Click for details...</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      ) : (
-                        `${rate}%`
-                      )}
-                    </td>
-                    {/* Per-session green/red circle icons — matching legacy */}
-                    {sessionsCopy.map((session) => {
-                      const entry = studentSessions[session.id];
-                      const attended =
-                        entry &&
-                        entry.request !== "pending" &&
-                        entry.request !== "denied";
-                      return (
-                        <td
-                          key={session.id}
-                          className="px-1 text-center"
-                          style={{ minWidth: 32 }}
-                          onClick={(e) => handleIconClick(e, student, session)}
-                          title={`Click to ${attended ? "uncheck" : "check-in"} ${student.name}`}
-                        >
-                          {attended ? (
-                            /* Green circle with checkmark — legacy style */
-                            <svg className="h-5 w-5 mx-auto cursor-pointer" viewBox="0 0 24 24">
-                              <circle cx="12" cy="12" r="10" fill="#4caf50" />
-                              <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          ) : (
-                            /* Red circle with X — legacy style */
-                            <svg className="h-5 w-5 mx-auto cursor-pointer" viewBox="0 0 24 24">
-                              <circle cx="12" cy="12" r="10" fill="#f44336" />
-                              <path d="M8 8l8 8M16 8l-8 8" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                            </svg>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
+              {paginatedStudents.map((student) => (
+                <CourseStudentRow
+                  key={student.id}
+                  student={student}
+                  sessionsCopy={sessionsCopy}
+                  isSelected={selected.includes(student.id)}
+                  isPremium={isPremium}
+                  showAttendeesPhoneAndId={user?.showAttendeesPhoneAndId}
+                  onSelect={handleItemChecked}
+                  onStudentClick={handleStudentClick}
+                  onIconClick={handleIconClick}
+                  onPricingClick={handlePricingClick}
+                />
+              ))}
             </tbody>
           </table>
         </div>
@@ -509,7 +338,6 @@ export function CourseStudents() {
             value={rowsPerPage}
             onChange={(e) => {
               setRowsPerPage(Number(e.target.value));
-              setPage(0);
             }}
             className="border-none bg-transparent text-xs text-gray-600 cursor-pointer focus:outline-none"
           >
@@ -526,18 +354,14 @@ export function CourseStudents() {
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               className="p-1 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
             >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
+              <ChevronLeft className="h-4 w-4" />
             </button>
             <button
               disabled={page >= totalPages - 1}
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               className="p-1 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
             >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>
